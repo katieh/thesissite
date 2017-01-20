@@ -1,0 +1,34 @@
+{% extends "activities/base.html" %}
+{% load static %}
+{% load template_filters %}
+
+<!DOCTYPE html>
+<!-- MODIFIED FROM: -->
+<!-- https://github.com/adilmoujahid/DonorsChoose_Visualization/blob/eadde1a537eef4d968628d1d838c07fb1953af52/templates/index.html -->
+<!-- https://github.com/keen/dashboards/blob/gh-pages/layouts/two-and-one/index.html -->
+
+<html>
+    <head>
+        <title>Details</title>        
+    </head>
+
+    <body>
+
+    {% block content %}
+        
+        <div class="container">
+
+            <h1>Details</h1>
+
+            <div id="lineChart">
+                <svg style="height:350px;"></svg>
+            </div>
+            <script src="{% static 'js/details_graphs.js' %}"></script>
+
+        </div>
+
+    {% endblock %}
+
+
+    </body>
+</html>

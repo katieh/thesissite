@@ -1,0 +1,54 @@
+</!DOCTYPE html>
+<html>
+<head>
+	<title>Activities</title>
+
+	{% load static %}
+
+	{# modified from http://django-bootstrap3.readthedocs.io/en/latest/quickstart.html #}
+	{# Load the tag library #}
+	{% load bootstrap3 %}
+
+	{# Load CSS and JavaScript #}
+	{% bootstrap_css %}
+	{% bootstrap_javascript %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+	<meta charset="utf-8">
+    <link href="{% static 'lib/css/nv.d3.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'lib/js/d3.v3.js' %}" charset="utf-8"></script>
+    <script src="{% static 'lib/js/nv.d3.js' %}"></script>
+
+</head>
+<body>
+
+	<!-- MODIFIED: from the example on HEROKU's "getting started with python" guide	 --> 
+	<!-- https://devcenter.heroku.com/articles/getting-started-with-python#introduction -->
+	<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+	  <div class="container">
+
+	  <!-- nav bar selection modified from -->
+	  <!-- http://stackoverflow.com/questions/25044370/make-clicked-tab-active-in-bootstrap -->
+	  	<!-- nav bar items starting from the left -->
+	    <ul class="nav navbar-nav">
+	      <li class="{% if nbar == 'home' %}active{% endif %}">
+	        <a href="/activities"><span class="glyphicon glyphicon-home"></span> Home </a>
+	      </li>
+	      <li class="{% if nbar == 'activities' %}active{% endif %}">
+	        <a href="/activities/list"><span class="glyphicon glyphicon-list"></span> Activities </a>
+	      </li>
+	    </ul>
+
+	    <!-- nav bar items starting from the right -->
+	    <ul class="nav navbar-nav navbar-right">
+	      <li class="navbar-right">
+	      	<a href="/activities/upload"><span class="glyphicon glyphicon-upload"></span> Upload Workout </a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+
+	{% block content %}{% endblock %}
+
+</body>
+</html>

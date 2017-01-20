@@ -1,0 +1,34 @@
+{% extends "activities/base.html" %}
+{% load static %}
+
+<!-- modified from https://github.com/axelpale/minimal-django-file-upload-example -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upload</title>
+    </head>
+
+    <body>
+
+        {% block content %}
+
+        <div class="container">
+
+            <!-- Upload form. Note enctype attribute! -->
+            <form action="{% url "activities:upload" %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <p>
+                    {{ form.docfile }}
+                </p>
+
+                <p><input type="submit" value="Upload"/></p>
+            </form>
+
+        </div>
+
+        {% endblock %}
+
+    </body>
+
+</html>
