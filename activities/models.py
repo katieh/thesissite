@@ -6,6 +6,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
+import json
 
 ## ------------------------------------------------------------ ##
 ## A model which stores data from an uploaded activity.
@@ -34,19 +35,6 @@ from django.utils import timezone
 ## class MyModel(models.Model):
 ##    	upload = models.FileField(upload_to=user_directory_path)
 
-class Timestamp(models.Model):
-	run_id = models.PositiveIntegerField(null=False) ## MUST connect timestamp to a run
-	timedelta = models.FloatField(null=False, primary_key=True) ## MUST have a primary key
-	timestamp = models.DateTimeField(null=False) ## MUST have a primary key
-	position_lat = models.IntegerField(null=True)
-	position_long = models.IntegerField(null=True)
-	distance = models.FloatField(null=True)
-	altitude = models.FloatField(null=True)
-	speed = models.FloatField(null=True)
-	heart_rate = models.PositiveIntegerField(null=True)
-	cadence = models.PositiveIntegerField(null=True)
-
-
 class Activity(models.Model):
 
 	## summary fields for an activity
@@ -73,6 +61,47 @@ class Activity(models.Model):
 	## return the names of the array fields in Activity Model 
 	def get_array_fields(self):
 		return ["timestamp", "position_lat", "position_long", "distance", "altitude", "speed", "heart_rate", "cadence"]
+
+	## returns a graphable json object of the activity
+	def get_graphable_json(self):
+
+		## objects that will be graphable
+		altitude = []
+		speed = []
+		heart_rate = []
+		cadence = []
+
+		for i in range(self.num_records):
+			altitude.append({"x": self.distance[i], "y": self.altitude[i]})
+			speed.append({"x": self.distance[i], "y": self.speed[i]})
+			heart_rate.append({"x": self.distance[i], "y": self.heart_rate[i]})
+			cadence.append({"x": self.distance[i], "y": self.cadence[i]})
+
+
+		data = [
+		{
+		"values": altitude,
+		"key": 'Altitude',
+		"color": '#00aedb'
+		},
+		{
+		"values": speed,
+		"key": 'Speed',
+		"color": '#00b159'
+		},
+		{
+		"values": heart_rate,
+		"key": 'Heart Rate',
+		"color": '#d11141'
+		},
+		{
+		"values": cadence,
+		"key": 'Cadence',
+		"color": '#f37735'
+		}
+		];
+
+		return json.dumps(data)
 
 	## TODO: something like this would be good
 	# def __getitem__(self, arg):

@@ -19,16 +19,28 @@
         <div class="container">
 
             <h1>Details</h1>
+            <h2>{{ activity.name }}</h2>
 
-            <div id="lineChart">
-                <svg style="height:350px;"></svg>
+
+            <div id="chart">
+              <svg></svg>
             </div>
-            <script src="{% static 'js/details_graphs.js' %}"></script>
 
         </div>
 
-    {% endblock %}
+        {% block javascript %}
 
+            <script>
+                var activity = "{{ activity_json }}";
+            </script>
+
+            <script src="{% static 'lib/js/queue.js' %}"></script>
+            <script src="{% static 'js/details_graphs.js' %}" type='text/javascript'></script>
+
+
+        {% endblock %}
+
+    {% endblock %}
 
     </body>
 </html>

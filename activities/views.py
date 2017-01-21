@@ -3,7 +3,7 @@
 ## Description: This file contains methods which render views
 
 from django.shortcuts import render, reverse, redirect, get_object_or_404, get_list_or_404
-from .models import Activity, Timestamp
+from .models import Activity
 from .forms import DocumentForm
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
@@ -31,9 +31,7 @@ def details(request, pk):
 	# get the matching activity
     activity = get_object_or_404(Activity, pk=pk)
 
-    timestamps = get_list_or_404(Timestamp, run_id=activity.id)
-
-    return render(request, 'activities/details.html', {'activity': activity, 'timestamps': timestamps})
+    return render(request, 'activities/details.html', {'activity': activity, 'activity_json': activity.get_graphable_json()})
 
 
 # modified from the example at https://amatellanes.wordpress.com/2013/11/05/dropzonejs-django-how-to-build-a-file-upload-form/
@@ -80,26 +78,6 @@ def upload(request):
 
 			## save model
 			db_activity.save()
-
-			## fill in data for Timestamp objects
-			## TODO: CLEAN THIS UP!
-			for i in range(len(activity_dict['timestamp'])):
-
-				## create new Timestamp row
-				db_timestamp = Timestamp()
-
-				db_timestamp.run_id = db_activity.id ## set the run ID
-				db_timestamp.timedelta = (activity_dict['timestamp'][i] - db_activity.start_time).total_seconds()
-				db_timestamp.timestamp = activity_dict['timestamp'][i]
-				db_timestamp.position_lat = activity_dict['position_lat'][i]
-				db_timestamp.position_long = activity_dict['position_long'][i]
-				db_timestamp.distance = activity_dict['distance'][i]
-				db_timestamp.altitude = activity_dict['altitude'][i]
-				db_timestamp.speed = activity_dict['speed'][i]
-				db_timestamp.heart_rate = activity_dict['heart_rate'][i]
-				db_timestamp.cadence = activity_dict['cadence'][i]
-
-				db_timestamp.save()
 			
 
 			# Redirect to the document list after POST
