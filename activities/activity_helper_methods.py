@@ -31,3 +31,33 @@ def get_dict_of_fields(fitparse_activity):
                 activity_dict[field].append(None)
 
     return activity_dict
+
+## return the key associated with a field (for graphing)
+def get_key(arg):
+
+    if arg == "distance":
+        return "Distance"
+    elif arg == "altitude":
+        return "Altitude"
+    elif arg == "speed":
+        return "Speed"
+    elif arg == "heart_rate":
+        return "Heart Rate"
+    elif arg == "cadence":
+        return "Cadence"
+    else:
+        raise ValueError("This type does not have a graphable key!")
+
+## return the associated color (for graphing)
+def get_color(arg):
+
+    if arg == "altitude":
+        return '#00aedb'
+    elif arg == "speed":
+        return '#00b159'
+    elif arg == "heart_rate":
+        return '#d11141'
+    elif arg == "cadence":
+        return '#f37735'
+    else:
+        raise ValueError("This type does not have a graphable color!")

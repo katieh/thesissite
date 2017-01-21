@@ -7,6 +7,7 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
 import json
+from activity_helper_methods import get_color, get_key
 
 ## ------------------------------------------------------------ ##
 ## A model which stores data from an uploaded activity.
@@ -62,8 +63,8 @@ class Activity(models.Model):
 	def get_array_fields(self):
 		return ["timestamp", "position_lat", "position_long", "distance", "altitude", "speed", "heart_rate", "cadence"]
 
-	## returns a graphable json object of the activity
-	def get_graphable_json(self):
+	## returns a graphable json object of the activity for all variables tracked
+	def get_json(self):
 
 		## objects that will be graphable
 		altitude = []
@@ -103,32 +104,51 @@ class Activity(models.Model):
 
 		return json.dumps(data)
 
-	## TODO: something like this would be good
-	# def __getitem__(self, arg):
-		
-	# 	## make sure we're getting a string
-	# 	if not typ(arg) == str: raise ValueError("you can only index into Activity with a String!")
+	## returns a graphable json object for one specific metric
+	def get_variable_json(self, type):
 
-	# 	## return correct field
-	# 	if arg == "file":
-	# 		return self.file
-	# 	elif arg == "timestamp":
-	# 		return self.timestamp
-	# 	elif arg == "position_lat":
-	# 		return self.position_lat
-	# 	elif arg == "position_long":
-	# 		return self.position_long
-	# 	elif arg == "distance":
-	# 		return self.distance
-	# 	elif arg == "altitude":
-	# 		return self.altitude
-	# 	elif arg == "speed":
-	# 		return self.speed
-	# 	elif arg == "heart_rate":
-	# 		return self.heart_rate
-	# 	elif arg == "cadence":
-	# 		return self.cadence
-	# 	else:
-	# 		raise ValueError("Activity does not contain field {}".format(arg))
+		values = []
+
+		for i in range(self.num_records):
+			values.append({"x": self.distance[i], "y": self[type][i]})
+
+		data = [
+		{
+		"values": values,
+		"key": get_key(type),
+		"color": get_color(type)
+		}
+		];
+
+		return json.dumps(data)
+
+
+	## allow us to index into this object.
+	def __getitem__(self, arg):
+		
+		## make sure we're getting a string
+		if not type(arg) == str: raise ValueError("you can only index into Activity with a String!")
+
+		## return correct field
+		if arg == "file":
+			return self.file
+		elif arg == "timestamp":
+			return self.timestamp
+		elif arg == "position_lat":
+			return self.position_lat
+		elif arg == "position_long":
+			return self.position_long
+		elif arg == "distance":
+			return self.distance
+		elif arg == "altitude":
+			return self.altitude
+		elif arg == "speed":
+			return self.speed
+		elif arg == "heart_rate":
+			return self.heart_rate
+		elif arg == "cadence":
+			return self.cadence
+		else:
+			raise ValueError("Activity does not contain field {}".format(arg))
 
 

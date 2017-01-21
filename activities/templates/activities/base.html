@@ -6,7 +6,9 @@
 	{% load static %}
 
 	<meta charset="utf-8">
-    <link href="{% static 'lib/css/nv.d3.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'lib/css/nv.d3.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'lib/css/keen-dashboards.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/custom-style.css' %}" rel="stylesheet" type="text/css" />
 
     <script src="{% static 'lib/js/jquery.min.js' %}"></script>
     <script src="{% static 'lib/js/d3.v3.js' %}" charset="utf-8"></script>
@@ -21,7 +23,7 @@
 	{% bootstrap_javascript %}
 
 </head>
-<body>
+<body class="application">
 
 	<!-- MODIFIED: from the example on HEROKU's "getting started with python" guide	 --> 
 	<!-- https://devcenter.heroku.com/articles/getting-started-with-python#introduction -->
@@ -42,7 +44,7 @@
 
 	    <!-- nav bar items starting from the right -->
 	    <ul class="nav navbar-nav navbar-right">
-	      <li class="navbar-right">
+	      <li class="navbar-right {% if nbar == 'upload' %}active{% endif %}">
 	      	<a href="/activities/upload"><span class="glyphicon glyphicon-upload"></span> Upload Workout </a>
 	      </li>
 	    </ul>

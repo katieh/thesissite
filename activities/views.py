@@ -31,7 +31,12 @@ def details(request, pk):
 	# get the matching activity
     activity = get_object_or_404(Activity, pk=pk)
 
-    return render(request, 'activities/details.html', {'activity': activity, 'activity_json': activity.get_graphable_json()})
+    return render(request, 'activities/details.html', 
+    	{'activity': activity,
+    	'speed': activity.get_variable_json("speed"), 
+    	'heartrate': activity.get_variable_json("heart_rate"),
+    	'altitude': activity.get_variable_json("altitude"),
+    	'cadence': activity.get_variable_json("cadence")})
 
 
 # modified from the example at https://amatellanes.wordpress.com/2013/11/05/dropzonejs-django-how-to-build-a-file-upload-form/
@@ -86,11 +91,7 @@ def upload(request):
 		form = DocumentForm()  # A empty, unbound form
 
 	# Render list page with the documents and the form
-	return render(
-		request,
-		'activities/upload.html',
-		{'form': form}
-	)
+	return render(request, 'activities/upload.html', {'form': form, 'nbar':'upload'})
 
 
 

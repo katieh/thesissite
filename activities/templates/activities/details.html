@@ -12,26 +12,195 @@
         <title>Details</title>        
     </head>
 
-    <body>
-
     {% block content %}
-        
-        <div class="container">
 
-            <h1>Details</h1>
-            <h2>{{ activity.name }}</h2>
+        <div class="container-fluid">
 
-
-            <div id="chart">
-              <svg></svg>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>{{activity.name}}</h1>
+                </div>
             </div>
 
-        </div>
+            <div class="row">
+
+                <div class="col-sm-6">
+
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            Notes
+                        </div>
+                        <div class="chart-stage">
+                        
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6">
+
+                    <div class="chart-wrapper">
+                        <div class="chart-stage">
+
+                            <table class="table table-hover">
+                              <tr>
+                                <th>Date</th>
+                                <th>Distance (miles)</th>
+                                <th>Avg Pace (min/mile)</th>
+                                <th>Avg HR (bpm)</th>
+                                <th>Avg Cadence (spm)</th>
+                              </tr>
+
+                            <tr>
+                                <td>{{ activity.start_time }}</td>
+                                <td>{{ activity.tot_dist | meters_to_miles }}</td>
+                                <td>{{ activity.avg_speed | mps_to_time_per_mile}}</td>
+                                <td>{{ activity.avg_hr }}</td>
+                                <td>{{ activity.avg_cadence }}</td>
+                            </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Speed Graphs -->
+            <div class="row">
+
+                <!-- speed distribution -->
+                <div class="col-sm-3">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            Cell Title
+                        </div>
+                        <div class="chart-stage">
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- speed over distance -->
+                <div class="col-sm-9">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            Speed Over Distance
+                        </div>
+
+                        <div class="chart-stage">
+                            <div id="speed_chart">
+                                <svg></svg>
+                            </div>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heart Rate Graphs -->
+            <div class="row">
+
+                <!-- heartrate distribution -->
+                <div class="col-sm-3">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            Cell Title
+                        </div>
+                        <div class="chart-stage">
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- heartrate over distance -->
+                <div class="col-sm-9">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            Heart Rate Over Distance
+                        </div>
+
+                        <div class="chart-stage">
+                            <div id="heartrate_chart">
+                                <svg></svg>
+                            </div>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Altitude Graphs -->
+            <div class="row">
+
+                <!-- altitude distribution -->
+                <div class="col-sm-3">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            Cell Title
+                        </div>
+                        <div class="chart-stage">
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- altitude over distance -->
+                <div class="col-sm-9">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            Altitude Over Distance
+                        </div>
+
+                        <div class="chart-stage">
+                            <div id="altitude_chart">
+                                <svg></svg>
+                            </div>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Cadence Graphs -->
+            <div class="row">
+
+                <!-- cadence distribution -->
+                <div class="col-sm-3">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            Cell Title
+                        </div>
+                        <div class="chart-stage">
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- cadence over distance -->
+                <div class="col-sm-9">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            Cadence Over Distance
+                        </div>
+
+                        <div class="chart-stage">
+                            <div id="cadence_chart">
+                                <svg></svg>
+                            </div>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+
 
         {% block javascript %}
 
             <script>
-                var activity = "{{ activity_json }}";
+                var speed = "{{ speed }}"
+                var heartrate = "{{ heartrate }}";
+                var altitude = "{{ altitude }}"
+                var cadence = "{{ cadence }}"
             </script>
 
             <script src="{% static 'lib/js/queue.js' %}"></script>
@@ -42,5 +211,5 @@
 
     {% endblock %}
 
-    </body>
+
 </html>
