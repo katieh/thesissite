@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
+## TODO: consolidate static files into one place (especially the library ones...)
+## the way you're doing it right now is sloppy.
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -31,7 +34,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'activities.apps.ActivitiesConfig',
+    'athletes.apps.AthletesConfig',
+    'accounts.apps.AccountsConfig',
+    'coaches.apps.CoachesConfig',
+    'connections.apps.ConnectionsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'bootstrap3',
-    'nvd3'
+    'nvd3',
+    'friendship'
 ]
 
 MIDDLEWARE = [
@@ -108,6 +115,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Login redirect url
+LOGIN_REDIRECT_URL = '/accounts/home/'
+LOGIN_URL = '/accounts/login/'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -131,3 +142,6 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = ['/common_static/']
+
+

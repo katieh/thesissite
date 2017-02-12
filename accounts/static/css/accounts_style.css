@@ -1,0 +1,39 @@
+
+
+#login_body {
+    background-image: url(/static/img/running.jpg);
+    background-size: 100%;
+}
+
+/* modified from
+https://css-tricks.com/centering-css-complete-guide/ */
+#login_panel {
+	margin: auto;
+    width: 50%;
+    position: absolute;
+	top: 20%;
+	left: 20px;
+	right: 20px;
+	transform: translateY(-20%);
+	resize: vertical;
+	overflow: auto;
+	opacity: 0.80;
+}
+
+form {
+	margin-bottom: 0px;
+}
+
+h3 {
+	text-align: center
+}
+
+a {
+	text-align: center;
+	display: block ;
+}
+
+container-fluid {
+  padding-left: 20px;
+  padding-right: 20px;
+}

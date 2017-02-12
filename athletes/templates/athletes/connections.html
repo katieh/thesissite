@@ -1,0 +1,83 @@
+{% extends "athletes/base.html" %}
+{% load static %}
+{% load template_filters %}
+
+</!DOCTYPE html>
+<html>
+<head>
+
+	<title>Connections</title>
+
+</head>
+<body>
+
+	{% block content %}
+
+	<div class="container-fluid">
+
+		{% if friend_data %}
+
+			<h2>Connections</h2>
+
+			<table class="table table-hover">
+
+				{% for data in friend_data %}
+
+					<tr>
+						<td>
+							{{data.first_name}} {{data.last_name}}
+
+							<a href="{% url 'connections:unfriend' data.friend_id %}" type="button" class="btn btn-danger pull-right">
+				  					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				  			</a>
+						</td>
+					</tr>
+
+				{% endfor %}
+
+			</table>
+
+
+		{% endif %}
+
+
+		<h2> Connect </h2>
+
+	    {% if coaches %}
+
+	    	<table class="table table-hover">
+
+			  {% for coach in coaches %}
+
+			  	{% if coach.id not in friends %}
+				  	<tr>
+				  		<td>
+				  			{{ coach.first_name }} {{ coach.last_name }}
+
+				  			{% if coach.id in pending_requests %}
+					  			<button type="button" class="btn btn-warning pull-right" disabled>
+					  					<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+					  			</button>
+
+				  			{% else %}
+
+				  				<a href="{% url 'connections:add' coach.id %}" type="button" class="btn btn-success pull-right">
+				  					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+				  				</a>
+
+			  				{% endif %}
+				  		</td>
+				  	</tr>
+				  	{% endif %}
+	          {% endfor %}
+
+			</table>
+
+	    {% endif %}
+
+    </div>
+
+	{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends "athletes/base.html" %}
+{% load static %}
+
+<!-- modified from https://github.com/axelpale/minimal-django-file-upload-example -->
+<!-- multiple file upload modified from https://www.calazan.com/adding-drag-and-drop-image-uploads-to-your-django-site-in-5-minutes-with-dropzonejs/ -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upload</title>
+    </head>
+
+    <body>
+
+        {% block content %}
+
+            <div class="container-fluid">
+
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Upload" />
+                </form>
+
+            </div>
+
+        {% endblock %}
+
+    </body>
+
+</html>

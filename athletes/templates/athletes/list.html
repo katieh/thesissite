@@ -1,0 +1,57 @@
+{% extends "athletes/base.html" %}
+{% load static %}
+{% load template_filters %}
+
+</!DOCTYPE html>
+<html>
+<head>
+
+	<title>Activities</title>
+
+</head>
+<body>
+
+	{% block content %}
+
+	<div class="container-fluid">
+
+		<h1> Activities </h1>
+
+	    <!-- List of uploaded documents -->
+	    <!-- TODO: make the rows clickable -->
+	    {% if activities %}
+
+	    	<table class="table table-hover">
+
+			  <tr>
+			    <th>Date</th>
+			    <th>Name</th>
+			    <th>Distance (miles)</th>
+			    <th>Avg Pace (min/mile)</th>
+			    <th>Avg HR (bpm)</th>
+			    <th>Avg Cadence (spm)</th>
+			    <th>File</th>
+			  </tr>
+
+			  {% for activity in activities %}
+			  	<tr>
+			  		<td><a href= {% url 'athletes:details' activity.id %} >{{ activity.start_time }}</a></td>
+			  		<td>{{ activity.name }}</td>
+			  		<td>{{ activity.tot_dist | two_decimals }}</td>
+			  		<td>{{ activity.avg_speed | mps_to_time_per_mile}}</td>
+			  		<td>{{ activity.avg_hr }}</td>
+			  		<td>{{ activity.avg_cadence }}</td>
+			  		<td>{{ activity.file.name }}</td>
+			  	</tr>
+	          {% endfor %}
+
+			</table>
+
+	    {% endif %}
+
+    </div>
+
+	{% endblock %}
+
+</body>
+</html>

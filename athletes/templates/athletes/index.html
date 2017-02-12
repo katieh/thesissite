@@ -1,0 +1,200 @@
+{% extends "athletes/base.html" %}
+{% load static %}
+{% load template_filters %}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Index</title>
+    </head>
+
+    <body>
+
+    	{% block content %}
+
+ 		<div class="container-fluid">
+
+    		<h1>Dashboard</h1>
+    		<hr>
+
+    		<div class="row">
+
+				<div class="col-sm-4">
+					<div class="chart-wrapper">
+					  <div class="chart-title">
+					    This Week
+					  </div>
+					  <div class="chart-stage">
+					    <table class="table-condensed">
+					    	<tr>
+						  		<td>Total Distance:</td>
+						  		{% if current_week != None %}
+							  		<td>{{ current_week.total_distance | two_decimals }}  miles</td>
+						  		{% else %}
+							  		<td>0.00  miles</td>
+						  		{% endif %}
+						  	</tr>
+						  	<tr>
+						  		<td>Number of Runs:</td>
+						  		{% if current_week != None %}
+							  		<td>{{ current_week.count}}</td>
+						  		{% else %}
+							  		<td>0</td>
+						  		{% endif %}
+						  	</tr>
+						  	<tr>
+						  		<td>Elevation Gained:</td>
+						  		{% if current_week != None %}
+							  		<td>{{ current_week.total_elevation_gained | two_decimals}} feet</td>
+						  		{% else %}
+							  		<td>0  feet</td>
+						  		{% endif %}
+						  	</tr>
+						  	<tr>
+						  		<td>Average Speed:</td>
+								{% if current_week != None %}
+							  		<td>{{ current_week.avg_avg_speed | mps_to_time_per_mile }} mins / mile</td>
+						  		{% else %}
+							  		<td>0  mins / mile</td>
+						  		{% endif %}
+						  	</tr>
+						  	<tr>
+						  		<td>Average Heart Rate:</td>
+						  		{% if current_week != None %}
+							  		<td>{{ current_week.avg_avg_hr }} bpm</td>
+						  		{% else %}
+							  		<td>0  bpm</td>
+						  		{% endif %}
+						  	</tr>
+						  	<tr>
+						  		<td>Average Cadance:</td>
+						  		{% if current_week != None %}
+							  		<td>{{ current_week.avg_avg_cadence }} spm</td>
+						  		{% else %}
+							  		<td>0  spm</td>
+						  		{% endif %}
+						  	</tr>
+					    </table>
+					  </div>
+					</div>
+				</div>
+
+				<div class="col-sm-8">
+					<div class="chart-wrapper">
+						<div class="chart-title">
+							Runs per Week
+						</div>
+							<div class="chart-stage">
+								<div id="count">
+									<svg></svg>
+								</div>
+							</div>
+					</div>
+				</div>
+    		</div>
+
+    		<div class="row">
+
+    			<div class="col-sm-12">
+					<div class="chart-wrapper">
+						<div class="chart-title">
+							Distance
+						</div>
+							<div class="chart-stage">
+								<div id="distance">
+									<svg></svg>
+								</div>
+							</div>
+					</div>
+				</div>
+
+    		</div>
+
+    		<div class="row">
+
+    			<div class="col-sm-12">
+					<div class="chart-wrapper">
+						<div class="chart-title">
+							Speed
+						</div>
+							<div class="chart-stage">
+								<div id="speed">
+									<svg></svg>
+								</div>
+							</div>
+					</div>
+				</div>
+
+    		</div>
+
+    		<div class="row">
+
+    			<div class="col-sm-12">
+					<div class="chart-wrapper">
+						<div class="chart-title">
+							Heart Rate
+						</div>
+							<div class="chart-stage">
+								<div id="hr">
+									<svg></svg>
+								</div>
+							</div>
+					</div>
+				</div>
+
+    		</div>
+
+    		<div class="row">
+
+    			<div class="col-sm-12">
+					<div class="chart-wrapper">
+						<div class="chart-title">
+							Cadence
+						</div>
+							<div class="chart-stage">
+								<div id="cadence">
+									<svg></svg>
+								</div>
+							</div>
+					</div>
+				</div>
+
+    		</div>
+
+    		<div class="row">
+
+    			<div class="col-sm-12">
+					<div class="chart-wrapper">
+						<div class="chart-title">
+							Elevation
+						</div>
+							<div class="chart-stage">
+								<div id="elevation">
+									<svg></svg>
+								</div>
+							</div>
+					</div>
+				</div>
+
+    		</div>
+
+    	</div>
+
+    	{% block javascript %}
+
+            <script>
+                var week_graphs = {{week_graphs | safe}}  
+            </script>
+
+            <script src="{% static 'js/dashboard_graphs.js' %}" type='text/javascript'></script>
+
+
+        {% endblock %}
+
+
+    	{% endblock %}
+    </body>
+
+</html>
+

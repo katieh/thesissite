@@ -1,0 +1,59 @@
+</!DOCTYPE html>
+<html>
+<head>	
+
+	{% load static %}
+
+
+	<script src="{% static 'lib/js/jquery.min.js' %}"></script>
+
+	{# modified from http://django-bootstrap3.readthedocs.io/en/latest/quickstart.html #}
+	{% load bootstrap3 %}
+	{% bootstrap_css %}
+	{% bootstrap_javascript %}
+
+	<link href="{% static 'css/accounts_style.css' %}" rel="stylesheet" type="text/css"/>
+
+
+</head>
+
+
+<body id="login_body">
+	
+	<div class="container-fluid">
+
+		<div class="panel panel-default" id="login_panel">
+
+			<div class="panel-heading">
+	    		<h3 class="panel-title">Login</h3>
+	  		</div>
+
+			<div class="panel-body">
+
+				<form class="form" method="post">
+				    {% csrf_token %}
+				    
+				    <div class="form-group">
+				    	<input class="form-control" name='username' type="text" placeholder="Username">
+				    </div>
+
+				    <div class="form-group">
+				    	<input class="form-control" name='password' type="text" placeholder="Password">
+				    </div>
+
+
+				    <button class="btn btn-default center-block" type="submit">Login</button>
+
+				    <a href="{% url 'accounts:create' %}">Create your account</a>
+				 </form>
+				
+			</div>
+			
+		</div>
+
+		  
+
+	</div>
+
+</body>
+</html>

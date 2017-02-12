@@ -1,0 +1,93 @@
+{% extends "coaches/base.html" %}
+{% load static %}
+{% load template_filters %}
+{% load friendshiptags %}
+
+</!DOCTYPE html>
+<html>
+<head>
+
+	<title>Connections</title>
+
+</head>
+<body>
+
+	{% block content %}
+
+	<div class="container-fluid">
+
+		{% if request_data %}
+
+			<h2> Pending Requests </h2>
+
+			<table class="table table-hover">
+
+				{% for data in request_data %}
+
+					<tr>
+				  		<td>
+				  			{{data.first_name}} {{data.last_name}}
+
+				  			<div class="btn-group pull-right" role="group">
+
+				  				<a href="{% url 'connections:confirm' data.request_id %}" type="button" class="btn btn-success">
+				  					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			  					</a>
+
+			  					<a href="{% url 'connections:reject' data.request_id %}" type="button" class="btn btn-danger">
+				  					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+			  					</a>
+
+				  			</div>
+				  		</td>
+				  	</tr>
+
+
+				{% endfor %}
+
+			</table>
+
+		{% endif %}
+
+		{% if friend_data %}
+
+			<h2>Connections</h2>
+
+			<table class="table table-hover">
+
+				{% for data in friend_data %}
+
+					<tr>
+						<td>
+							{{data.first_name}} {{data.last_name}}
+
+							<a href="{% url 'connections:unfriend' data.friend_id %}" type="button" class="btn btn-danger pull-right">
+				  					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+			  				</a>
+						</td>
+					</tr>
+
+				{% endfor %}
+				
+			</table>
+
+		{% endif %}
+
+		{% if not friend_data and not request_data %}
+
+			<div class="jumbotron">
+
+				<h2>Oh No...</h2>
+
+				<p>You don't have any connections yet! Your athletes can find and add you through the 'accounts/connections' tab on their menue bar.</p>
+
+			</div>
+
+		{% endif %}
+
+    </div>
+
+	{% endblock %}
+
+</body>
+</html>

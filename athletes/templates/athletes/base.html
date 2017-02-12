@@ -1,0 +1,79 @@
+</!DOCTYPE html>
+<html>
+<head>
+	<title>Activities</title>
+
+	{% load static %}
+
+	<meta charset="utf-8">
+    <link href="{% static 'lib/css/nv.d3.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'lib/css/keen-dashboards.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/custom-style.css' %}" rel="stylesheet" type="text/css" />
+
+    <script src="{% static 'lib/js/jquery.min.js' %}"></script>
+    <script src="{% static 'lib/js/d3.v3.js' %}" charset="utf-8"></script>
+    <script src="{% static 'lib/js/nv.d3.js' %}"></script>
+
+    {# modified from http://django-bootstrap3.readthedocs.io/en/latest/quickstart.html #}
+	{% load bootstrap3 %}
+	{% bootstrap_css %}
+	{% bootstrap_javascript %}
+
+</head>
+<body class="application">
+
+	<!-- MODIFIED: from the example on HEROKU's "getting started with python" guide	 --> 
+	<!-- https://devcenter.heroku.com/articles/getting-started-with-python#introduction -->
+	<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+	  <div class="container">
+
+	  <!-- nav bar selection modified from -->
+	  <!-- http://stackoverflow.com/questions/25044370/make-clicked-tab-active-in-bootstrap -->
+	  	<!-- nav bar items starting from the left -->
+	    <ul class="nav navbar-nav">
+
+			<li class="{% if nbar == 'home' %}active{% endif %}">
+			<a href="/athletes"><span class="glyphicon glyphicon-home"></span> Home </a>
+			</li>
+
+			<li class="{% if nbar == 'activities' %}active{% endif %}">
+			<a href="/athletes/list"><span class="glyphicon glyphicon-list"></span> Activities </a>
+			</li>
+
+	    </ul>
+
+	    <!-- nav bar items starting from the right -->
+	    <ul class="nav navbar-nav navbar-right">
+
+	    <li class="{% if nbar == 'upload' %}active{% endif %}">
+				<a href="/athletes/upload"><span class="glyphicon glyphicon-upload"></span> Upload </a>
+		</li>
+
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+
+			<ul class="dropdown-menu">
+				<li>
+					<a href="/athletes/connections">Manage Connections</a>
+				</li>
+
+				<li role="separator" class="divider"></li>
+
+				<li>
+					<a href="/accounts/logout">Logout</a>
+				</li>
+            </ul>
+		</li>
+
+
+	      
+
+
+	    </ul>
+	  </div>
+	</nav>
+
+	{% block content %}{% endblock %}
+
+</body>
+</html>
