@@ -83,10 +83,10 @@
 				<div class="col-sm-8">
 					<div class="chart-wrapper">
 						<div class="chart-title">
-							Runs per Week
+							Sentiment
 						</div>
 							<div class="chart-stage">
-								<div id="count">
+								<div id="sentiment">
 									<svg></svg>
 								</div>
 							</div>
@@ -99,9 +99,26 @@
     			<div class="col-sm-12">
 					<div class="chart-wrapper">
 						<div class="chart-title">
-							Distance
+							User Tags
 						</div>
 							<div class="chart-stage">
+								<div id="user_tags">
+									<svg></svg>
+								</div>
+							</div>
+					</div>
+				</div>
+
+    		</div>
+
+    		<div class="row">
+
+    			<div class="col-sm-12">
+					<div class="chart-wrapper">
+						<div class="chart-title">
+							Distance
+						</div>
+							<div class="chart-stage" style="padding-top: 50px;">
 								<div id="distance">
 									<svg></svg>
 								</div>
@@ -110,6 +127,24 @@
 				</div>
 
     		</div>
+
+    		<div class="row">
+
+    			<div class="col-sm-12">
+					<div class="chart-wrapper">
+						<div class="chart-title">
+							Runs per Week
+						</div>
+							<div class="chart-stage">
+								<div id="count">
+									<svg></svg>
+								</div>
+							</div>
+					</div>
+				</div>
+
+    		</div>
+
 
     		<div class="row">
 
@@ -184,7 +219,8 @@
     	{% block javascript %}
 
             <script>
-                var week_graphs = {{week_graphs | safe}}  
+            	var tag_graphs = {{tag_graphs | safe}}
+                var week_graphs = {{week_graphs | safe}}
             </script>
 
             <script src="{% static 'js/dashboard_graphs.js' %}" type='text/javascript'></script>

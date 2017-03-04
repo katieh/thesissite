@@ -12,3 +12,8 @@ textarea{
     height: 164px;
     border: none;
 }
+
+.chart-stage {
+	display: block;
+	
+}

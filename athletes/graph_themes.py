@@ -33,6 +33,16 @@ def get_color(key):
 		else:
 			return '#f37735'
 
+	elif "sentiment_" in key:
+		if "pos" in key:
+			return '#00b159'
+
+		elif "neg" in key:
+			return 	'#d11141'
+
+		else:
+			return '#00aedb'
+
 	else:
 		raise KeyError("Requesting key that does not have a set color")
 

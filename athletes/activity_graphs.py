@@ -45,8 +45,6 @@ def get_field_histograms(activity, user):
 			'ymax': max(hist[0]) + 1
 		}
 
-	print data
-
 	## return the data
 	return json.dumps(data)
 
@@ -61,7 +59,12 @@ def get_field_graphs(activity):
 	heart_rate = []
 	cadence = []
 
-	for i in range(activity.num_records):
+	if activity.num_records != None:
+		N = activity.num_records
+	else:
+		N = 0
+
+	for i in range(N):
 		if activity.altitude != None:
 			altitude.append({"x": activity.distance[i], "y": activity.altitude[i]})
 		if activity.speed != None:

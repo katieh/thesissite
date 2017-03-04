@@ -1,8 +1,0 @@
-body.application {
-  background: #f2f2f2;
-  padding: 0px 0px 0;
-}
-body.application > .container-fluid {
-  padding-left: 20px;
-  padding-right: 20px;
-}

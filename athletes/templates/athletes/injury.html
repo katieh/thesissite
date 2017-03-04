@@ -1,0 +1,42 @@
+<!-- MODIFIED FROM TUTORIAL: 
+https://tutorial.djangogirls.org/en/django_forms/ -->
+
+{% extends "athletes/base.html" %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit</title>
+    </head>
+
+        {% block content %}
+
+            <div class="container-fluid">
+
+                <h1>Add Injury</h1>
+                <hr>
+
+                <form method="POST" class="post-form">
+
+                    {% csrf_token %}
+
+                    <div class="form-group row">
+
+                        <label class="col-sm-1 col-form-label">Date: </label>
+                        <div for="start_time" class="col-sm-3">
+                            <input type="date" for="date" name="date" class="form-control" required>
+                        </div>
+                        
+                    </div>
+
+                    <button type="submit" class="save btn btn-primary pull-right">Save</button>
+                </form>
+
+            </div>
+
+        {% endblock %}
+
+
+
+</html>

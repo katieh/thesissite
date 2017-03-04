@@ -7,6 +7,7 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField, JSONField
 from django.utils import timezone
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta
 
 ## ------------------------------------------------------------ ##
 ## A model which stores data from an uploaded activity.
@@ -45,7 +46,6 @@ class Activity(models.Model):
 
 	## summary of activity
 	start_time = models.DateTimeField(default=timezone.now)
-	week = models.FloatField(default=None, null=True)
 	num_records = models.PositiveIntegerField(default=None, null=True)
 	tot_dist = models.FloatField(null=True)
 	avg_speed = models.FloatField(null=True)
@@ -55,6 +55,8 @@ class Activity(models.Model):
 	max_speed = models.FloatField(null=True)
 	max_hr = models.PositiveIntegerField(null=True)
 	max_cadence = models.PositiveIntegerField(null=True)
+	RPE = models.PositiveIntegerField(null=True)
+	tot_time = models.PositiveIntegerField(null=True)
 
 	## users comments
 	comments = models.TextField(null=True, default=None)
@@ -68,6 +70,14 @@ class Activity(models.Model):
 	speed = ArrayField(models.FloatField(null=True), null=True, default=None) # float field
 	heart_rate = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
 	cadence = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
+
+	@property
+	def RPE_percent(self):
+		return (self.RPE / 10.0) * 100
+
+	@property
+	def SRPE(self):
+		return self.RPE * self.tot_time
 
 	## return the names of the array fields in Activity Model 
 	def get_array_fields(self):
@@ -134,215 +144,186 @@ class Weeks(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False)
 	weeks = JSONField(default=dict())
 
-	def add_activity(self, activity):
+	def add_week(self, key):
 
-		## add week(s) if we need to
-		weeks_int = [int(float(x) * 100) for x in self.weeks.keys()]
-		week_int = int(activity.week * 100)
-		if not week_int in weeks_int:
+		self.weeks[key] = {}
+		self.weeks[key]['count'] = 0
+		self.weeks[key]['total_distance'] = 0
+		self.weeks[key]['avg_avg_speed'] = 0
+		self.weeks[key]['max_speed'] = 0
+		self.weeks[key]['avg_avg_hr'] = 0
+		self.weeks[key]['max_hr'] = 0
+		self.weeks[key]['avg_avg_cadence'] = 0
+		self.weeks[key]['max_cadence'] = 0
+		self.weeks[key]['avg_elevation_gained'] = 0
+		self.weeks[key]['total_elevation_gained'] = 0
 
-			## check if this is the first week we're adding to weeks
-			if len(weeks_int) == 0:
-				i = week_int
-				end = week_int + 1
+	def remove_activity(self, activity):
 
+		activity_week = activity.start_time - timedelta(days=activity.start_time.weekday())
 
-			## check if we're adding a weeks earlier than we've seen
-			elif min(weeks_int) > week_int:
-				i = week_int
-				end = min(weeks_int)
-
-			elif max(weeks_int) < week_int:
-				i = max(weeks_int) + 1
-				end = week_int + 1
-
-			print "i: {} end: {}".format(i, end)
-			while (i < end):
-				i_str = str(i)
-				if int(i_str[len(i_str) - 2:len(i_str)]) == 53:
-					print "bridging a year!: {}".format(i)
-					i = (int(i_str[0:len(i_str) - 2]) + 1) * 100 + 1
-
-				print "current loop: {}".format(i)
-				self.weeks[unicode(i / 100.0)] = {}
-				self.weeks[unicode(i / 100.0)]['count'] = 0
-				self.weeks[unicode(i / 100.0)]['total_distance'] = 0
-				self.weeks[unicode(i / 100.0)]['avg_avg_speed'] = 0
-				self.weeks[unicode(i / 100.0)]['max_speed'] = 0
-				self.weeks[unicode(i / 100.0)]['avg_avg_hr'] = 0
-				self.weeks[unicode(i / 100.0)]['max_hr'] = 0
-				self.weeks[unicode(i / 100.0)]['avg_avg_cadence'] = 0
-				self.weeks[unicode(i / 100.0)]['max_cadence'] = 0
-				self.weeks[unicode(i / 100.0)]['avg_elevation_gained'] = 0
-				self.weeks[unicode(i / 100.0)]['total_elevation_gained'] = 0
-
-				i += 1
-
-		## add info to the week
-		week_string = unicode(activity.week)
-		print 'adding info to week: {}'.format(week_string)
+		# remove activity from the week it contributed to
+		key = activity_week.strftime('%m/%d/%Y')
 
 		if activity.tot_dist != None:
-			self.weeks[week_string]['total_distance'] += activity.tot_dist
+			self.weeks[key]['total_distance'] -= activity.tot_dist
 
 		if activity.avg_speed != None:
-			self.weeks[week_string]['avg_avg_speed'] = _update_average(self.weeks[week_string]['avg_avg_speed'],
-				activity.avg_speed, self.weeks[week_string]['count'])
+			self.weeks[key]['avg_avg_speed'] = _revert_average(self.weeks[key]['avg_avg_speed'],
+				activity.avg_speed, self.weeks[key]['count'])
 
-		if activity.max_speed != None and activity.max_speed > self.weeks[week_string]['max_speed']:
-			self.weeks[week_string]['max_speed'] = activity.max_speed
+		# NOTE: this is a bug!!!!
+		if activity.max_speed != None and activity.max_speed > self.weeks[key]['max_speed']:
+			self.weeks[key]['max_speed'] = activity.max_speed
 
 		if activity.avg_hr != None:
-			self.weeks[week_string]['avg_avg_hr'] = _update_average(self.weeks[week_string]['avg_avg_hr'],
-				activity.avg_hr, self.weeks[week_string]['count'])
+			self.weeks[key]['avg_avg_hr'] = _revert_average(self.weeks[key]['avg_avg_hr'],
+				activity.avg_hr, self.weeks[key]['count'])
 
-		if activity.max_hr != None and activity.max_hr > self.weeks[week_string]['max_hr']:
-			self.weeks[week_string]['max_hr'] = activity.max_hr
+		# BUG
+		if activity.max_hr != None and activity.max_hr > self.weeks[key]['max_hr']:
+			self.weeks[key]['max_hr'] = activity.max_hr
 
 		if activity.avg_cadence != None:
-			self.weeks[week_string]['avg_avg_cadence'] = _update_average(self.weeks[week_string]['avg_avg_cadence'],
-				activity.avg_cadence, self.weeks[week_string]['count'])
+			self.weeks[key]['avg_avg_cadence'] = _revert_average(self.weeks[key]['avg_avg_cadence'],
+				activity.avg_cadence, self.weeks[key]['count'])
 
-		if activity.max_cadence != None and activity.max_cadence > self.weeks[week_string]['max_cadence']:
-			self.weeks[week_string]['max_cadence'] = activity.max_cadence
+		# BUG
+		if activity.max_cadence != None and activity.max_cadence > self.weeks[key]['max_cadence']:
+			self.weeks[key]['max_cadence'] = activity.max_cadence
 
 		if activity.elevation_gained != None:
-			self.weeks[week_string]['avg_elevation_gained'] = _update_average(self.weeks[week_string]['avg_elevation_gained'],
-				activity.elevation_gained, self.weeks[week_string]['count'])
+			self.weeks[key]['avg_elevation_gained'] = _revert_average(self.weeks[key]['avg_elevation_gained'],
+				activity.elevation_gained, self.weeks[key]['count'])
 
-			self.weeks[week_string]['total_elevation_gained'] += activity.elevation_gained
-
-
-		self.weeks[week_string]['count'] += 1
+			self.weeks[key]['total_elevation_gained'] -= activity.elevation_gained
 
 
+		self.weeks[key]['count'] -= 1
+
+
+	def add_activity(self, activity):
+
+		activity_week = activity.start_time - timedelta(days=activity.start_time.weekday())
+
+		# add week if we need to
+		if activity_week.strftime('%m/%d/%Y') not in self.weeks.keys():
+
+			# add new week
+			self.add_week(activity_week.strftime('%m/%d/%Y'))
+
+			weeks = [datetime.strptime(x, '%m/%d/%Y') for x in self.weeks.keys()]
+			week_below = activity_week - timedelta(days=7)
+			week_above = activity_week + timedelta(days=7)
+
+			# add any weeks we need to below
+			if min(weeks).replace(tzinfo=None) < week_below.replace(tzinfo=None):
+				while week_below.strftime('%m/%d/%Y') not in self.weeks.keys():
+					self.add_week(week_below.strftime('%m/%d/%Y'))
+					week_below = week_below - timedelta(days=7)
+
+			# add any weeks we need to above
+			if max(weeks).replace(tzinfo=None) > week_above.replace(tzinfo=None): 
+				while week_above.strftime('%m/%d/%Y') not in self.weeks.keys():
+					self.add_week(week_above.strftime('%m/%d/%Y'))
+					week_above = week_above + timedelta(days=7)
+
+		# add activity data to the appropriate week
+		key = activity_week.strftime('%m/%d/%Y')
+
+		if activity.tot_dist != None:
+			self.weeks[key]['total_distance'] += activity.tot_dist
+
+		if activity.avg_speed != None:
+			self.weeks[key]['avg_avg_speed'] = _update_average(self.weeks[key]['avg_avg_speed'],
+				activity.avg_speed, self.weeks[key]['count'])
+
+		if activity.max_speed != None and activity.max_speed > self.weeks[key]['max_speed']:
+			self.weeks[key]['max_speed'] = activity.max_speed
+
+		if activity.avg_hr != None:
+			self.weeks[key]['avg_avg_hr'] = _update_average(self.weeks[key]['avg_avg_hr'],
+				activity.avg_hr, self.weeks[key]['count'])
+
+		if activity.max_hr != None and activity.max_hr > self.weeks[key]['max_hr']:
+			self.weeks[key]['max_hr'] = activity.max_hr
+
+		if activity.avg_cadence != None:
+			self.weeks[key]['avg_avg_cadence'] = _update_average(self.weeks[key]['avg_avg_cadence'],
+				activity.avg_cadence, self.weeks[key]['count'])
+
+		if activity.max_cadence != None and activity.max_cadence > self.weeks[key]['max_cadence']:
+			self.weeks[key]['max_cadence'] = activity.max_cadence
+
+		if activity.elevation_gained != None:
+			self.weeks[key]['avg_elevation_gained'] = _update_average(self.weeks[key]['avg_elevation_gained'],
+				activity.elevation_gained, self.weeks[key]['count'])
+
+			self.weeks[key]['total_elevation_gained'] += activity.elevation_gained
+
+
+		self.weeks[key]['count'] += 1
+
+## ------------------------------------------------------------ ##
+## helper method to update the average in a week. 
+## NOTE: function assumes that count has NOT been updated yet!
+## ------------------------------------------------------------ ##
 def _update_average(old_avg, new_val, count):
 	return (old_avg * count + new_val) / (count + 1)
 
-# ## summary of activity
-# 	start_time = models.DateTimeField(default=timezone.now)
-# 	week = models.FloatField(default=None, null=True)
-# 	num_records = models.PositiveIntegerField(default=None, null=True)
-# 	tot_dist = models.FloatField(null=True)
-# 	avg_speed = models.FloatField(null=True)
-# 	avg_hr = models.PositiveIntegerField(null=True)
-# 	avg_cadence = models.PositiveIntegerField(null=True)
-# 	elevation_gained = models.PositiveIntegerField(null=True, default=None)
-# 	max_speed = models.FloatField(null=True)
-# 	max_hr = models.PositiveIntegerField(null=True)
-# 	max_cadence = models.PositiveIntegerField(null=True)
+## ------------------------------------------------------------ ##
+## helper method to update the average in a week. 
+## NOTE: function assumes that count has NOT been updated yet!
+## ------------------------------------------------------------ ##
+def _revert_average(avg, val, count):
+	return (avg * count - val) / (count - 1)
 
-# 	## users comments
-# 	comments = models.TextField(null=True, default=None)
-
-# 	## these are the data fields we keep track of for each run
-# 	timestamp = ArrayField(models.DateTimeField(null=True), null=True, default=None) # datetime field
-# 	position_lat = ArrayField(models.IntegerField(null=True), null=True, default=None) # integer values
-# 	position_long = ArrayField(models.IntegerField(null=True), null=True, default=None) # integer values
-# 	distance = ArrayField(models.FloatField(null=True), null=True, default=None) # float field
-# 	altitude = ArrayField(models.FloatField(null=True), null=True, default=None) # float field
-# 	speed = ArrayField(models.FloatField(null=True), null=True, default=None) # float field
-# 	heart_rate = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
-# 	cadence = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
-
-
-
-
-	# ## number of runs in each week
-	# count = JSONField(default=0, null=True)
-
-	# ## distance
-	# total_distance = JSONField(null=True, default=0)
-
-	# ## speed
-	# avg_avg_speed = JSONField(null=True, default=0)
-	# avg_max_speed = JSONField(null=True, default=0)
-
-	# ## hr
-	# avg_avg_hr = JSONField(null=True, default=0)
-	# avg_max_hr = JSONField(null=True, default=0)
-
-
-	# ## cadence
-	# avg_avg_cadence = JSONField(null=True, default=0)
-	# avg_max_cadence = JSONField(null=True, default=0)
-
-	# ## elevation
-	# avg_elevation_gained = JSONField(null=True, default=0)
-	# total_elevation_gained = JSONField(null=True, default=0)
-
-	# ## allow us to index into object.
-	# def __getitem__(self, arg):
-
-	# 	## make sure we're getting a string
-	# 	if not (type(arg) == str or type(arg) == unicode): raise ValueError("you can only index into Week with a String!")
-
-
-	# 	if arg == "user":
-	# 		return self.user
-	# 	elif arg == "total_distance":
-	# 		return self.total_distance
-	# 	elif arg == "avg_avg_speed":
-	# 		return self.avg_avg_speed
-	# 	elif arg == "avg_max_speed":
-	# 		return self.avg_max_speed
-	# 	elif arg == "avg_avg_hr":
-	# 		return self.avg_avg_hr
-	# 	elif arg == "avg_max_hr":
-	# 		return self.avg_max_hr
-	# 	elif arg == "avg_avg_cadence":
-	# 		return self.avg_avg_cadence
-	# 	elif arg == "avg_max_cadence":
-	# 		return self.avg_max_cadence
-	# 	elif arg == "avg_elevation_gained":
-	# 		return self.avg_elevation_gained
-	# 	elif arg == "total_elevation_gained":
-	# 		return self.total_elevation_gained
-	# 	else:
-	# 		raise ValueError("Weeks does not contain field {}.".format(arg))
-
-
-	# ## allow us to set value item into object.
-	# def __setitem__(self, arg, value):
-
-	# 	## make sure we're getting a string
-	# 	if not (type(arg) == str or type(arg) == unicode): raise ValueError("you can only index into Week with a String!")
-
-
-	# 	if arg == "user":
-	# 		self.user = value
-	# 	elif arg == "total_distance":
-	# 		self.total_distance = value
-	# 	elif arg == "avg_avg_speed":
-	# 		self.avg_avg_speed = value
-	# 	elif arg == "avg_max_speed":
-	# 		self.avg_max_speed = value
-	# 	elif arg == "avg_avg_hr":
-	# 		self.avg_avg_hr = value
-	# 	elif arg == "avg_max_hr":
-	# 		self.avg_max_hr = value
-	# 	elif arg == "avg_avg_cadence":
-	# 		self.avg_avg_cadence = value
-	# 	elif arg == "avg_max_cadence":
-	# 		self.avg_max_cadence = value
-	# 	elif arg == "avg_elevation_gained":
-	# 		self.avg_elevation_gained = value
-	# 	elif arg == "total_elevation_gained":
-	# 		self.total_elevation_gained = value
-	# 	else:
-	# 		raise ValueError("Weeks does not contain field {}.".format(arg))
-
-# def get_avg_fields():
-# 		return ["avg_avg_speed", "avg_max_speed",
-# 		"avg_avg_hr", "avg_max_hr",
-# 		"avg_avg_cadence", "avg_max_cadence",
-# 		"avg_elevation_gained"]
-
+## ------------------------------------------------------------ ##
+## helper function returns the y_value_fields that we want to
+## graph in the dashboard
+## ------------------------------------------------------------ ##
 def get_y_value_fields():
 
 	return['count', 'total_distance', 'avg_avg_speed',
 	'max_speed', 'avg_avg_hr', 'max_hr', 'avg_avg_cadence',
 	'max_cadence', 'avg_elevation_gained', 'total_elevation_gained']
+
+
+
+## ------------------------------------------------------------ ##
+## A model which stores data about a user's tags
+## ------------------------------------------------------------ ##
+class Tag(models.Model):
+
+	## who is the object for and on what run did they tag it?
+	user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
+	run = models.ForeignKey(Activity, on_delete=models.CASCADE, null=True)
+
+	## information on the tag
+	tag = models.CharField(max_length=100, blank=False) # what was the tag
+	date = models.DateTimeField(blank=False) # date associated with tag
+	value = models.FloatField(default=1) # numeric value associated with tag
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

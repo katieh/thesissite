@@ -47,7 +47,8 @@ INSTALLED_APPS = [
 
     'bootstrap3',
     'nvd3',
-    'friendship'
+    'friendship',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -133,7 +134,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -142,6 +142,6 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ['/common_static/']
+STATICFILES_DIRS = ["/commmon_static/"]
 
 

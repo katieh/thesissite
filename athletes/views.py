@@ -10,15 +10,17 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.db.models.base import ObjectDoesNotExist
 from django.utils.decorators import method_decorator
+from django.views.generic.edit import CreateView
 
 
 import numpy as np
 import datetime
 
-from .models import Activity, Weeks
-from .forms import UploadActivitiesForm, ActivityForm
-from activity_graphs import get_field_graphs, get_field_histograms
-from week_graphs import get_week_graphs
+from .tags import get_user_tags, get_sentiment_tags
+from .models import Activity, Weeks, Tag
+from .forms import UploadActivitiesForm, ActivityForm, InjuryForm, PerformanceForm
+from .activity_graphs import get_field_graphs, get_field_histograms
+from .dashboard_graphs import get_week_graphs, get_tag_graphs
 from fitparse import Activity as FitActivity
 from activity_helper_methods import get_dict_of_fields
 
@@ -26,10 +28,6 @@ from activity_helper_methods import get_dict_of_fields
 # main view
 @login_required
 def index(request):
-
-	## -------- GET THE CURRENT WEEK! ---------- ##
-	activity_isocalendar = datetime.datetime.now().date().isocalendar()
-	current_week = str(activity_isocalendar[0] + activity_isocalendar[1] / 100.0)
 
 	## -------- GET USER WEEKS! ---------- ##
 	## try and get weeks summary
@@ -42,16 +40,25 @@ def index(request):
 		user_weeks.user = request.user
 		user_weeks.save()
 
+	## -------- GET THE CURRENT WEEK! ---------- ##
+	activity_isocalendar = datetime.datetime.now().date().isocalendar()
+	current_week = str(activity_isocalendar[0] + activity_isocalendar[1] / 100.0)
+
 	try:
 		current_week = user_weeks.weeks[current_week]
 
 	except KeyError:
 		current_week = None
 
+
+	## -------- GET USER TAGS ---------- ##
+	tags = Tag.objects.filter(user=request.user).order_by('date')
+
 	return render(request, 'athletes/index.html', 
 		{'nbar': 'home', 
 		'current_week': current_week,
-		'week_graphs': get_week_graphs(user_weeks.weeks)})
+		'week_graphs': get_week_graphs(user_weeks.weeks),
+		'tag_graphs': get_tag_graphs(tags)})
 
 # main view for athletes
 @login_required
@@ -78,20 +85,46 @@ def details(request, pk):
 
 # allows you to edit an activity's name and comments
 @login_required
-def edit(request, pk):
+def edit(request, pk=None):
+
+	# get week object
+	weeks = get_object_or_404(Weeks, user=request.user)
 
 	# get the matching activity IF the user has permission!
-	activity = get_object_or_404(Activity, user=request.user, pk=pk)
+	if pk!=None:
+		activity = get_object_or_404(Activity, user=request.user, pk=pk)
 
-	if request.method == "POST":
-		form = ActivityForm(request.POST, initial={'name': activity.name, 'comments': activity.comments}, instance=activity)
-		if form.is_valid():
-			activity = form.save()
-			print pk
-			return redirect('athletes:details', pk=pk)
+		# remove it from weeks model
+		weeks.remove_activity(activity)
 
 	else:
-		form = ActivityForm(initial={'name': activity.name, 'comments': activity.comments}, instance=activity)
+		activity = Activity()
+		activity.user_id = request.user.id
+
+	if request.method == "POST":
+		form = ActivityForm(request.POST, instance=activity)
+		if form.is_valid():
+			print "valid!"
+			activity = form.save()
+
+			# delete any tags formerly associated with this activity
+			Tag.objects.filter(run_id=activity).delete()
+
+			## get sentiment of comment
+			get_sentiment_tags(activity)
+
+			## find tags in the new comment
+			get_user_tags(activity)
+
+			## add back to week
+			weeks.add_activity(activity)
+			weeks.save()
+
+
+			return redirect('athletes:details', pk=activity.pk)
+
+	else:
+		form = ActivityForm(instance=activity)
 
 	return render(request, 'athletes/edit.html', {'form': form})
 
@@ -159,6 +192,7 @@ class UploadView(FormView):
 				## fill in summary stats
 				db_activity.start_time = min(activity_dict['timestamp'])
 				db_activity.num_records = len(activity_dict['timestamp'])
+				db_activity.tot_time = int((max(activity_dict['timestamp']) - min(activity_dict['timestamp'])).total_seconds() / 60.0)
 
 				## get iso calender
 				## figure out which week the activity is in
@@ -221,6 +255,52 @@ class UploadView(FormView):
 			weeks.save()
 
 		return super(UploadView, self).form_valid(form)
+
+
+def new_injury(request):
+
+	tag = Tag()
+	tag.tag = "injury"
+	tag.value = 1
+	tag.user_id = request.user.id
+
+	if request.method == "POST":
+		form = InjuryForm(request.POST, instance=tag)
+		if form.is_valid():
+			print "valid!"
+			form.save()
+
+			return redirect('athletes:index')
+
+		else:
+			print "invalid"
+
+	else:
+		form = InjuryForm()
+
+	return render(request, 'athletes/injury.html', {'form': form})
+
+def new_performance(request):
+
+	tag = Tag()
+	tag.tag = "performance"
+	tag.user_id = request.user.id
+
+	if request.method == "POST":
+		form = PerformanceForm(request.POST, instance=tag)
+		if form.is_valid():
+			print "valid!"
+			form.save()
+
+			return redirect('athletes:index')
+
+		else:
+			print "invalid"
+
+	else:
+		form = PerformanceForm()
+
+	return render(request, 'athletes/performance.html', {'form': form})
 
 
 

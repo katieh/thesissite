@@ -15,11 +15,31 @@
 
             <div class="container-fluid">
 
+                <h2>Upload Fit Files</h2>
+
                 <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Upload" />
-                </form>
+
+                    <input id="id_attachments" multiple="multiple" name="attachments" type="file" required="">
+                    <input type="submit" value="Upload">
+
+                 </form>
+
+                 <h2>How to Download Your Fit Files</h2>
+
+                <div style="padding-left: 30px">
+                    <h4>Garmin</h4>
+
+                    <img src="">
+
+                    <ol type="1">
+                      <li>Go to <a href="https://connect.garmin.com">Garmin Connect</a></li>
+                      <li>Navigate to the activity whose FIT file you'd like to download.</li>
+                      <li>Click on the <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> button in the top right corner.</li>
+                      <li>Click on "Export Original" from the dropdown menu.</li>
+                    </ol> 
+                </div>
+                
 
             </div>
 

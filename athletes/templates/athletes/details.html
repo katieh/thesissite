@@ -33,18 +33,75 @@
                 <div class="col-sm-4" height="130px">
                     <div class="chart-wrapper">
                         <div class="chart-title">
-                            Summary
+                            Summary -- {{ activity.start_time }}
                         </div>
 
                         <div class="chart-stage">
 
+                            {% if activity.RPE == None %}
+
+                            <div class="progress" style="margin-bottom: 5px">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{activity.RPE}}" 
+                                aria-valuemin="0" aria-valuemax="10" style="width:100%; background: grey; ">
+                                    RPE: {{activity.RPE}}
+                                </div>
+                            </div>
+
+                            {% else %}
+
+                                {% if activity.RPE <= 3 %}
+                                <div class="progress" style="margin-bottom: 5px">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{activity.RPE}}" 
+                                    aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
+                                        RPE: {{activity.RPE}}
+                                    </div>
+                                </div>
+
+                                {% else %}
+
+                                    {% if activity.RPE <= 6 %}
+                                    <div class="progress" style="margin-bottom: 5px">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{activity.RPE}}" 
+                                        aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
+                                            RPE: {{activity.RPE}}
+                                        </div>
+                                    </div>
+
+                                    {% else %}
+
+                                        {% if activity.RPE <= 8 %}
+                                        <div class="progress" style="margin-bottom: 5px">
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{activity.RPE}}" 
+                                            aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
+                                                RPE: {{activity.RPE}}
+                                            </div>
+                                        </div>
+
+                                        {% else %}
+
+                                            <div class="progress" style="margin-bottom: 5px">
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{activity.RPE}}" 
+                                                aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
+                                                    RPE: {{activity.RPE}}
+                                                </div>
+                                            </div>
+
+                                        {% endif %}
+
+                                    {% endif %}
+
+                                {% endif %}
+
+                            {% endif %}
+
                             <table class="table-condensed">
-                                <tr>
-                                    <td>{{ activity.start_time }}</td>
-                                </tr>
                                 <tr>
                                     <td>Distance:</td>
                                     <td>{{ activity.tot_dist | two_decimals}} miles</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Time:</td>
+                                    <td>{{ activity.tot_minutes}} minutes</td>
                                 </tr>
                                 <tr>
                                     <td>Elevation Gained:</td>
