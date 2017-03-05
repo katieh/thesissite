@@ -16,6 +16,13 @@ from timestring import Date
 class UploadActivitiesForm(forms.Form):
 	attachments = MultiFileField(min_num=1, max_num=100, max_file_size=1024*1024*5)
 
+class UploadActivityForm(forms.Form):
+
+	docfile = forms.FileField()
+	name = forms.CharField()
+	comments = forms.CharField()
+	RPE = forms.IntegerField()
+
 # http://stackoverflow.com/questions/27651577/
 class NaturalDateField(forms.DateField):
 	def to_python(self, value):
@@ -33,18 +40,18 @@ class ActivityForm(ModelForm):
 
 	class Meta:
 		model = Activity
-		fields = ['name', 'comments', 'RPE', 'tot_dist', 'start_time']
+		fields = ['name', 'comments', 'RPE', 'tot_dist', 'start_time', 'tot_time']
 
 class InjuryForm(ModelForm):
 	date = NaturalDateField()
 
 	class Meta:
 		model = Tag
-		fields = ['date']
+		fields = ['date', 'comments']
 
 class PerformanceForm(ModelForm):
 	date = NaturalDateField()
 
 	class Meta:
 		model = Tag
-		fields = ['date', 'value']
+		fields = ['date', 'value', 'comments']

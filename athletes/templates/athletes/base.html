@@ -37,9 +37,27 @@
 			<a href="/athletes"><span class="glyphicon glyphicon-home"></span> Home </a>
 			</li>
 
-			<li class="{% if nbar == 'activities' %}active{% endif %}">
-			<a href="/athletes/list"><span class="glyphicon glyphicon-list"></span> Activities </a>
-			</li>
+			<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span> Lists <span class="caret"></span></a>
+
+			<ul class="dropdown-menu {% if nbar == 'list' %}active{% endif %}">
+				<li>
+					<a href="/athletes/list"><img src="{% static 'img/running.png' %}" style="width:20px"> Activities </a>
+				</li>
+
+				<li>
+					<a href="{% url 'athletes:performance' %}"><span class="glyphicon glyphicon-signal"></span> Performance </a>
+				</li>
+
+				<li>
+					<a href="{% url 'athletes:injury' %}"><span class="glyphicon glyphicon-exclamation-sign"></span> Injuries </a>
+				</li>
+            </ul>
+		</li>
+
+			
+
+			
 
 	    </ul>
 
@@ -52,7 +70,7 @@
 			<ul class="dropdown-menu">
 				
 				<li>
-					<a href="/athletes/upload"><span class="glyphicon glyphicon-upload"></span> Upload Fit File</a>
+					<a href="/athletes/upload_one"><span class="glyphicon glyphicon-upload"></span> Upload Fit File</a>
 				</li>
 
 				<li>
@@ -65,6 +83,12 @@
 
 				<li>
 					<a href="{% url 'athletes:new-injury' %}"><span class="glyphicon glyphicon-exclamation-sign"></span> Add Injury </a>
+				</li>
+
+				<li role="separator" class="divider"></li>
+
+				<li>
+					<a href="{% url 'athletes:help' %}"> Help Finding Fit Files</a>
 				</li>
 
 

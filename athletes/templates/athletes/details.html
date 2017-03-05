@@ -17,16 +17,25 @@
         <div class="container-fluid">
 
             <div class="row">
-                <div class="col-sm-11">
+                <div class="col-sm-10">
                     <h1>{{ activity.name }}</h1>
                 </div>
 
-                <div class="col-sm-1">
+                <div class="col-sm-2">
 
-                    <button onclick="location.href = '{% url 'athletes:edit' activity.id %}';" type="button" class="btn btn-default" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </button>
+                    <div class="btn-group pull-right" role="group">
+
+                        <button onclick="location.href = '{% url 'athletes:edit' activity.id %}'" type="button" class="btn btn-default" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </button>
+
+                        <a onclick="return confirm('Are you sure you want to delete this run?')" href='{% url 'athletes:delete_activity' activity.id %}' type="button" class="btn btn-default" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
                 </div>
+
             </div>
 
             <div class="row">
@@ -97,27 +106,27 @@
                             <table class="table-condensed">
                                 <tr>
                                     <td>Distance:</td>
-                                    <td>{{ activity.tot_dist | two_decimals}} miles</td>
+                                    <td>{{ activity.tot_dist | two_decimals}} {% if activity.tot_dist != None %}miles{% endif %}</td>
                                 </tr>
                                 <tr>
                                     <td>Total Time:</td>
-                                    <td>{{ activity.tot_minutes}} minutes</td>
+                                    <td>{{ activity.tot_time}} {% if activity.tot_time != None %}minutes{% endif %}</td>
                                 </tr>
                                 <tr>
                                     <td>Elevation Gained:</td>
-                                    <td>{{ activity.elevation_gained }} feet</td>
+                                    <td>{{ activity.elevation_gained }} {% if activity.elevation_gained != None %}feet{% endif %}</td>
                                 </tr>
                                 <tr>
                                     <td>Average Speed:</td>
-                                    <td>{{ activity.avg_speed | mps_to_time_per_mile}} mins / mile</td>
+                                    <td>{{ activity.avg_speed | mps_to_time_per_mile}} {% if activity.avg_speed != None %}mins / mile{% endif %}</td>
                                 </tr>
                                 <tr>
                                     <td>Average Heart Rate:</td>
-                                    <td>{{ activity.avg_hr }} bpm</td>
+                                    <td>{{ activity.avg_hr }} {% if activity.avg_hr != None %}bpm{% endif %}</td>
                                 </tr>
                                 <tr>
                                     <td>Average Cadance:</td>
-                                    <td>{{ activity.avg_cadence }} spm</td>
+                                    <td>{{ activity.avg_cadence }} {% if activity.avg_cadence != None %}spm{% endif %}</td>
                                 </tr>
                             </table>
                         </div>

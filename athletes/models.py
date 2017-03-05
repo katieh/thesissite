@@ -165,41 +165,46 @@ class Weeks(models.Model):
 		# remove activity from the week it contributed to
 		key = activity_week.strftime('%m/%d/%Y')
 
-		if activity.tot_dist != None:
-			self.weeks[key]['total_distance'] -= activity.tot_dist
+		if self.weeks[key]['count'] - 1 == 0:
+			self.weeks.pop(key)
 
-		if activity.avg_speed != None:
-			self.weeks[key]['avg_avg_speed'] = _revert_average(self.weeks[key]['avg_avg_speed'],
-				activity.avg_speed, self.weeks[key]['count'])
+		else:
 
-		# NOTE: this is a bug!!!!
-		if activity.max_speed != None and activity.max_speed > self.weeks[key]['max_speed']:
-			self.weeks[key]['max_speed'] = activity.max_speed
+			if activity.tot_dist != None:
+				self.weeks[key]['total_distance'] -= activity.tot_dist
 
-		if activity.avg_hr != None:
-			self.weeks[key]['avg_avg_hr'] = _revert_average(self.weeks[key]['avg_avg_hr'],
-				activity.avg_hr, self.weeks[key]['count'])
+			if activity.avg_speed != None:
+				self.weeks[key]['avg_avg_speed'] = _revert_average(self.weeks[key]['avg_avg_speed'],
+					activity.avg_speed, self.weeks[key]['count'])
 
-		# BUG
-		if activity.max_hr != None and activity.max_hr > self.weeks[key]['max_hr']:
-			self.weeks[key]['max_hr'] = activity.max_hr
+			# NOTE: this is a bug!!!!
+			if activity.max_speed != None and activity.max_speed > self.weeks[key]['max_speed']:
+				self.weeks[key]['max_speed'] = activity.max_speed
 
-		if activity.avg_cadence != None:
-			self.weeks[key]['avg_avg_cadence'] = _revert_average(self.weeks[key]['avg_avg_cadence'],
-				activity.avg_cadence, self.weeks[key]['count'])
+			if activity.avg_hr != None:
+				self.weeks[key]['avg_avg_hr'] = _revert_average(self.weeks[key]['avg_avg_hr'],
+					activity.avg_hr, self.weeks[key]['count'])
 
-		# BUG
-		if activity.max_cadence != None and activity.max_cadence > self.weeks[key]['max_cadence']:
-			self.weeks[key]['max_cadence'] = activity.max_cadence
+			# BUG
+			if activity.max_hr != None and activity.max_hr > self.weeks[key]['max_hr']:
+				self.weeks[key]['max_hr'] = activity.max_hr
 
-		if activity.elevation_gained != None:
-			self.weeks[key]['avg_elevation_gained'] = _revert_average(self.weeks[key]['avg_elevation_gained'],
-				activity.elevation_gained, self.weeks[key]['count'])
+			if activity.avg_cadence != None:
+				self.weeks[key]['avg_avg_cadence'] = _revert_average(self.weeks[key]['avg_avg_cadence'],
+					activity.avg_cadence, self.weeks[key]['count'])
 
-			self.weeks[key]['total_elevation_gained'] -= activity.elevation_gained
+			# BUG
+			if activity.max_cadence != None and activity.max_cadence > self.weeks[key]['max_cadence']:
+				self.weeks[key]['max_cadence'] = activity.max_cadence
+
+			if activity.elevation_gained != None:
+				self.weeks[key]['avg_elevation_gained'] = _revert_average(self.weeks[key]['avg_elevation_gained'],
+					activity.elevation_gained, self.weeks[key]['count'])
+
+				self.weeks[key]['total_elevation_gained'] -= activity.elevation_gained
 
 
-		self.weeks[key]['count'] -= 1
+			self.weeks[key]['count'] -= 1
 
 
 	def add_activity(self, activity):
@@ -303,6 +308,7 @@ class Tag(models.Model):
 	tag = models.CharField(max_length=100, blank=False) # what was the tag
 	date = models.DateTimeField(blank=False) # date associated with tag
 	value = models.FloatField(default=1) # numeric value associated with tag
+	comments = models.TextField(null=True) # ONLY filled out for injury / performance tags
 
 
 

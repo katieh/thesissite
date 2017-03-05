@@ -1,0 +1,65 @@
+{% extends "athletes/base.html" %}
+{% load static %}
+{% load template_filters %}
+
+</!DOCTYPE html>
+<html>
+<head>
+
+	<title>Injuries</title>
+
+</head>
+<body>
+
+	{% block content %}
+
+	<div class="container-fluid">
+
+		<h1> Performance </h1>
+
+	    <!-- List of uploaded documents -->
+	    <!-- TODO: make the rows clickable -->
+	    {% if performances %}
+
+	    	<table class="table table-hover">
+
+			  <tr>
+			    <th>Date</th>
+			    <th>Reaction</th>
+			    <th>Decription</th>
+			    <th></th>
+			  </tr>
+
+			  {% for performance in performances %}
+			  	<tr>
+			  		<td>{{ performance.date|date:"M d, Y" }}</td>
+			  		{% if performance.value == 0 %}
+			  			<td>Very Unhappy</td>
+			  		{% endif %}
+			  		{% if performance.value == 1 %}
+			  			<td>Unhappy</td>
+			  		{% endif %}
+			  		{% if performance.value == 2 %}
+			  			<td>Neutral</td>
+			  		{% endif %}
+			  		{% if performance.value == 3 %}
+			  			<td>Happy</td>
+			  		{% endif %}
+			  		{% if performance.value == 4 %}
+			  			<td>Very Happy</td>
+			  		{% endif %}
+			  		<td>{{ performance.comments }}</td>
+			  		<td><a onclick="return confirm('Are you sure you want to delete this performance?')" class="btn btn-default" href={% url 'athletes:remove_tag' performance.id %}><span class="glyphicon glyphicon-trash"></span></a></td>
+			  	</tr>
+	          {% endfor %}
+
+			</table>
+
+	    {% endif %}
+
+    </div>
+
+	{% endblock %}
+
+</body>
+</html>

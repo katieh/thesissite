@@ -1,0 +1,29 @@
+{% extends "athletes/base.html" %}
+<body>
+
+	{% block content %}
+
+	<div class="container-fluid">
+
+		<h1>How to Download Your Fit Files</h1>
+
+            <div style="padding-left: 30px">
+                <h2>Garmin</h2>
+
+                <img src="">
+
+                <ol type="1">
+                  <li>Go to <a href="https://connect.garmin.com">Garmin Connect</a></li>
+                  <li>Navigate to the activity whose FIT file you'd like to download.</li>
+                  <li>Click on the <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> button in the top right corner.</li>
+                  <li>Click on "Export Original" from the dropdown menu. The downloaded file should end in ".zip" (e.g. 19204901.zip)</li>
+                  <li>Double click on the ".zip" file and it will unzip into a ".fit" file</li>
+                </ol> 
+     </div>
+
+    </div>
+
+	{% endblock %}
+
+</body>
+</html>

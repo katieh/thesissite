@@ -1,0 +1,49 @@
+{% extends "athletes/base.html" %}
+{% load static %}
+{% load template_filters %}
+
+</!DOCTYPE html>
+<html>
+<head>
+
+	<title>Injuries</title>
+
+</head>
+<body>
+
+	{% block content %}
+
+	<div class="container-fluid">
+
+		<h1> Injuries </h1>
+
+	    <!-- List of uploaded documents -->
+	    <!-- TODO: make the rows clickable -->
+	    {% if injuries %}
+
+	    	<table class="table table-hover">
+
+			  <tr>
+			    <th>Date</th>
+			    <th>Decription</th>
+			    <th></th>
+			  </tr>
+
+			  {% for injury in injuries %}
+			  	<tr>
+			  		<td>{{ injury.date|date:"M d, Y" }}</td>
+			  		<td>{{ injury.comments }}</td>
+			  		<td><a onclick="return confirm('Are you sure you want to delete this injury?')" class="btn btn-default" href={% url 'athletes:remove_tag' injury.id %}><span class="glyphicon glyphicon-trash"></span></a></td>
+			  	</tr>
+	          {% endfor %}
+
+			</table>
+
+	    {% endif %}
+
+    </div>
+
+	{% endblock %}
+
+</body>
+</html>

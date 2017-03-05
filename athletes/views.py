@@ -18,7 +18,7 @@ import datetime
 
 from .tags import get_user_tags, get_sentiment_tags
 from .models import Activity, Weeks, Tag
-from .forms import UploadActivitiesForm, ActivityForm, InjuryForm, PerformanceForm
+from .forms import UploadActivitiesForm, ActivityForm, InjuryForm, PerformanceForm, UploadActivityForm
 from .activity_graphs import get_field_graphs, get_field_histograms
 from .dashboard_graphs import get_week_graphs, get_tag_graphs
 from fitparse import Activity as FitActivity
@@ -94,9 +94,6 @@ def edit(request, pk=None):
 	if pk!=None:
 		activity = get_object_or_404(Activity, user=request.user, pk=pk)
 
-		# remove it from weeks model
-		weeks.remove_activity(activity)
-
 	else:
 		activity = Activity()
 		activity.user_id = request.user.id
@@ -104,8 +101,12 @@ def edit(request, pk=None):
 	if request.method == "POST":
 		form = ActivityForm(request.POST, instance=activity)
 		if form.is_valid():
-			print "valid!"
+			
+			# remove it from weeks model
+			weeks.remove_activity(activity)
+
 			activity = form.save()
+
 
 			# delete any tags formerly associated with this activity
 			Tag.objects.filter(run_id=activity).delete()
@@ -119,7 +120,6 @@ def edit(request, pk=None):
 			## add back to week
 			weeks.add_activity(activity)
 			weeks.save()
-
 
 			return redirect('athletes:details', pk=activity.pk)
 
@@ -257,6 +257,113 @@ class UploadView(FormView):
 		return super(UploadView, self).form_valid(form)
 
 
+def upload_one(request):
+
+	if request.method == 'POST':
+		form = UploadActivityForm(request.POST, request.FILES)
+		print form.is_valid()
+
+		if form.is_valid():
+
+			## create and save a new activity
+			db_activity = Activity(file=request.FILES['docfile']) ## get the uploaded file
+			db_activity.save() ## save so that we save the file
+
+			## open file and extract data
+			activity_file = open("media/" + db_activity.file.name)
+			fit_activity = FitActivity(activity_file)
+			fit_activity.parse()
+			activity_dict = get_dict_of_fields(fit_activity)
+
+			# TODO: something like this would be GREAT
+			## find the union of keys in dict and fields in the Activity model
+			#fields = union(activity_dict.keys, db_activity.get_data_fields())
+			# for field in fields:
+			# 	db_activity[field] = activity_dict[field]
+
+			## fill in the user of the uploaded activity!
+			db_activity.user = request.user	
+			db_activity.RPE = request.POST['RPE']
+			db_activity.name = request.POST['name']
+			db_activity.comments = request.POST['comments']
+
+			## fill in data for db_activity and save again
+			if 'timestamp' in activity_dict.keys():
+				db_activity.timestamp = activity_dict['timestamp']
+
+				## fill in summary stats
+				db_activity.start_time = min(activity_dict['timestamp'])
+				db_activity.num_records = len(activity_dict['timestamp'])
+				db_activity.tot_time = int((max(activity_dict['timestamp']) - min(activity_dict['timestamp'])).total_seconds() / 60.0)
+
+				## get iso calender
+				## figure out which week the activity is in
+				activity_isocalendar = db_activity.start_time.date().isocalendar()
+				db_activity.week = activity_isocalendar[0] + activity_isocalendar[1] / 100.0
+
+			if 'position_lat' in activity_dict.keys():
+				db_activity.position_lat = activity_dict['position_lat']
+
+			if 'position_long' in activity_dict.keys():
+				db_activity.position_long = activity_dict['position_long']
+
+			if 'distance' in activity_dict.keys():
+				db_activity.distance = activity_dict['distance']
+				db_activity.tot_dist = max(activity_dict['distance'])
+
+			if 'altitude' in activity_dict.keys():
+				db_activity.altitude = activity_dict['altitude']
+
+				db_activity.elevation_gained = sum([abs(activity_dict['altitude'][i] - activity_dict['altitude'][i+1]) 
+					for i in range(len(activity_dict['altitude']) - 1) 
+					if activity_dict['altitude'][i] != None and activity_dict['altitude'][i+1] != None])
+
+			if 'speed' in activity_dict.keys():
+				db_activity.speed = activity_dict['speed']
+				db_activity.avg_speed = np.nanmean([x for x in activity_dict['speed'] if x != None])
+				db_activity.max_speed = max(activity_dict['speed'])
+
+			if 'heart_rate' in activity_dict.keys():
+				db_activity.heart_rate = activity_dict['heart_rate']
+				db_activity.avg_hr = int(np.nanmean([x for x in activity_dict['heart_rate'] if x != None]))
+				db_activity.max_hr = max(activity_dict['heart_rate'])
+
+			if 'cadence' in activity_dict.keys():
+				db_activity.cadence = activity_dict['cadence']
+				db_activity.avg_cadence = int(np.nanmean([x for x in activity_dict['cadence'] if x != None]))
+				db_activity.max_cadence = max(activity_dict['cadence'])
+
+
+			## ----------------------------------------- ##
+			## ADD WEEK INFORMATION
+			## ----------------------------------------- ##
+			activity_week = db_activity.week
+
+			## if the user already has a week object, use it
+			try:
+				weeks = Weeks.objects.get(user=request.user)
+
+			## otherwise create a new one.
+			except ObjectDoesNotExist:
+				weeks = Weeks()
+				weeks.user = request.user
+
+			## add activity to weeks object
+			weeks.add_activity(db_activity)
+
+
+			## save models!
+			db_activity.save()
+			weeks.save()
+
+			return redirect('athletes:details', pk=db_activity.pk)
+
+
+	else:
+		form = UploadActivityForm()
+
+	return render(request, 'athletes/upload_one.html', {'form': form})
+
 def new_injury(request):
 
 	tag = Tag()
@@ -270,7 +377,7 @@ def new_injury(request):
 			print "valid!"
 			form.save()
 
-			return redirect('athletes:index')
+			return redirect('athletes:injury')
 
 		else:
 			print "invalid"
@@ -292,7 +399,7 @@ def new_performance(request):
 			print "valid!"
 			form.save()
 
-			return redirect('athletes:index')
+			return redirect('athletes:performance')
 
 		else:
 			print "invalid"
@@ -303,5 +410,39 @@ def new_performance(request):
 	return render(request, 'athletes/performance.html', {'form': form})
 
 
+def delete_activity(request, pk):
 
+	activity = get_object_or_404(Activity, user=request.user, pk=pk)
+	week = get_object_or_404(Weeks, user=request.user)
 
+	# remove from week
+	week.remove_activity(activity)
+	week.save()
+
+	# remove activity
+	activity.delete()
+
+	return redirect('athletes:index')
+
+def injury_list(request):
+
+	injuries = Tag.objects.filter(user=request.user, tag="injury")
+
+	return render(request, 'athletes/injury_list.html', {'injuries': injuries, 'nbar': 'injury_list'})
+
+def performance_list(request):
+
+	performances = Tag.objects.filter(user=request.user, tag="performance")
+
+	return render(request, 'athletes/performance_list.html', {'performances': performances, 'nbar': 'list'})
+
+def remove_tag(request, pk):
+
+	tag = get_object_or_404(Tag, user=request.user, pk=pk)
+	tag.delete()
+
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def help(request):
+
+	return render(request, "athletes/help.html")
