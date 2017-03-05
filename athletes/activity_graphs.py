@@ -1,7 +1,7 @@
 import json
 import numpy as np
 from .models import Activity
-from graph_themes import get_color, get_label
+from .graph_themes import get_color, get_label
 
 def get_field_histograms(activity, user):
 
