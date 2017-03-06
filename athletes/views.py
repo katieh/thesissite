@@ -290,10 +290,10 @@ def upload_one(request):
 
 			## save any # that were in the comments.
 			## get sentiment of comment
-			get_sentiment_tags(activity)
+			get_sentiment_tags(db_activity)
 
 			## find tags in the new comment
-			get_user_tags(activity)
+			get_user_tags(db_activity)
 
 			## fill in data for db_activity and save again
 			if 'timestamp' in activity_dict.keys():
