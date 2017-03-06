@@ -103,7 +103,8 @@ def edit(request, pk=None):
 		if form.is_valid():
 			
 			# remove it from weeks model
-			weeks.remove_activity(activity)
+			if pk!=None:
+				weeks.remove_activity(activity)
 
 			activity = form.save()
 
