@@ -21,7 +21,7 @@ from .models import Activity, Weeks, Tag
 from .forms import UploadActivitiesForm, ActivityForm, InjuryForm, PerformanceForm, UploadActivityForm
 from .activity_graphs import get_field_graphs, get_field_histograms
 from .dashboard_graphs import get_week_graphs, get_tag_graphs
-from fitparse import Activity as FitActivity
+from .fitparse import Activity as FitActivity
 from activity_helper_methods import get_dict_of_fields
 
 
