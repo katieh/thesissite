@@ -44,6 +44,8 @@ class ActivityForm(ModelForm):
 	class Meta:
 		model = Activity
 		fields = ['name', 'comments', 'RPE', 'tot_dist', 'start_time', 'tot_time']
+		widgets = {'start_time': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm",
+                                       "pickSeconds": False})}
 
 class InjuryForm(ModelForm):
 	date = NaturalDateField()
