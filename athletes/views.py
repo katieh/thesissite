@@ -47,13 +47,18 @@ def index(request):
 	## -------- GET USER TAGS ---------- ##
 	tags = Tag.objects.filter(user=request.user)
 
+	try:
+		latest_activity = activities.latest()
+	except:
+		latest_activity = None
+
 	return render(request, 'athletes/index.html', 
 		{'nbar': 'home', 
 		'this_week': this_week,
 		'current_week': current_week,
 		'week_graphs': weeks_graphs,
 		'tag_graphs': get_tag_graphs(tags, weeks),
-		'activity': activities.latest()})
+		'activity': latest_activity})
 
 # main view for athletes
 @login_required
