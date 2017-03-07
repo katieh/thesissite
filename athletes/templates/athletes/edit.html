@@ -18,6 +18,10 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
 
                     {% csrf_token %}
 
+                                            <p>
+                                {{ form }}
+                        </p>
+
                     <!-- copied from http://stackoverflow.com/questions/14647723/django-forms-if-not-valid-show-form-with-error-message -->
                     {% if form.errors %}
                         <div class="alert alert-danger">

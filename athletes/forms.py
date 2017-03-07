@@ -12,6 +12,8 @@ from .models import Activity, Tag
 
 from django.utils import timezone
 from timestring import Date
+from datetimewidget.widgets import DateTimeWidget, DateWidget
+
 
 class UploadActivitiesForm(forms.Form):
 	attachments = MultiFileField(min_num=1, max_num=100, max_file_size=1024*1024*5)
@@ -39,13 +41,11 @@ class NaturalDateField(forms.DateField):
 		return parsed_date.date
 
 class ActivityForm(ModelForm):
-	start_time = NaturalDateField()
+	start_time = forms.DateTimeField(widget=DateTimeWidget(usel10n=True, bootstrap_version=3))
 
 	class Meta:
 		model = Activity
 		fields = ['name', 'comments', 'RPE', 'tot_dist', 'start_time', 'tot_time']
-		widgets = {'start_time': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm",
-                                       "pickSeconds": False})}
 
 class InjuryForm(ModelForm):
 	date = NaturalDateField()
