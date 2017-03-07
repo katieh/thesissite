@@ -71,13 +71,19 @@ class Activity(models.Model):
 	heart_rate = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
 	cadence = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
 
+	class Meta:
+		get_latest_by = 'start_time'
+
 	@property
 	def RPE_percent(self):
 		return (self.RPE / 10.0) * 100
 
 	@property
-	def SRPE(self):
-		return self.RPE * self.tot_time
+	def sRPE(self):
+		try:
+			return self.RPE * self.tot_time
+		except:
+			return None
 
 	## return the names of the array fields in Activity Model 
 	def get_array_fields(self):
@@ -133,155 +139,6 @@ class Activity(models.Model):
 			return self.cadence
 		else:
 			raise ValueError("Activity does not contain field {}".format(arg))
-
-## ------------------------------------------------------------ ##
-## A model which stores data about a user's weekly stats
-## ------------------------------------------------------------ ##
-
-class Weeks(models.Model):
-
-	## who is the object for?
-	user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False)
-	weeks = JSONField(default=dict())
-
-	def add_week(self, key):
-
-		self.weeks[key] = {}
-		self.weeks[key]['count'] = 0
-		self.weeks[key]['total_distance'] = 0
-		self.weeks[key]['avg_avg_speed'] = 0
-		self.weeks[key]['max_speed'] = 0
-		self.weeks[key]['avg_avg_hr'] = 0
-		self.weeks[key]['max_hr'] = 0
-		self.weeks[key]['avg_avg_cadence'] = 0
-		self.weeks[key]['max_cadence'] = 0
-		self.weeks[key]['avg_elevation_gained'] = 0
-		self.weeks[key]['total_elevation_gained'] = 0
-
-	def remove_activity(self, activity):
-
-		activity_week = activity.start_time - timedelta(days=activity.start_time.weekday())
-
-		# remove activity from the week it contributed to
-		key = activity_week.strftime('%m/%d/%Y')
-
-		if self.weeks[key]['count'] - 1 == 0:
-			self.weeks.pop(key)
-
-		else:
-
-			if activity.tot_dist != None:
-				self.weeks[key]['total_distance'] -= activity.tot_dist
-
-			if activity.avg_speed != None:
-				self.weeks[key]['avg_avg_speed'] = _revert_average(self.weeks[key]['avg_avg_speed'],
-					activity.avg_speed, self.weeks[key]['count'])
-
-			# NOTE: this is a bug!!!!
-			if activity.max_speed != None and activity.max_speed > self.weeks[key]['max_speed']:
-				self.weeks[key]['max_speed'] = activity.max_speed
-
-			if activity.avg_hr != None:
-				self.weeks[key]['avg_avg_hr'] = _revert_average(self.weeks[key]['avg_avg_hr'],
-					activity.avg_hr, self.weeks[key]['count'])
-
-			# BUG
-			if activity.max_hr != None and activity.max_hr > self.weeks[key]['max_hr']:
-				self.weeks[key]['max_hr'] = activity.max_hr
-
-			if activity.avg_cadence != None:
-				self.weeks[key]['avg_avg_cadence'] = _revert_average(self.weeks[key]['avg_avg_cadence'],
-					activity.avg_cadence, self.weeks[key]['count'])
-
-			# BUG
-			if activity.max_cadence != None and activity.max_cadence > self.weeks[key]['max_cadence']:
-				self.weeks[key]['max_cadence'] = activity.max_cadence
-
-			if activity.elevation_gained != None:
-				self.weeks[key]['avg_elevation_gained'] = _revert_average(self.weeks[key]['avg_elevation_gained'],
-					activity.elevation_gained, self.weeks[key]['count'])
-
-				self.weeks[key]['total_elevation_gained'] -= activity.elevation_gained
-
-
-			self.weeks[key]['count'] -= 1
-
-
-	def add_activity(self, activity):
-
-		activity_week = activity.start_time - timedelta(days=activity.start_time.weekday())
-
-		# add week if we need to
-		if activity_week.strftime('%m/%d/%Y') not in self.weeks.keys():
-
-			# add new week
-			self.add_week(activity_week.strftime('%m/%d/%Y'))
-
-			weeks = [datetime.strptime(x, '%m/%d/%Y') for x in self.weeks.keys()]
-			week_below = activity_week - timedelta(days=7)
-			week_above = activity_week + timedelta(days=7)
-
-			# add any weeks we need to below
-			if min(weeks).replace(tzinfo=None) < week_below.replace(tzinfo=None):
-				while week_below.strftime('%m/%d/%Y') not in self.weeks.keys():
-					self.add_week(week_below.strftime('%m/%d/%Y'))
-					week_below = week_below - timedelta(days=7)
-
-			# add any weeks we need to above
-			if max(weeks).replace(tzinfo=None) > week_above.replace(tzinfo=None): 
-				while week_above.strftime('%m/%d/%Y') not in self.weeks.keys():
-					self.add_week(week_above.strftime('%m/%d/%Y'))
-					week_above = week_above + timedelta(days=7)
-
-		# add activity data to the appropriate week
-		key = activity_week.strftime('%m/%d/%Y')
-
-		if activity.tot_dist != None:
-			self.weeks[key]['total_distance'] += activity.tot_dist
-
-		if activity.avg_speed != None:
-			self.weeks[key]['avg_avg_speed'] = _update_average(self.weeks[key]['avg_avg_speed'],
-				activity.avg_speed, self.weeks[key]['count'])
-
-		if activity.max_speed != None and activity.max_speed > self.weeks[key]['max_speed']:
-			self.weeks[key]['max_speed'] = activity.max_speed
-
-		if activity.avg_hr != None:
-			self.weeks[key]['avg_avg_hr'] = _update_average(self.weeks[key]['avg_avg_hr'],
-				activity.avg_hr, self.weeks[key]['count'])
-
-		if activity.max_hr != None and activity.max_hr > self.weeks[key]['max_hr']:
-			self.weeks[key]['max_hr'] = activity.max_hr
-
-		if activity.avg_cadence != None:
-			self.weeks[key]['avg_avg_cadence'] = _update_average(self.weeks[key]['avg_avg_cadence'],
-				activity.avg_cadence, self.weeks[key]['count'])
-
-		if activity.max_cadence != None and activity.max_cadence > self.weeks[key]['max_cadence']:
-			self.weeks[key]['max_cadence'] = activity.max_cadence
-
-		if activity.elevation_gained != None:
-			self.weeks[key]['avg_elevation_gained'] = _update_average(self.weeks[key]['avg_elevation_gained'],
-				activity.elevation_gained, self.weeks[key]['count'])
-
-			self.weeks[key]['total_elevation_gained'] += activity.elevation_gained
-
-
-		self.weeks[key]['count'] += 1
-
-## ------------------------------------------------------------ ##
-## helper method to update the average in a week. 
-## NOTE: function assumes that count has NOT been updated yet!
-## ------------------------------------------------------------ ##
-def _update_average(old_avg, new_val, count):
-	return (old_avg * count + new_val) / (count + 1)
-
-## ------------------------------------------------------------ ##
-## helper method to update the average in a week. 
-## NOTE: function assumes that count has NOT been updated yet!
-## ------------------------------------------------------------ ##
-def _revert_average(avg, val, count):
-	return (avg * count - val) / (count - 1)
 
 ## ------------------------------------------------------------ ##
 ## helper function returns the y_value_fields that we want to

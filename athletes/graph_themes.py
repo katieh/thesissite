@@ -3,8 +3,17 @@
 ## color pallet from:
 ## http://www.color-hex.com/color-palette/700
 def get_color(key):
-	if "distance" in key:
-		return "#ffc425"
+	if "acute_distance" in key:
+		return "#00aedb"
+
+	elif "chronic_distance" in key:
+		return '#006883'
+
+	elif "acute_sRPM" in key:
+		return '#d11141'
+
+	elif "chronic_sRPM" in key:
+		return '#7d0a27'
 
 	elif "count" in key:
 		return "#7f7f7f"
@@ -42,6 +51,13 @@ def get_color(key):
 
 		else:
 			return '#00aedb'
+
+	elif "performance":
+		return "#00b159"
+
+	elif "injury":
+		return "#d11141"
+
 
 	else:
 		raise KeyError("Requesting key that does not have a set color")

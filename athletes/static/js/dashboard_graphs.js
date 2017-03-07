@@ -14,13 +14,8 @@ for (i in week_graphs_keys) {
 }
 
 // graph tags
-make_line_chart(tag_graphs['sentiment'], 'sentiment')
-make_bar_chart_date(tag_graphs['user_tags'], 'user_tags')
-// var tag_graphs_keys = Object.keys(tag_graphs)
-
-// for (i in tag_graphs_keys) {
-//     make_line_chart(tag_graphs[tag_graphs_keys[i]], tag_graphs_keys[i])
-// }
+make_bar_chart(tag_graphs['user_tags'], 'user_tags')
+make_bar_chart(tag_graphs['performance_injury'], 'performance_injury')
 
 function make_line_chart(data, key) {
     height = 250
@@ -39,43 +34,6 @@ function make_line_chart(data, key) {
 
         chart.xAxis
         .axisLabel('Date')
-        // modified from http://stackoverflow.com/questions/19459687/understanding-nvd3-x-axis-date-format
-        .tickFormat(function(d) {
-            return d3.time.format('%m/%d/%y')(new Date(d))
-        })
-        .rotateLabels(-45)
-        ;
-
-        chart.yAxis
-        .tickFormat(d3.format('.2f'))
-        ;
-
-        // modifide from http://stackoverflow.com/questions/9244824/how-to-remove-quot-from-my-json-in-javascript
-        d3.select("#" + key + " svg")
-        .datum(data)
-        .transition().duration(500)
-        .call(chart).style({'height': height});
-
-        nv.utils.windowResize(chart.update);
-
-        return chart;
-    });
-}
-
-function make_bar_chart_date(data, key) {
-
-
-    height = 250
-
-    // make the graph with the appropriate key
-    nv.addGraph(function() {
-
-        var chart = nv.models.multiBarChart()
-        .showControls(false)
-        .height(height);
-
-        chart.xAxis
-        .axisLabel('Week')
         // modified from http://stackoverflow.com/questions/19459687/understanding-nvd3-x-axis-date-format
         .tickFormat(function(d) {
             return d3.time.format('%m/%d/%y')(new Date(d))

@@ -1,61 +1,143 @@
-from .models import Weeks, get_y_value_fields
+from .models import get_y_value_fields
 from .graph_themes import get_color
 import numpy as np
 import collections
-import datetime
+from datetime import datetime, timedelta
 from colour import Color
+import json
 
-def get_tag_graphs(tags):
+def get_tag_graphs(tags, weeks):
 	tag_graphs = {}
-	red = Color('red')
-	purple = Color('purple')
+	red = Color('#f37736')
+	purple = Color('#a64ca6')
 
 	unique_tags = np.unique([x['tag'] for x in tags.values('tag')])
 
-	## make sentiment graph if we have any notes saved
+	## get all tag graphs
 	for tag in unique_tags:
 
-		x_val = [(x['date'].replace(tzinfo=None) - datetime.datetime(1970,1,1)).total_seconds() * 1000 for x in tags.filter(tag=tag).values('date')]
-		y_val = [x['value'] for x in tags.filter(tag=tag).values('value')]
+		x_val = [(x['date'].date() - datetime(1970,1,1).date()).total_seconds() * 1000 for x in tags.filter(tag=tag).order_by('date').values('date')]
+		y_val = [x['value'] for x in tags.filter(tag=tag).order_by('date').values('value')]
 
 		tag_graphs[tag] = map_to_graph(x_val, y_val)
 
-	# get an object with sentiments
-	data = {}
+	## get week graph with all 0s
+	x_val = [((datetime.combine(x, datetime.min.time()) - datetime(1970,1,1)).total_seconds() + 86400) * 1000 for x in weeks.keys()]
 
-	# get sentiments graph
-	data['sentiment'] = []
+	y_val = [0] * len(x_val)
+	zero_weeks = map_to_graph(x_val, y_val)
 
-	for sentiment in [x for x in unique_tags if "sentiment_" in x]:
-		data['sentiment'].append({
-				"values": tag_graphs[sentiment],
-				"key": str(sentiment),
-				"color": get_color(sentiment)
+	## define unique USER tags
+	user_tags = [x for x in unique_tags if x != "injury" and x != "performance"]
 
-			})
-
-	# get user tags graph
-	data['user_tags'] = []
-	user_tags = [x for x in unique_tags if "sentiment_" not in x]
-
+	## get colors
 	try:
 		user_colors = list(red.range_to(purple, len(user_tags)))
 	except:
 		user_colors = []
 
-	for user_tag in user_tags:
+	# get an object with sentiments
+	data = {}
+
+	# get sentiments graph
+	data['user_tags'] = []
+
+	for tag in user_tags:
 		data['user_tags'].append({
-				"values": tag_graphs[user_tag],
-				"key": str(user_tag),
-				"color": user_colors[user_tags.index(user_tag)].hex
+				"values": tag_graphs[tag],
+				"key": str(tag),
+				"color": get_color(tag) if "sentiment" in tag else user_colors[user_tags.index(tag)].hex
 			})
+
+	# data['user_tags'].append({
+	# 	"values": zero_weeks,
+	# 	"key": "",
+	# 	"color": "#FFFFFF"
+	# 	})
+
+	# get user tags graph
+	data['performance_injury'] = []
+
+	# http://stackoverflow.com/questions/642763/find-intersection-of-two-lists
+	for tag in set.intersection({'injury', 'performance'}, unique_tags):
+		print tag
+		data['performance_injury'].append({
+				"values": tag_graphs[tag],
+				"key": str(tag),
+				"color": get_color(tag)
+			})
+
+	# data['performance_injury'].append({
+	# 	"values": zero_weeks,
+	# 	"key": "",
+	# 	"color": "#FFFFFF"
+	# 	})
 
 	return data
 
+def add_week(weeks, key):
 
-def get_week_graphs(weeks):
+		weeks[key] = {}
+		weeks[key]['count'] = 0
+		weeks[key]['acute_distance'] = 0
+		weeks[key]['chronic_distance'] = 0
+		weeks[key]['acute_sRPE'] = 0
+		weeks[key]['chronic_sRPE'] = 0
 
-	weeks = {datetime.datetime.strptime(x, '%m/%d/%Y'):y for x,y in weeks.items()}
+def get_week_graphs(activities):
+
+	weeks = dict()
+	all_weeks = [(x['start_time'] - timedelta(days=x['start_time'].weekday())).date() for x in activities.values('start_time')]
+
+	for activity in activities:
+
+		activity_week = (activity.start_time - timedelta(days=activity.start_time.weekday())).date()
+
+		# add week if we need to
+		if activity_week not in weeks.keys():
+
+			# add new week
+			add_week(weeks, activity_week)
+
+			week_below = activity_week - timedelta(days=7)
+			week_above = activity_week + timedelta(days=7)
+
+			# add any weeks we need to below
+			if min(weeks.keys()) < week_below:
+				while week_below not in weeks.keys():
+					add_week(weeks, week_below)
+					week_below = week_below - timedelta(days=7)
+
+			# add any weeks we need to above
+			if max(weeks.keys()) > week_above: 
+				while week_above not in weeks.keys():
+					add_week(weeks, week_above)
+					week_above = week_above + timedelta(days=7)
+
+		# add activity data to the appropriate week
+		if activity.tot_dist != None:
+			weeks[activity_week]['acute_distance'] += activity.tot_dist
+
+		if activity.RPE != None and activity.tot_time != None:
+			weeks[activity_week]['acute_sRPE'] += activity.sRPE
+
+		weeks[activity_week]['count'] += 1
+
+	for week in weeks:
+
+		count = 0
+		for i in range(1, 5):
+			past_week = week - timedelta(days=7*i)
+
+			if past_week in weeks:
+				count += 1
+				weeks[week]['chronic_distance'] += weeks[past_week]['acute_distance']
+				weeks[week]['chronic_sRPE'] += weeks[past_week]['acute_sRPE']
+
+		if count > 0:
+			weeks[week]['chronic_distance'] /= count
+			weeks[week]['chronic_sRPE'] /= count
+
 
 	## modified from: http://stackoverflow.com/questions/9001509/how-can-i-sort-a-dictionary-by-key
 	ordered_weeks = collections.OrderedDict(sorted(weeks.items()))
@@ -63,10 +145,10 @@ def get_week_graphs(weeks):
 	field_graphs = {}
 
 	# always graph against the week
-	x_val = [(x - datetime.datetime(1970,1,1)).total_seconds() * 1000 for x in ordered_weeks.keys()]
+	x_val = [((datetime.combine(x, datetime.min.time()) - datetime(1970,1,1)).total_seconds() + 86400) * 1000 for x in ordered_weeks.keys()]
 
 	# get a graphable representation of every colunm of weeks
-	for field in get_y_value_fields():
+	for field in ['acute_distance', 'chronic_distance', 'acute_sRPE', 'chronic_sRPE']:
 
 		# get a list of the y_values
 		y_val = [ordered_weeks[x][field] for x in ordered_weeks]
@@ -76,71 +158,34 @@ def get_week_graphs(weeks):
 
 	# get an object with all the data we want to graph
 	data = {
-		"count": [
-			{
-				"values": field_graphs["count"],
-				"key": "Runs per Week",
-				"color": get_color("count")
-			}
-		],
 		"distance": [
 			{
-				"values": field_graphs["total_distance"],
-				"key": "Total Distance",
-				"color": get_color("total_distance")
-			}
-		],
-		"speed": [
-			{
-				"values": field_graphs["avg_avg_speed"],
-				"key": "Average Speed",
-				"color": get_color("avg_avg_speed")
+				"values": field_graphs["acute_distance"],
+				"key": "Weekly Mileage",
+				"color": get_color("acute_distance")
 			},
 			{
-				"values": field_graphs["max_speed"],
-				"key": "Max Speed",
-				"color": get_color("avg_max_speed")
+				"values": field_graphs["chronic_distance"],
+				"key": "Mean Mileage (past month)",
+				"color": get_color("chronic_distance")
 			}
 		],
-		"hr": [
+		"sRPE": [
 			{
-				"values": field_graphs["avg_avg_hr"],
-				"key": "Average Heart Rate",
-				"color": get_color("avg_avg_hr")
+				"values": field_graphs["acute_sRPE"],
+				"key": "Weekly sRPE",
+				"color": get_color("acute_sRPE")
 			},
 			{
-				"values": field_graphs["max_hr"],
-				"key": "Max Heart Rate",
-				"color": get_color("max_hr")
-			}
-		],
-		"cadence": [
-			{
-				"values": field_graphs["avg_avg_cadence"],
-				"key": "Average Cadence",
-				"color": get_color("avg_avg_cadence")
-			},
-			{
-				"values": field_graphs["max_cadence"],
-				"key": "Max Cadence",
-				"color": get_color("max_cadence")
-			}
-		],
-		"elevation": [
-			{
-				"values": field_graphs["avg_elevation_gained"],
-				"key": "Average Elevation Gained",
-				"color": get_color("avg_elevation_gained")
-			},
-			{
-				"values": field_graphs["total_elevation_gained"],
-				"key": "Total Elevation Gained",
-				"color": get_color("max_total_elevation_gained")
+				"values": field_graphs["chronic_sRPE"],
+				"key": "Mean sRPE (past month)",
+				"color": get_color("chronic_sRPE")
 			}
 		]
 	}
 
-	return data
+	return (data, ordered_weeks)
+
 
 def map_to_graph(x, y):
 	values = []

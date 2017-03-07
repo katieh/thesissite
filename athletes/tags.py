@@ -14,7 +14,7 @@ def get_sentiment_tags(activity):
 	probabilities = r.json()['probability']
 
 	# save each probability as a sentiment tag
-	for key in probabilities:
+	for key in ['neg', 'pos']:
 		tag = Tag()
 
 		# save user info

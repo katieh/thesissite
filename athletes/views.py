@@ -15,50 +15,45 @@ from django.views.generic.edit import CreateView
 
 import numpy as np
 import datetime
+from datetime import timedelta
 
 from .tags import get_user_tags, get_sentiment_tags
-from .models import Activity, Weeks, Tag
+from .models import Activity, Tag
 from .forms import UploadActivitiesForm, ActivityForm, InjuryForm, PerformanceForm, UploadActivityForm
 from .activity_graphs import get_field_graphs, get_field_histograms
 from .dashboard_graphs import get_week_graphs, get_tag_graphs
 from .fitparse import Activity as FitActivity
 from activity_helper_methods import get_dict_of_fields
+import json
 
 
 # main view
 @login_required
 def index(request):
 
-	## -------- GET USER WEEKS! ---------- ##
-	## try and get weeks summary
+	## -------- GET WEEKS FROM ACTIVITIES! ---------- ##
+	activities = Activity.objects.filter(user=request.user)
+	weeks_graphs, weeks = get_week_graphs(activities)
+	
+
+	# -------- GET THE CURRENT WEEK! ---------- ##
+	this_week = datetime.datetime.now().date() - timedelta(days=datetime.datetime.now().weekday())
 	try:
-		user_weeks = Weeks.objects.get(user=request.user)
-
-	## create weeks object
-	except ObjectDoesNotExist:
-		user_weeks = Weeks()
-		user_weeks.user = request.user
-		user_weeks.save()
-
-	## -------- GET THE CURRENT WEEK! ---------- ##
-	activity_isocalendar = datetime.datetime.now().date().isocalendar()
-	current_week = str(activity_isocalendar[0] + activity_isocalendar[1] / 100.0)
-
-	try:
-		current_week = user_weeks.weeks[current_week]
+		current_week = weeks[this_week]
 
 	except KeyError:
 		current_week = None
 
-
 	## -------- GET USER TAGS ---------- ##
-	tags = Tag.objects.filter(user=request.user).order_by('date')
+	tags = Tag.objects.filter(user=request.user)
 
 	return render(request, 'athletes/index.html', 
 		{'nbar': 'home', 
+		'this_week': this_week,
 		'current_week': current_week,
-		'week_graphs': get_week_graphs(user_weeks.weeks),
-		'tag_graphs': get_tag_graphs(tags)})
+		'week_graphs': weeks_graphs,
+		'tag_graphs': get_tag_graphs(tags, weeks),
+		'activity': activities.latest()})
 
 # main view for athletes
 @login_required
@@ -87,9 +82,6 @@ def details(request, pk):
 @login_required
 def edit(request, pk=None):
 
-	# get week object
-	weeks = get_object_or_404(Weeks, user=request.user)
-
 	# get the matching activity IF the user has permission!
 	if pk!=None:
 		activity = get_object_or_404(Activity, user=request.user, pk=pk)
@@ -101,10 +93,6 @@ def edit(request, pk=None):
 	if request.method == "POST":
 		form = ActivityForm(request.POST, instance=activity)
 		if form.is_valid():
-			
-			# remove it from weeks model
-			if pk!=None:
-				weeks.remove_activity(activity)
 
 			activity = form.save()
 
@@ -117,10 +105,6 @@ def edit(request, pk=None):
 
 			## find tags in the new comment
 			get_user_tags(activity)
-
-			## add back to week
-			weeks.add_activity(activity)
-			weeks.save()
 
 			return redirect('athletes:details', pk=activity.pk)
 
@@ -233,27 +217,8 @@ class UploadView(FormView):
 				db_activity.max_cadence = max(activity_dict['cadence'])
 
 
-			## ----------------------------------------- ##
-			## ADD WEEK INFORMATION
-			## ----------------------------------------- ##
-			activity_week = db_activity.week
-
-			## if the user already has a week object, use it
-			try:
-				weeks = Weeks.objects.get(user=self.request.user)
-
-			## otherwise create a new one.
-			except ObjectDoesNotExist:
-				weeks = Weeks()
-				weeks.user = self.request.user
-
-			## add activity to weeks object
-			weeks.add_activity(db_activity)
-
-
 			## save models!
 			db_activity.save()
-			weeks.save()
 
 		return super(UploadView, self).form_valid(form)
 
@@ -341,28 +306,8 @@ def upload_one(request):
 				db_activity.avg_cadence = int(np.nanmean([x for x in activity_dict['cadence'] if x != None]))
 				db_activity.max_cadence = max(activity_dict['cadence'])
 
-
-			## ----------------------------------------- ##
-			## ADD WEEK INFORMATION
-			## ----------------------------------------- ##
-			activity_week = db_activity.week
-
-			## if the user already has a week object, use it
-			try:
-				weeks = Weeks.objects.get(user=request.user)
-
-			## otherwise create a new one.
-			except ObjectDoesNotExist:
-				weeks = Weeks()
-				weeks.user = request.user
-
-			## add activity to weeks object
-			weeks.add_activity(db_activity)
-
-
 			## save models!
 			db_activity.save()
-			weeks.save()
 
 			return redirect('athletes:details', pk=db_activity.pk)
 
@@ -421,11 +366,6 @@ def new_performance(request):
 def delete_activity(request, pk):
 
 	activity = get_object_or_404(Activity, user=request.user, pk=pk)
-	week = get_object_or_404(Weeks, user=request.user)
-
-	# remove from week
-	week.remove_activity(activity)
-	week.save()
 
 	# remove activity
 	activity.delete()
