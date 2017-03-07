@@ -12,7 +12,6 @@ from .models import Activity, Tag
 
 from django.utils import timezone
 from timestring import Date
-from datetimewidget.widgets import DateTimeWidget, DateWidget
 
 
 class UploadActivitiesForm(forms.Form):
@@ -41,7 +40,7 @@ class NaturalDateField(forms.DateField):
 		return parsed_date.date
 
 class ActivityForm(ModelForm):
-	start_time = forms.DateTimeField(widget=DateTimeWidget(usel10n=True, bootstrap_version=3))
+	start_time = NaturalDateField()
 
 	class Meta:
 		model = Activity

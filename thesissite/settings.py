@@ -51,8 +51,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'nvd3',
     'friendship',
-    'widget_tweaks',
-    'datetimewidget'
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
