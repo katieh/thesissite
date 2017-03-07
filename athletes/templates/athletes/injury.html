@@ -21,9 +21,24 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
 
                     {% csrf_token %}
 
-                    <div class="form-group row">
+                    <!-- copied from http://stackoverflow.com/questions/14647723/django-forms-if-not-valid-show-form-with-error-message -->
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                                <strong>Please correct the errors below.</strong>
+                        </div>
+                    {% endif %}
 
-                        <label class="col-sm-2 col-form-label">Date: </label>
+                    <div class="form-group row">
+                        <div class="col-sm-2 col-form-label">
+                            <label for="date">Date:</label>
+                            {% if form.date.errors %}
+                                {% for error in form.date.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error | escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                         <div for="start_time" class="col-sm-3">
                             <input type="date" for="date" name="date" class="form-control" required>
                         </div>
@@ -31,8 +46,16 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
                     </div>
 
                     <div class="form-group row">
-
-                        <label class="col-sm-2 col-form-label">Description: </label>
+                        <div class="col-sm-2 col-form-label">
+                            <label for="comments">Description:</label>
+                            {% if form.comments.errors %}
+                                {% for error in form.comments.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error | escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                         <div for="date" class="col-sm-10">
                             <textarea class="form-control" rows="10" type="text" name="comments" required></textarea>
                         </div>

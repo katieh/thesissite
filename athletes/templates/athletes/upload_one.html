@@ -18,10 +18,27 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
 
                     {% csrf_token %}
 
+                    <!-- copied from http://stackoverflow.com/questions/14647723/django-forms-if-not-valid-show-form-with-error-message -->
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                                <strong>Please correct the errors below.</strong>
+                        </div>
+                    {% endif %}
+
+
                     <div class="form-group row">
-                        <label for="first_name" class="col-sm-2 col-form-label">Name:</label>
+                        <div class="col-sm-2 col-form-label">
+                            <label for="name">Name:</label>
+                            {% if form.name.errors %}
+                                {% for error in form.name.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error | escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" name="name" value="{{form.name.value}}" required>
+                            <input class="form-control" type="text" name="name" required>
                         </div>
 
 
@@ -29,14 +46,32 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
                     </div>
 
                     <div class="form-group row">
-                        <label for="comments" class="col-sm-2 col-form-label">Comments:</label>
+                        <div class="col-sm-2 col-form-label">
+                            <label for="comments">Comments:</label>
+                            {% if form.comments.errors %}
+                                {% for error in form.comments.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error | escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="10" type="text" name="comments" required>{{form.comments.value}}</textarea>
+                            <textarea class="form-control" rows="10" type="text" name="comments" required></textarea>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="RPE" class="col-sm-2 col-form-label">RPE:</label>
+                        <div class="col-sm-2 col-form-label">
+                            <label for="RPE">RPE:</label>
+                            {% if form.RPE.errors %}
+                                {% for error in form.RPE.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error | escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                         <div class="col-sm-4">
                             <img src="{% static "img/RPE-scale.jpg" %}" alt="RPE-scale" style="width:100%;">   
                         </div>
@@ -48,7 +83,14 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
                             <p>
                                 {{ form.docfile }}
                             </p>
-                            
+                            {% if form.docfile.errors %}
+                                {% for error in form.docfile.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error | escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
                         </div>
 
                         <div class="col-sm-2">

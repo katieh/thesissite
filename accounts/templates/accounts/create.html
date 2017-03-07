@@ -29,36 +29,88 @@
 
 			{% csrf_token %}
 
+            <!-- copied from http://stackoverflow.com/questions/14647723/django-forms-if-not-valid-show-form-with-error-message -->
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                        <strong>Please correct the errors below.</strong>
+                </div>
+            {% endif %}
+
 			<div class="form-group row">
-				<label for="first_name" class="col-sm-2 col-form-label">First Name</label>
+				<div class="col-sm-2 col-form-label">
+                    <label for="first_name">First Name</label>
+                    {% if form.first_name.errors %}
+                        {% for error in form.first_name.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error | escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
 				<div class="col-sm-10">
 					<input class="form-control" type="text" name="first_name" placeholder="Jane" required>
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
+				<div class="col-sm-2 col-form-label">
+                    <label for="last_name">Last Name</label>
+                    {% if form.last_name.errors %}
+                        {% for error in form.last_name.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error | escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
 				<div class="col-sm-10">
 					<input class="form-control" type="text" name="last_name" placeholder="Doe" required>
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label for="email" class="col-sm-2 col-form-label">Email</label>
+				<div class="col-sm-2 col-form-label">
+                    <label for="email">Email</label>
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error | escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
 				<div class="col-sm-10">
 					<input class="form-control" type="text" name="email" placeholder="janedoe@gmail.com" required>
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label for="username" class="col-sm-2 col-form-label">Username</label>
+				<div class="col-sm-2 col-form-label">
+                    <label for="username">Username</label>
+                    {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error | escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
 				<div class="col-sm-10">
 					<input class="form-control" type="text" name="username" placeholder="janedoe" required>
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label for="password" class="col-sm-2 col-form-label">Password</label>
+				<div class="col-sm-2 col-form-label">
+                    <label for="password">Password</label>
+                    {% if form.password.errors %}
+                        {% for error in form.password.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error | escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
 				<div class="col-sm-10">
 					<input class="form-control" type="password" name="password" placeholder="*********" required>
 				</div>

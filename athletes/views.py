@@ -97,6 +97,9 @@ def edit(request, pk=None):
 
 	if request.method == "POST":
 		form = ActivityForm(request.POST, instance=activity)
+		print "this one"
+		print form['tot_dist'].errors
+		print "that one"
 		if form.is_valid():
 
 			activity = form.save()

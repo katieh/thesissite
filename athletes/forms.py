@@ -32,7 +32,10 @@ class NaturalDateField(forms.DateField):
 
 		if not value:
 			return None
-		parsed_date = Date(value, tz=timezone.get_current_timezone())
+		try:
+			parsed_date = Date(value, tz=timezone.get_current_timezone())
+		except:
+			return None
 		return parsed_date.date
 
 class ActivityForm(ModelForm):
