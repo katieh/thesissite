@@ -9,10 +9,10 @@ def get_color(key):
 	elif "chronic_distance" in key:
 		return '#006883'
 
-	elif "acute_sRPM" in key:
+	elif "acute_sRPE" in key:
 		return '#d11141'
 
-	elif "chronic_sRPM" in key:
+	elif "chronic_sRPE" in key:
 		return '#7d0a27'
 
 	elif "count" in key:
@@ -52,10 +52,10 @@ def get_color(key):
 		else:
 			return '#00aedb'
 
-	elif "performance":
+	elif "performance" in key:
 		return "#00b159"
 
-	elif "injury":
+	elif "injury" in key:
 		return "#d11141"
 
 
