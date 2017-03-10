@@ -113,16 +113,16 @@
                                     <td>{{ activity.tot_time}} {% if activity.tot_time != None %}minutes{% endif %}</td>
                                 </tr>
                                 <tr>
-                                    <td>Elevation Gained:</td>
-                                    <td>{{ activity.elevation_gained }} {% if activity.elevation_gained != None %}feet{% endif %}</td>
+                                    <td>Average Pace:</td>
+                                    <td>{{ activity.avg_speed | mps_to_time_per_mile}}{% if activity.avg_speed != None %} mins / mile{% endif %}</td>
                                 </tr>
                                 <tr>
-                                    <td>Average Speed:</td>
-                                    <td>{{ activity.avg_speed | mps_to_time_per_mile}} {% if activity.avg_speed != None %}mins / mile{% endif %}</td>
-                                </tr>
                                 <tr>
                                     <td>Average Heart Rate:</td>
                                     <td>{{ activity.avg_hr }} {% if activity.avg_hr != None %}bpm{% endif %}</td>
+                                </tr>
+                                    <td>Elevation Gained:</td>
+                                    <td>{{ activity.elevation_gained }} {% if activity.elevation_gained != None %}feet{% endif %}</td>
                                 </tr>
                                 <tr>
                                     <td>Average Cadance:</td>

@@ -8,11 +8,14 @@ def get_field_histograms(activity, user):
 	bins = 5
 
 	## get the fields from the database
-	keys = ['avg_speed', 'avg_hr', 'avg_cadence', 'elevation_gained']
+	keys = ['avg_hr', 'avg_speed', 'avg_cadence', 'elevation_gained']
 	data = {}
 
 	for key in keys:
-		colunm_values = [x[key] for x in Activity.objects.filter(user=user).values(key) if x[key] != None]
+		if key == 'avg_speed':
+			colunm_values = [x.avg_speed for x in Activity.objects.filter(user=user) if x.avg_speed != None]
+		else:
+			colunm_values = [x[key] for x in Activity.objects.filter(user=user).values(key) if x[key] != None]
 
 		## put col values into bins
 		hist = np.histogram(colunm_values, bins = bins)

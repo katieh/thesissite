@@ -301,7 +301,6 @@ def upload_one(request):
 
 			if 'speed' in activity_dict.keys():
 				db_activity.speed = activity_dict['speed']
-				db_activity.avg_speed = np.nanmean([x for x in activity_dict['speed'] if x != None])
 				db_activity.max_speed = max(activity_dict['speed'])
 
 			if 'heart_rate' in activity_dict.keys():

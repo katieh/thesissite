@@ -48,7 +48,6 @@ class Activity(models.Model):
 	start_time = models.DateTimeField(default=timezone.now)
 	num_records = models.PositiveIntegerField(default=None, null=True)
 	tot_dist = models.FloatField(null=True)
-	avg_speed = models.FloatField(null=True)
 	avg_hr = models.PositiveIntegerField(null=True)
 	avg_cadence = models.PositiveIntegerField(null=True)
 	elevation_gained = models.PositiveIntegerField(null=True, default=None)
@@ -82,6 +81,13 @@ class Activity(models.Model):
 	def sRPE(self):
 		try:
 			return self.RPE * self.tot_time
+		except:
+			return None
+
+	@property
+	def avg_speed(self):
+		try:
+			return (self.tot_dist * 1609.34) / (self.tot_time * 60)
 		except:
 			return None
 
