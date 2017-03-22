@@ -173,8 +173,8 @@ class Tag(models.Model):
 	value = models.FloatField(default=1) # numeric value associated with tag
 	comments = models.TextField(null=True) # ONLY filled out for injury / performance tags
 
-
-
+	class Meta:
+		get_latest_by = 'date'
 
 
 

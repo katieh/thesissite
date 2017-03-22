@@ -1,10 +1,30 @@
 
+from colour import Color
+
+def get_colors(count):
+	## ---------- COLORS FOR GRAPH! ------------ ##
+	red = Color('#f37736')
+	purple = Color('#a64ca6')
+	try:
+		user_colors = list(red.range_to(purple, count))
+	except:
+		user_colors = []
+
+	return user_colors
+
 ## NOTE: could turn this into a dict
 ## color pallet from:
 ## http://www.color-hex.com/color-palette/700
 def get_color(key):
 	if "acute_distance" in key:
 		return "#00aedb"
+
+	elif "distance_ratio" in key:
+		return "#800080"
+
+	elif "sRPE_ratio" in key:
+		return "#4b3832"
+
 
 	elif "chronic_distance" in key:
 		return '#006883'
@@ -13,7 +33,7 @@ def get_color(key):
 		return '#d11141'
 
 	elif "chronic_sRPE" in key:
-		return '#7d0a27'
+		return '#8a223c'
 
 	elif "count" in key:
 		return "#7f7f7f"

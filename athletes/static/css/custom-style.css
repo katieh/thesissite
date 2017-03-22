@@ -17,3 +17,15 @@ textarea{
 	display: block;
 	
 }
+
+iframe:focus { 
+    outline: none;
+}
+
+iframe[seamless] { 
+    display: block;
+}
+
+.nv-axis .tick line {
+    stroke:#e5e5e5;
+}

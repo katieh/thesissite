@@ -15,65 +15,88 @@
 
 	<div class="container-fluid">
 
-		{% if friend_data %}
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="chart-wrapper">
+					<div class="chart-title">
+						<h2>Connections</h2>
+					</div>
+						<div class="chart-stage">
+							{% if friend_data %}
 
-			<h2>Connections</h2>
+							<table class="table table-hover">
 
-			<table class="table table-hover">
+								{% for data in friend_data %}
 
-				{% for data in friend_data %}
+									<tr>
+										<td>
+											{{data.first_name}} {{data.last_name}}
 
-					<tr>
-						<td>
-							{{data.first_name}} {{data.last_name}}
+											<a href="{% url 'connections:unfriend' data.friend_id %}" type="button" class="btn btn-danger pull-right">
+								  					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+								  			</a>
+										</td>
+									</tr>
 
-							<a href="{% url 'connections:unfriend' data.friend_id %}" type="button" class="btn btn-danger pull-right">
-				  					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-				  			</a>
-						</td>
-					</tr>
+								{% endfor %}
 
-				{% endfor %}
+							</table>
 
-			</table>
-
-
-		{% endif %}
+						{% else %}
+							<h5> You have no current connections </h5>
 
 
-		<h2> Connect </h2>
+						{% endif %}
+						</div>
+				</div>
+			</div>
+		</div>
 
-	    {% if coaches %}
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="chart-wrapper">
+					<div class="chart-title">
+						<h2> Connect </h2>
+					</div>
+						<div class="chart-stage">
+							{% if coaches %}
 
-	    	<table class="table table-hover">
+						    	<table class="table table-hover">
 
-			  {% for coach in coaches %}
+								  {% for coach in coaches %}
 
-			  	{% if coach.id not in friends %}
-				  	<tr>
-				  		<td>
-				  			{{ coach.first_name }} {{ coach.last_name }}
+								  	{% if coach.id not in friends %}
+									  	<tr>
+									  		<td>
+									  			{{ coach.first_name }} {{ coach.last_name }}
 
-				  			{% if coach.id in pending_requests %}
-					  			<button type="button" class="btn btn-warning pull-right" disabled>
-					  					<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
-					  			</button>
+									  			{% if coach.id in pending_requests %}
+										  			<button type="button" class="btn btn-warning pull-right" disabled>
+										  					<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+										  			</button>
 
-				  			{% else %}
+									  			{% else %}
 
-				  				<a href="{% url 'connections:add' coach.id %}" type="button" class="btn btn-success pull-right">
-				  					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-				  				</a>
+									  				<a href="{% url 'connections:add' coach.id %}" type="button" class="btn btn-success pull-right">
+									  					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+									  				</a>
 
-			  				{% endif %}
-				  		</td>
-				  	</tr>
-				  	{% endif %}
-	          {% endfor %}
+								  				{% endif %}
+									  		</td>
+									  	</tr>
+									  	{% endif %}
+						          {% endfor %}
 
-			</table>
+								</table>
 
-	    {% endif %}
+							{% else %}
+								<h5> Sorry. There is no one to connect with at this time. </h5>
+
+						    {% endif %}
+						</div>
+				</div>
+			</div>
+		</div>
 
     </div>
 

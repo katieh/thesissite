@@ -1,3 +1,108 @@
 {% extends "coaches/base.html" %}
+{% load static %}
 
-<h1>Test</h1>
+{% block content %}
+
+<div class="container-fluid">
+	<h1>Dashboard</h1>
+	<hr>
+
+	<div class="row">
+
+		<div class="col-sm-3">
+			<div class="chart-wrapper">
+				<div class="chart-title">
+					Tags
+				</div>
+
+				<div class="chart-stage" style="height: 565px; overflow-y: scroll;">
+					{% if tags.new %}<h4>New Tags</h4>{% endif %}
+
+					<table class="table">
+						{% for user_tag in tags.new %}
+							<tr>
+								<td>
+									<a href="{% url 'coaches:details' user_tag.id %}" style="color:black"> {{user_tag.name}}:</a><br>
+									
+										<p style="color: {{user_tag.color}}">
+											{% for tag in user_tag.tags %}
+												 {{ tag }}
+											{% endfor %}
+										</p>
+								</td>
+							</tr>
+						{% endfor %}
+						
+					</table>
+
+
+					{% if tags.recent %}<h4>Recent Tags</h4>{% endif %}
+
+					<table class="table">
+						{% for user_tag in tags.recent %}
+							<tr>
+								<td>
+									<a href="{% url 'coaches:details' user_tag.id %}" style="color:black"> {{user_tag.name}}:</a><br>
+									
+										<p style="color: {{user_tag.color}}">
+											{% for tag in user_tag.tags %}
+												 {{ tag }}
+											{% endfor %}
+										</p>
+								</td>
+							</tr>
+						{% endfor %}
+						
+					</table>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-9">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="chart-wrapper">
+						<div class="chart-title">
+							Acute:Chronic Distance
+						</div>
+
+						<div class="chart-stage">
+							<div id="distance">
+								<svg style="overflow: visible; height: 250px;"></svg>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="chart-wrapper">
+						<div class="chart-title">
+							Acute:Chronic sRPE
+						</div>
+
+						<div class="chart-stage">
+							<div id="sRPE">
+								<svg style="overflow: visible; height: 250px;"></svg>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{% block javascript %}
+
+    <script>
+    	var athletes_graph = {{athletes_graph | safe}}
+    </script>
+
+    <script src="{% static 'js/coaches_dashboard.js' %}" type='text/javascript'></script>
+
+{% endblock %}
+
+{% endblock %}

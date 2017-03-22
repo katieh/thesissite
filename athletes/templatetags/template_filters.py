@@ -4,6 +4,7 @@
 ##				to be used in the HTML file
 from django import template
 import numpy as np
+from django.contrib.auth.models import Group
 
 ## get template library
 register = template.Library()
@@ -39,3 +40,9 @@ def mps_to_time_per_mile(mps):
 	except:
 		print "mps to time per mile did not receive a float"
 		return mps
+
+# copied from http://stackoverflow.com/questions/34571880/
+@register.filter 
+def is_type(user, group_name):
+    group =  Group.objects.get(name=group_name) 
+    return group in user.groups.all() 

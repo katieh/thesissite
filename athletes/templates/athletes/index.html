@@ -1,6 +1,5 @@
 {% extends "athletes/base.html" %}
 {% load static %}
-{% load template_filters %}
 
 
 <!DOCTYPE html>
@@ -9,255 +8,35 @@
         <title>Index</title>
     </head>
 
-    <body>
+<body>
 
-    	{% block content %}
+	{% block content %}
 
- 		<div class="container-fluid">
+	<div class="container-fluid">
 
-    		<h1>Dashboard</h1>
-    		<hr>
+		<h1>Dashboard</h1>
+		<hr>
 
-    		<div class="row">
+		<div class="basic">
+			{% include "athletes/dashboard.html" %}    
+		</div>
 
-				<div class="col-sm-4">
-					<div class="chart-wrapper">
-					  <div class="chart-title">
-					    This Week -- {{ this_week }}
-					  </div>
-					  <div class="chart-stage">
-					    <table class="table-condensed">
-					    	<tr>
-						  		<td>Weekly Mileage:</td>
-						  		{% if current_week != None %}
-							  		<td>{{ current_week.acute_distance | two_decimals }}  miles</td>
-						  		{% else %}
-							  		<td>0.00  miles</td>
-						  		{% endif %}
-						  	</tr>
-						  	<tr>
-						  		<td>Mean Weekly Mileage Past Month:</td>
-						  		{% if current_week != None %}
-							  		<td>{{ current_week.chronic_distance | two_decimals }}  miles</td>
-						  		{% else %}
-							  		<td>0.00  miles</td>
-						  		{% endif %}
-						  	</tr>
-						  	<tr>
-						  		<td>Weekly sRPE:</td>
-						  		{% if current_week != None %}
-							  		<td>{{ current_week.acute_sRPE}}</td>
-						  		{% else %}
-							  		<td>0</td>
-						  		{% endif %}
-						  	</tr>
-						  	<tr>
-						  		<td>Mean Weekly sRPE Past Month:</td>
-						  		{% if current_week != None %}
-							  		<td>{{ current_week.chronic_sRPE}}</td>
-						  		{% else %}
-							  		<td>0</td>
-						  		{% endif %}
-						  	</tr>
-						  	<tr>
-						  		<td>Number of Runs:</td>
-						  		{% if current_week != None %}
-							  		<td>{{ current_week.count}}</td>
-						  		{% else %}
-							  		<td>0</td>
-						  		{% endif %}
-						  	</tr>
-					    </table>
-					  </div>
-					</div>
-				</div>
+	</div>
 
-				<div class="col-sm-8">
-                    <div class="chart-wrapper">
-                        <div class="chart-title">
-                            Latest Run -- {{ activity.start_time }}
-                        </div>
+	{% block javascript %}
 
-                        <div class="chart-stage">
+        <script>
+        	var tag_graphs = {{tag_graphs | safe}}
+            var week_graphs = {{week_graphs | safe}}
+        </script>
 
-	                        <div class='row'>
-		                        <div class='col-sm-6'>
+        <script src="{% static 'js/dashboard_graphs.js' %}" type='text/javascript'></script>
 
-			                        {% if activity.RPE == None %}
-
-		                            <div class="progress" style="margin-bottom: 5px">
-		                                <div class="progress-bar" role="progressbar" aria-valuenow="{{activity.RPE}}" 
-		                                aria-valuemin="0" aria-valuemax="10" style="width:100%; background: grey; ">
-		                                    RPE: {{activity.RPE}}
-		                                </div>
-		                            </div>
-
-		                            {% else %}
-
-		                                {% if activity.RPE <= 3 %}
-		                                <div class="progress" style="margin-bottom: 5px">
-		                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{activity.RPE}}" 
-		                                    aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
-		                                        RPE: {{activity.RPE}}
-		                                    </div>
-		                                </div>
-
-		                                {% else %}
-
-		                                    {% if activity.RPE <= 6 %}
-		                                    <div class="progress" style="margin-bottom: 5px">
-		                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{activity.RPE}}" 
-		                                        aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
-		                                            RPE: {{activity.RPE}}
-		                                        </div>
-		                                    </div>
-
-		                                    {% else %}
-
-		                                        {% if activity.RPE <= 8 %}
-		                                        <div class="progress" style="margin-bottom: 5px">
-		                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{activity.RPE}}" 
-		                                            aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
-		                                                RPE: {{activity.RPE}}
-		                                            </div>
-		                                        </div>
-
-		                                        {% else %}
-
-		                                            <div class="progress" style="margin-bottom: 5px">
-		                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{activity.RPE}}" 
-		                                                aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
-		                                                    RPE: {{activity.RPE}}
-		                                                </div>
-		                                            </div>
-
-		                                        {% endif %}
-
-		                                    {% endif %}
-
-		                                {% endif %}
-
-		                            {% endif %}
-
-		                            <table class="table-condensed">
-		                                <tr>
-		                                    <td>Distance:</td>
-		                                    <td>{{ activity.tot_dist | two_decimals}} {% if activity.tot_dist != None %}miles{% endif %}</td>
-		                                </tr>
-		                                <tr>
-		                                    <td>Total Time:</td>
-		                                    <td>{{ activity.tot_time}} {% if activity.tot_time != None %}minutes{% endif %}</td>
-		                                </tr>
-		                                <tr>
-		                                    <td>Average Pace:</td>
-		                                    <td>{{ activity.avg_speed | mps_to_time_per_mile}}{% if activity.avg_speed != None %} mins / mile{% endif %}</td>
-		                                </tr>
-		                                <tr>
-		                                <tr>
-		                                    <td>Average Heart Rate:</td>
-		                                    <td>{{ activity.avg_hr }} {% if activity.avg_hr != None %}bpm{% endif %}</td>
-		                                </tr>
-		                                    <td>Elevation Gained:</td>
-		                                    <td>{{ activity.elevation_gained }} {% if activity.elevation_gained != None %}feet{% endif %}</td>
-		                                </tr>
-		                                <tr>
-		                                    <td>Average Cadance:</td>
-		                                    <td>{{ activity.avg_cadence }} {% if activity.avg_cadence != None %}spm{% endif %}</td>
-		                                </tr>
-		                            </table>
-		                        </div>
-
-		                        <div class='col-sm-6'>
-		                        	<label>Comments:</label>
-			                        <textarea readonly>{{activity.comments}}</textarea>
-		                        </div>
-	                        </div>
-
-                        
-
-                            
-                        </div>
-                    </div>
-                </div>
-    		</div>
-
-    		<div class="row">
-
-    			<div class="col-sm-6">
-					<div class="chart-wrapper">
-						<div class="chart-title">
-							Distance (External Workload)
-						</div>
-							<div class="chart-stage" style="padding-top: 50px; padding-right: 50px;">
-								<div id="distance">
-									<svg></svg>
-								</div>
-							</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6">
-					<div class="chart-wrapper">
-						<div class="chart-title">
-							sRPE (Internal Workload)
-						</div>
-							<div class="chart-stage" style="padding-top: 50px; padding-right: 50px;">
-								<div id="sRPE">
-									<svg></svg>
-								</div>
-							</div>
-					</div>
-				</div>
-
-    		</div>
-
-    		<div class="row">
-
-    			<div class="col-sm-6">
-					<div class="chart-wrapper">
-						<div class="chart-title">
-							User Tags
-						</div>
-							<div class="chart-stage" style="padding-top: 50px; padding-right: 50px;">
-								<div id="user_tags">
-									<svg></svg>
-								</div>
-							</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6">
-					<div class="chart-wrapper">
-						<div class="chart-title">
-							Injury and Performance Tags
-						</div>
-							<div class="chart-stage" style="padding-top: 50px; padding-right: 50px;">
-								<div id="performance_injury">
-									<svg></svg>
-								</div>
-							</div>
-					</div>
-				</div>
-
-    		</div>
-
-    	</div>
-
-    	{% block javascript %}
-
-            <script>
-            	var tag_graphs = {{tag_graphs | safe}}
-                var week_graphs = {{week_graphs | safe}}
-            </script>
-
-            <script src="{% static 'js/dashboard_graphs.js' %}" type='text/javascript'></script>
+    {% endblock %}
 
 
-        {% endblock %}
-
-
-    	{% endblock %}
-    </body>
+	{% endblock %}
+</body>
 
 </html>
 

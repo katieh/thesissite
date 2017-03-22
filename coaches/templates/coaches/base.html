@@ -46,12 +46,12 @@
 	    <ul class="nav navbar-nav navbar-right">
 
 		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account {% if pending > 0 %}<span style="background-color:red" class="badge badge-pill badge-danger">{{pending}}</span> {% endif %} <span class="caret"></span></a>
 
 			<ul class="dropdown-menu">
 
 				<li>
-				  	<a href="/coaches/connections">Manage Connections</a>
+					  <a href="/coaches/connections">Manage Connections {% if pending > 0 %}<span style="background-color:red" class="badge badge-pill badge-danger">{{pending}}</span> {% endif %}</a> 
 				</li>
 
 				<li role="separator" class="divider"></li>

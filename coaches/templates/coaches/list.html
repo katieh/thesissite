@@ -13,7 +13,42 @@
 
 			<h1>Athletes</h1>
 
-		</div>
+			<!-- List of uploaded documents -->
+		    <!-- TODO: make the rows clickable -->
+		    {% if athletes %}
+
+		    	<table class="table table-hover">
+
+				  <tr>
+				    <th>Name</th>
+				    <th>Latest Performance</th>
+				    <th>Latest Injury</th>
+				    <th>Recent Tags</th>
+				    <th>Frequent Tags</th>
+				  </tr>
+
+				  {% for athlete in athletes %}
+				  	<tr>
+				  		<td><a href="{% url 'coaches:details' athlete.id %}">{{ athlete.name }}</a></td>
+
+				  		<td style="max-width: 150px;">{% if athlete.performance %} {{athlete.performance.date|date:"M d, Y"}}: <br> {{athlete.performance.comments}} {% else %} No Performances. {% endif %}</td>
+
+				  		<td style="max-width: 150px;">{% if athlete.injury %} {{athlete.injury.date|date:"M d, Y"}}: <br> {{athlete.injury.comments}} {% else %} No Injuries. {% endif %}</td>
+
+				  		<td>{% if athlete.recent_tags %}{% for tag in athlete.recent_tags %}{{ tag }}<br>{% endfor %}{% else %} No Tags.{% endif %}</td>
+
+				  		<td>{% if athlete.frequent_tags %}{% for tag in athlete.frequent_tags %}
+				  		{{ tag.0 }} ({{tag.1}} {% if tag.1 == 1 %}time{% else %}times{% endif %})
+				  		<br>
+				  		{% endfor %} {% else %} No Tags. {% endif %}<td>
+				  	</tr>
+		          {% endfor %}
+
+				</table>
+
+		    {% endif %}
+
+	    </div>
 
 
 	{% endblock %}

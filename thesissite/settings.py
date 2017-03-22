@@ -38,8 +38,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'athletes.apps.AthletesConfig',
     'accounts.apps.AccountsConfig',
-    #'coaches.apps.CoachesConfig',
-    #'connections.apps.ConnectionsConfig',
+    'coaches.apps.CoachesConfig',
+    'connections.apps.ConnectionsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

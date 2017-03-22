@@ -3,7 +3,7 @@
 ## Description: This file contains methods which render views
 from django.contrib.auth.models import User, Group
 from friendship.models import FriendshipRequest, Friend
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.generic.edit import FormView
 from django.shortcuts import render, reverse, redirect, get_object_or_404, get_list_or_404
 from django.template import RequestContext
@@ -26,14 +26,26 @@ from .fitparse import Activity as FitActivity
 from activity_helper_methods import get_dict_of_fields
 import json
 
+# modified from stack overflow but I don't have internet rn 
+# so can't get the link.
+def _is_athlete(user):
+	return user.groups.filter(name='athlete').exists()
+
 
 # main view
 @login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def index(request):
 
 	## -------- GET WEEKS FROM ACTIVITIES! ---------- ##
 	activities = Activity.objects.filter(user=request.user)
 	weeks_graphs, weeks = get_week_graphs(activities)
+
+	try:
+		current_activity = activities.latest()
+
+	except:
+		current_activity = None
 	
 
 	# -------- GET THE CURRENT WEEK! ---------- ##
@@ -47,21 +59,18 @@ def index(request):
 	## -------- GET USER TAGS ---------- ##
 	tags = Tag.objects.filter(user=request.user)
 
-	try:
-		latest_activity = activities.latest()
-	except:
-		latest_activity = None
-
 	return render(request, 'athletes/index.html', 
 		{'nbar': 'home', 
 		'this_week': this_week,
 		'current_week': current_week,
 		'week_graphs': weeks_graphs,
-		'tag_graphs': get_tag_graphs(tags, weeks),
-		'activity': latest_activity})
+		'tag_graphs': get_tag_graphs(tags, weeks_graphs['distance'][2], weeks_graphs['sRPE'][2]),
+		'activity': current_activity,
+		'test': json.dumps({"hi": 1, "hello": 2})})
 
 # main view for athletes
 @login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def list(request):
 
 	# get all the activities for the user
@@ -72,6 +81,7 @@ def list(request):
 
 # details view for an activity
 @login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def details(request, pk):
 
 	# get the matching activity IF the user has permission!
@@ -85,6 +95,7 @@ def details(request, pk):
 
 # allows you to edit an activity's name and comments
 @login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def edit(request, pk=None):
 
 	# get the matching activity IF the user has permission!
@@ -123,6 +134,7 @@ def edit(request, pk=None):
 
 ## TODO: allow athlete to remove the connection!
 @login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def connections(request):
 
 	coaches = User.objects.filter(groups__name='coach')
@@ -147,6 +159,7 @@ def connections(request):
 # TODO: something weird is happening with my elevation gained function... not sure what but it does NOT match up with garmins
 # modified from example at https://github.com/Chive/django-multiupload
 @method_decorator(login_required, name='dispatch')
+@method_decorator(user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None), name='dispatch')
 class UploadView(FormView):
 	template_name = 'athletes/upload.html'
 	form_class = UploadActivitiesForm
@@ -211,7 +224,6 @@ class UploadView(FormView):
 
 			if 'speed' in activity_dict.keys():
 				db_activity.speed = activity_dict['speed']
-				db_activity.avg_speed = np.nanmean([x for x in activity_dict['speed'] if x != None])
 				db_activity.max_speed = max(activity_dict['speed'])
 
 			if 'heart_rate' in activity_dict.keys():
@@ -230,7 +242,8 @@ class UploadView(FormView):
 
 		return super(UploadView, self).form_valid(form)
 
-
+@login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def upload_one(request):
 
 	if request.method == 'POST':
@@ -324,6 +337,8 @@ def upload_one(request):
 
 	return render(request, 'athletes/upload_one.html', {'form': form})
 
+@login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def new_injury(request):
 
 	tag = Tag()
@@ -347,6 +362,8 @@ def new_injury(request):
 
 	return render(request, 'athletes/injury.html', {'form': form})
 
+@login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def new_performance(request):
 
 	tag = Tag()
@@ -369,7 +386,8 @@ def new_performance(request):
 
 	return render(request, 'athletes/performance.html', {'form': form})
 
-
+@login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def delete_activity(request, pk):
 
 	activity = get_object_or_404(Activity, user=request.user, pk=pk)
@@ -379,18 +397,24 @@ def delete_activity(request, pk):
 
 	return redirect('athletes:index')
 
+@login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def injury_list(request):
 
 	injuries = Tag.objects.filter(user=request.user, tag="injury")
 
 	return render(request, 'athletes/injury_list.html', {'injuries': injuries, 'nbar': 'injury_list'})
 
+@login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def performance_list(request):
 
 	performances = Tag.objects.filter(user=request.user, tag="performance")
 
 	return render(request, 'athletes/performance_list.html', {'performances': performances, 'nbar': 'list'})
 
+@login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def remove_tag(request, pk):
 
 	tag = get_object_or_404(Tag, user=request.user, pk=pk)
@@ -398,6 +422,8 @@ def remove_tag(request, pk):
 
 	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+@login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def help(request):
 
 	return render(request, "athletes/help.html")

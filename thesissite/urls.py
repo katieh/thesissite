@@ -22,8 +22,8 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    #url(r'^connections/', include('connections.urls', namespace='connections')),
-    #url(r'^coaches/', include('coaches.urls', namespace='coaches')),
+    url(r'^connections/', include('connections.urls', namespace='connections')),
+    url(r'^coaches/', include('coaches.urls', namespace='coaches')),
 	url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^athletes/', include('athletes.urls', namespace='athletes')),
     url(r'^admin/', admin.site.urls)
