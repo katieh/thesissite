@@ -23,6 +23,7 @@ class UploadActivityForm(forms.Form):
 	name = forms.CharField()
 	comments = forms.CharField()
 	RPE = forms.IntegerField()
+	tags = forms.CharField(required=False)
 
 # http://stackoverflow.com/questions/27651577/
 class NaturalDateField(forms.DateField):
@@ -41,10 +42,11 @@ class NaturalDateField(forms.DateField):
 
 class ActivityForm(ModelForm):
 	start_time = NaturalDateField()
+	tags = forms.CharField(required=False)
 
 	class Meta:
 		model = Activity
-		fields = ['name', 'comments', 'RPE', 'tot_dist', 'start_time', 'tot_time']
+		fields = ['name', 'comments', 'tags', 'RPE', 'tot_dist', 'start_time', 'tot_time']
 
 class InjuryForm(ModelForm):
 	date = NaturalDateField()

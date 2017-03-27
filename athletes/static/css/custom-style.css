@@ -29,3 +29,8 @@ iframe[seamless] {
 .nv-axis .tick line {
     stroke:#e5e5e5;
 }
+
+/* from http://stackoverflow.com/questions/3148415/ */
+.verticalLine {
+  border-left: solid #ff0000;
+}

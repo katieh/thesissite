@@ -27,7 +27,7 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
 
 
                     <div class="form-group row">
-                        <div class="col-sm-2 col-form-label">
+                        <div class="col-sm-1 col-form-label">
                             <label for="name">Name:</label>
                             {% if form.name.errors %}
                                 {% for error in form.name.errors %}
@@ -37,7 +37,7 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
                                 {% endfor %}
                             {% endif %}
                         </div>
-                        <div class="col-sm-10">
+                        <div class="col-sm-11">
                             <input class="form-control" type="text" name="name" required>
                         </div>
 
@@ -46,23 +46,53 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-2 col-form-label">
-                            <label for="comments">Comments:</label>
-                            {% if form.comments.errors %}
-                                {% for error in form.comments.errors %}
-                                    <div class="alert alert-danger">
-                                        <strong>{{ error | escape }}</strong>
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
+                        <div class = "col-sm-6">
+                            <div class="form-group row">
+
+                                <div class="col-sm-2 col-form-label">
+                                    <label for="comments">Comments:</label>
+                                    {% if form.comments.errors %}
+                                        {% for error in form.comments.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error | escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="10" type="text" name="comments" required></textarea>
+                                </div>
+            
+                            </div>
                         </div>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" rows="10" type="text" name="comments" required></textarea>
+
+                        <div class = "col-sm-6">
+                            <div class="form-group row">
+
+                                <div class="col-sm-2 col-form-label">
+                                    <label for="comments">Tags:</label>
+                                    {% if form.tags.errors %}
+                                        {% for error in form.tags.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error | escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="10" type="text" name="tags" placeholder="e.g.
+#pelvis_hurt 3
+#slept 8
+#dehydrated"></textarea>
+                                </div>
+            
+                            </div>
                         </div>
+                        
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-2 col-form-label">
+                        <div class="col-sm-1 col-form-label">
                             <label for="RPE">RPE:</label>
                             {% if form.RPE.errors %}
                                 {% for error in form.RPE.errors %}
@@ -93,7 +123,7 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
 
                         </div>
 
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
 
                             <button type="submit" class="save btn btn-primary pull-right" value="Upload">Save</button>
 

@@ -49,11 +49,11 @@
                             <div class="chart-stage">
 
                                 <div class='row'>
-                                    <div class='col-sm-4'>
+                                    <div class='col-sm-5'>
 
                                         {% if activity.RPE == None %}
 
-                                        <div class="progress" style="margin-bottom: 5px">
+                                        <div class="progress" style="margin-bottom: 5px;">
                                             <div class="progress-bar" role="progressbar" aria-valuenow="{{activity.RPE}}" 
                                             aria-valuemin="0" aria-valuemax="10" style="width:100%; background: grey; ">
                                                 RPE: {{activity.RPE}}
@@ -135,9 +135,20 @@
                                         </table>
                                     </div>
 
-                                    <div class='col-sm-8'>
-                                        <label>Comments:</label>
-                                        <textarea readonly>{{activity.comments}}</textarea>
+                                    <div class='col-sm-7'>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label>Comments:</label>
+                                                <textarea style="height:75px" readonly>{{activity.comments}}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label>Tags:</label>
+                                                <textarea style="height:100px" readonly>{{activity.tags}}</textarea>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>     
                             </div>

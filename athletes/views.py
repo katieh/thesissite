@@ -115,12 +115,12 @@ def edit(request, pk=None):
 
 			activity = form.save()
 
-
 			# delete any tags formerly associated with this activity
 			Tag.objects.filter(run_id=activity).delete()
 
-			## get sentiment of comment
-			get_sentiment_tags(activity)
+			# NOTE: NOT DOING THIS ANYMORE
+			# ## get sentiment of comment
+			# get_sentiment_tags(activity)
 
 			## find tags in the new comment
 			get_user_tags(activity)
@@ -273,10 +273,13 @@ def upload_one(request):
 			db_activity.RPE = request.POST['RPE']
 			db_activity.name = request.POST['name']
 			db_activity.comments = request.POST['comments']
+			db_activity.tags = request.POST['tags']
 
 			## save any # that were in the comments.
-			## get sentiment of comment
-			get_sentiment_tags(db_activity)
+
+			# NOTE: I've STOPPED doing sentiment analysis!!!
+			# ## get sentiment of comment
+			# get_sentiment_tags(db_activity)
 
 			## find tags in the new comment
 			get_user_tags(db_activity)

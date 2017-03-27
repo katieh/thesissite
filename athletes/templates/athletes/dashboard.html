@@ -54,7 +54,7 @@
 			</div>
 		</div>
 
-		<div class="col-sm-8" >
+		<div class="col-sm-8">
 
 		<div class="chart-wrapper">
 	    	<div class="chart-title">
@@ -94,7 +94,7 @@
 	    <div class="chart-stage">
 
 	        <div class='row'>
-	            <div class='col-sm-6'>
+				<div class="col-sm-6">
 
 	                {% if activity.RPE == None %}
 
@@ -179,11 +179,26 @@
 	                    </tr>
 	                </table>
 	            </div>
+	            
+				<div class='col-sm-6'>
 
-	            <div class='col-sm-6'>
-	            	<label>Comments:</label>
-	                <textarea readonly>{{activity.comments}}</textarea>
-	            </div>
+                    {% if request.user|is_type:"athlete" %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Comments:</label>
+                            <textarea style="height:75px" readonly>{{activity.comments}}</textarea>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Tags:</label>
+                            <textarea {% if request.user|is_type:"athlete" %} style="height:100px" {% endif %} readonly>{{activity.tags}}</textarea>
+                        </div>
+                    </div>
+                    
+                </div>
+
 	        </div>
 	    </div>
 	</div>

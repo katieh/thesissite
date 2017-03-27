@@ -29,9 +29,7 @@
 			    <th>RPE</th>
 			    <th>Distance (miles)</th>
 			    <th>Time (minutes)</th>
-			    <th>Avg Pace (min/mile)</th>
-			    <th>Avg HR (bpm)</th>
-			    <th>Avg Cadence (spm)</th>
+			    <th>Tags</th>
 			    <th>Comments</th>
 			  </tr>
 
@@ -41,13 +39,9 @@
 			  		<td>{{ activity.name }}</td>
 			  		<td>{{ activity.RPE }}</td>
 			  		<td>{{ activity.tot_dist | two_decimals }}</td>
-			  		<td>{{ activity.tot_time }}</td>
-			  		<td>{{ activity.avg_speed | mps_to_time_per_mile}}</td>
-			  		<td>{{ activity.avg_hr }}</td>
-			  		<td>{{ activity.avg_cadence }}</td>
-			  		<td>
-			  		<textarea style="height:75px; background:#f2f2f2;" readonly>{{ activity.comments }}</textarea>
-    				</td>
+			  		<td>{{ activity.tot_time }}</td>		
+			  		<td>{{ activity.tags }}</td>
+			  		<td>{{ activity.comments }}</td>
 			  	</tr>
 	          {% endfor %}
 

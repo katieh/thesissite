@@ -59,6 +59,7 @@ class Activity(models.Model):
 
 	## users comments
 	comments = models.TextField(null=True, default=None)
+	tags = models.TextField(null=True, default=None)
 
 	## these are the data fields we keep track of for each run
 	timestamp = ArrayField(models.DateTimeField(null=True), null=True, default=None) # datetime field

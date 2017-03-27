@@ -31,7 +31,8 @@ def get_sentiment_tags(activity):
 def get_user_tags(activity):
 
 	# get all words in the comment
-	words = activity.comments.split()
+	words = activity.tags.split()
+	words += activity.comments.split()
 
 	# get the hashtags and their associated values if they exist
 	for i in range(len(words)):
