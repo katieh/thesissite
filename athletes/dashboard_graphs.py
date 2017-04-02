@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from colour import Color
 import json
 
-def get_tag_graphs(tags, distance_ratio, sRPE_ratio):
+def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 	tag_graphs = {}
 	red = Color('#f37736')
 	purple = Color('#a64ca6')
@@ -51,8 +51,10 @@ def get_tag_graphs(tags, distance_ratio, sRPE_ratio):
 				"yAxis": 1
 			})
 
-	data['user_tags'].append(distance_ratio)
-	data['user_tags'].append(sRPE_ratio)
+	if distance_ratio:
+		data['user_tags'].append(distance_ratio)
+	if sRPE_ratio:
+		data['user_tags'].append(sRPE_ratio)
 
 	# get the max_y value for 'user_tags'
 	try:
@@ -80,8 +82,10 @@ def get_tag_graphs(tags, distance_ratio, sRPE_ratio):
 				"yAxis": 1
 			})
 
-	data['performance_injury'].append(distance_ratio)
-	data['performance_injury'].append(sRPE_ratio)
+	if distance_ratio:
+		data['performance_injury'].append(distance_ratio)
+	if sRPE_ratio:
+		data['performance_injury'].append(sRPE_ratio)
 
 	try:
 		data["y_max"]['performance_injury'] = max([x["y"] for tag in set.intersection({'injury', 'performance'}, unique_tags) for x in tag_graphs[tag]])
@@ -106,7 +110,7 @@ def add_week(weeks, key):
 		weeks[key]['acute_sRPE'] = 0
 		weeks[key]['chronic_sRPE'] = 0
 
-def get_week_graphs(activities):
+def get_week_graphs(activities, advanced=True):
 
 	weeks = dict()
 	all_weeks = [(x['start_time'] - timedelta(days=x['start_time'].weekday())).date() for x in activities.values('start_time')]
@@ -198,7 +202,21 @@ def get_week_graphs(activities):
 				"color": get_color("acute_distance"),
 				"type": "bar",
 				"yAxis": 1
-			},
+			}
+		],
+		"sRPE": [
+			{
+				"values": field_graphs["acute_sRPE"],
+				"key": "Weekly sRPE (Acute)",
+				"color": get_color("acute_sRPE"),
+				"type": "bar",
+				"yAxis": 1
+			}
+		]
+	}
+
+	if advanced:
+		data['distance'] += [
 			{
 				"values": field_graphs["chronic_distance"],
 				"key": "Chronic Mileage",
@@ -213,15 +231,8 @@ def get_week_graphs(activities):
 				"type": "line",
 				"yAxis": 2
 			}
-		],
-		"sRPE": [
-			{
-				"values": field_graphs["acute_sRPE"],
-				"key": "Weekly sRPE (Acute)",
-				"color": get_color("acute_sRPE"),
-				"type": "bar",
-				"yAxis": 1
-			},
+		]
+		data['sRPE'] += [
 			{
 				"values": field_graphs["chronic_sRPE"],
 				"key": "Chronic sRPE",
@@ -237,17 +248,23 @@ def get_week_graphs(activities):
 				"yAxis": 2
 			}
 		]
-	}
+			
 
 	data["y_max"] = {}
 
 	try:
 		data["y_max"]["distance"] = max([x["y"] for tag in ["acute_distance", "chronic_distance"] for x in field_graphs[tag]])
+		if not advanced:
+			data["y_max"]["distance"] += 0.2*data["y_max"]["distance"]
+
 	except:
 		data["y_max"]["distance"] = 0
 
 	try:
 		data["y_max"]["sRPE"] = max([x["y"] for tag in ["acute_sRPE", "chronic_sRPE"] for x in field_graphs[tag]])
+		if not advanced:
+			data["y_max"]["sRPE"] += 0.2*data["y_max"]["sRPE"]
+
 	except:
 		data["y_max"]["sRPE"] = 0
 

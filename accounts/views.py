@@ -3,6 +3,8 @@ from django.contrib.auth import login
 from .forms import UserForm
 from django.contrib.auth.models import User, Group
 
+from athletes.models import Preferences
+
 
 # Create your views here.
 
@@ -27,6 +29,12 @@ def create_account(request):
 				## get the athlete group
 				group, created = Group.objects.get_or_create(name='athlete')
 				user.groups.add(group)
+
+				## set up their preference object defaulting to NOT advanced graphs
+				preferences = Preferences()
+				preferences.user = user
+				preferences.advanced = False
+				preferences.save()
 
 				## redirect to athlete index
 				return redirect('accounts:home')

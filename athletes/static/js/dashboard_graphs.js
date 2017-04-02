@@ -72,7 +72,7 @@ function make_multichart(data, y_max, key) {
         ;
 
         chart.yAxis1
-        .tickFormat(d3.format('.1f'))
+        .tickFormat(d3.format('.1f'));
         chart.yAxis2
         .tickFormat(d3.format('.2f'))
         ;

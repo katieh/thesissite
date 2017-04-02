@@ -15,7 +15,7 @@ from datetime import timedelta
 # modified from stack overflow but I don't have internet rn 
 # so can't get the link.
 def _is_coach(user):
-	return user.groups.filter(name='coach').exists()
+	return not user.groups.filter(name='athlete').exists()
 
 # function copied from 
 # http://stackoverflow.com/questions/480214/

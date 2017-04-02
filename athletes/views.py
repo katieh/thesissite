@@ -18,7 +18,7 @@ import datetime
 from datetime import timedelta
 
 from .tags import get_user_tags, get_sentiment_tags
-from .models import Activity, Tag
+from .models import Activity, Tag, Preferences
 from .forms import UploadActivitiesForm, ActivityForm, InjuryForm, PerformanceForm, UploadActivityForm
 from .activity_graphs import get_field_graphs, get_field_histograms
 from .dashboard_graphs import get_week_graphs, get_tag_graphs
@@ -37,9 +37,18 @@ def _is_athlete(user):
 @user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def index(request):
 
+	## ---------- GET USER PREFERENCES --------- ##
+	try:
+		preferences = Preferences.objects.get(user=request.user)
+
+	except:
+		preferences = Preferences()
+		preferences.user = request.user
+		preferences.save()
+
 	## -------- GET WEEKS FROM ACTIVITIES! ---------- ##
 	activities = Activity.objects.filter(user=request.user)
-	weeks_graphs, weeks = get_week_graphs(activities)
+	weeks_graphs, weeks = get_week_graphs(activities, preferences.advanced)
 
 	try:
 		current_activity = activities.latest()
@@ -58,15 +67,19 @@ def index(request):
 
 	## -------- GET USER TAGS ---------- ##
 	tags = Tag.objects.filter(user=request.user)
+	try:
+		tags_graph = get_tag_graphs(tags, distance_ratio = weeks_graphs['distance'][2], sRPE_ratio = weeks_graphs['sRPE'][2])
+	except:
+		tags_graph = get_tag_graphs(tags)
 
 	return render(request, 'athletes/index.html', 
-		{'nbar': 'home', 
+		{'nbar': 'home',
+		'preferences': preferences, 
 		'this_week': this_week,
 		'current_week': current_week,
 		'week_graphs': weeks_graphs,
-		'tag_graphs': get_tag_graphs(tags, weeks_graphs['distance'][2], weeks_graphs['sRPE'][2]),
-		'activity': current_activity,
-		'test': json.dumps({"hi": 1, "hello": 2})})
+		'tag_graphs': tags_graph,
+		'activity': current_activity})
 
 # main view for athletes
 @login_required
@@ -404,7 +417,7 @@ def delete_activity(request, pk):
 @user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def injury_list(request):
 
-	injuries = Tag.objects.filter(user=request.user, tag="injury")
+	injuries = Tag.objects.filter(user=request.user, tag="injury").order_by('-date')
 
 	return render(request, 'athletes/injury_list.html', {'injuries': injuries, 'nbar': 'injury_list'})
 
@@ -412,7 +425,7 @@ def injury_list(request):
 @user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def performance_list(request):
 
-	performances = Tag.objects.filter(user=request.user, tag="performance")
+	performances = Tag.objects.filter(user=request.user, tag="performance").order_by('-date')
 
 	return render(request, 'athletes/performance_list.html', {'performances': performances, 'nbar': 'list'})
 
@@ -430,3 +443,13 @@ def remove_tag(request, pk):
 def help(request):
 
 	return render(request, "athletes/help.html")
+
+@login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
+def toggle_advanced(request):
+
+	preferences = Preferences.objects.get(user=request.user)
+	preferences.advanced = not preferences.advanced
+	preferences.save()
+
+	return redirect('athletes:index')

@@ -14,9 +14,23 @@
 
 	<div class="container-fluid">
 
-		<h1>Dashboard</h1>
-		<hr>
+		<div class="row">
+			<div class="col-sm-6">
+				<h1>Dashboard</h1>
+			</div>
 
+			<div class="col-sm-6">
+				{% if preferences.advanced %}
+					<a class="btn btn-default pull-right" href="{% url 'athletes:toggle_advanced' %}">Hide Advanced Graphs</a>
+				{% else %}
+					<a class="btn btn-default pull-right" href="{% url 'athletes:toggle_advanced' %}">Show Advanced Graphs</a>
+				{% endif %}
+			</div>
+
+		</div>
+
+		<hr>
+		
 		<div class="basic">
 			{% include "athletes/dashboard.html" %}    
 		</div>

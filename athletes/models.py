@@ -71,6 +71,7 @@ class Activity(models.Model):
 	heart_rate = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
 	cadence = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
 
+
 	class Meta:
 		get_latest_by = 'start_time'
 
@@ -91,6 +92,12 @@ class Activity(models.Model):
 			return (self.tot_dist * 1609.34) / (self.tot_time * 60)
 		except:
 			return None
+
+	def __str__(self):
+		try:
+			return self.user.first_name + " " + self.user.last_name + ", " + self.name
+		except:
+			return "---- ----, " + self.name
 
 	## return the names of the array fields in Activity Model 
 	def get_array_fields(self):
@@ -174,8 +181,19 @@ class Tag(models.Model):
 	value = models.FloatField(default=1) # numeric value associated with tag
 	comments = models.TextField(null=True) # ONLY filled out for injury / performance tags
 
+	def __str__(self):
+		try:
+			return self.user.first_name + " " + self.user.last_name + ", " + self.tag
+		except:
+			return "---- ----, " + self.tag
+
 	class Meta:
 		get_latest_by = 'date'
+
+
+class Preferences(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    advanced = models.BooleanField(default=True)
 
 
 

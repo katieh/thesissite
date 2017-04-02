@@ -17,8 +17,9 @@ urlpatterns = [
     url(r'^connections/$', views.connections, name='connections'),
     url(r'^injury/$', views.new_injury, name='new-injury'),
     url(r'^performance/$', views.new_performance, name='new-performance'),
-    url(r'^list/injury$', views.injury_list, name='injury'),
-    url(r'^list/performance$', views.performance_list, name='performance'),
+    url(r'^list/injury/$', views.injury_list, name='injury'),
+    url(r'^list/performance/$', views.performance_list, name='performance'),
     url(r'^(?P<pk>[0-9]+)/remove_tag/$', views.remove_tag, name='remove_tag'),
     url(r'^help/$', views.help, name='help'),
+    url(r'^toggle_advanced/$', views.toggle_advanced, name="toggle_advanced")
 ]
