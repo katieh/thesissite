@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
 from friendship.models import FriendshipRequest, Friend
 from django.contrib.auth.models import User
-from athletes.models import Activity, Tag
+from athletes.models import Activity, Tag, Preferences
 from athletes.dashboard_graphs import get_week_graphs, get_tag_graphs
 from collections import Counter
 from .coaches_dashboard import get_athletes_graph
@@ -31,6 +31,15 @@ def _pending_requests(user):
 @login_required
 @user_passes_test(_is_coach, login_url="/athletes/", redirect_field_name=None)
 def index(request):
+
+	## ---------- GET USER PREFERENCES --------- ##
+	try:
+		preferences = Preferences.objects.get(user=request.user)
+
+	except:
+		preferences = Preferences()
+		preferences.user = request.user
+		preferences.save()
 
 	# get athelete graphs
 	athlete_ids = [x['to_user_id'] for x in Friend.objects.filter(from_user_id=request.user.id).values('to_user_id')]
@@ -73,13 +82,14 @@ def index(request):
 					'tags': new_tags})
 
 	# get graph
-	athletes_graph = get_athletes_graph(activities)
+	athletes_graph = get_athletes_graph(activities, preferences.advanced)
 
 	return render(request, 'coaches/index.html', 
 		{'nbar': 'home',
 		'athletes_graph': athletes_graph,
 		'tags': tags,
-		'pending': _pending_requests(request.user)})
+		'pending': _pending_requests(request.user),
+		'preferences':preferences})
 
 # coaches list view of athletes
 @login_required

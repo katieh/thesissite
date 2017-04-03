@@ -4,7 +4,29 @@
 {% block content %}
 
 <div class="container-fluid">
-	<h1>Dashboard</h1>
+	<div class="row">
+		<div class="col-sm-6">
+			<h1>Dashboard</h1>
+		</div>
+
+		<div class="col-sm-6">
+
+			<div class="btn-group pull-right">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu">
+			  	{% if preferences.advanced %}
+				<li><a href="{% url 'athletes:toggle_advanced' %}">Show Weekly Mileage / sRPE</a></li>
+				{% else %}
+				<li><a href="{% url 'athletes:toggle_advanced' %}">Show Acute:Chronic Ratio</a></li>
+				{% endif %}
+			  </ul>
+			</div>
+		</div>
+
+	</div>
+
 	<hr>
 
 	<div class="row">
@@ -64,7 +86,7 @@
 				<div class="col-sm-12">
 					<div class="chart-wrapper">
 						<div class="chart-title">
-							Acute:Chronic Distance
+							{% if preferences.advanced %}Acute:Chronic{% else %}Weekly{% endif %} Distance
 						</div>
 
 						<div class="chart-stage">
@@ -79,7 +101,7 @@
 				<div class="col-sm-12">
 					<div class="chart-wrapper">
 						<div class="chart-title">
-							Acute:Chronic sRPE
+							{% if preferences.advanced %}Acute:Chronic{% else %}Weekly{% endif %} sRPE
 						</div>
 
 						<div class="chart-stage">

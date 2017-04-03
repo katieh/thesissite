@@ -445,11 +445,10 @@ def help(request):
 	return render(request, "athletes/help.html")
 
 @login_required
-@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
 def toggle_advanced(request):
 
 	preferences = Preferences.objects.get(user=request.user)
 	preferences.advanced = not preferences.advanced
 	preferences.save()
 
-	return redirect('athletes:index')
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
