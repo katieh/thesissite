@@ -8,6 +8,7 @@ from collections import Counter
 from .coaches_dashboard import get_athletes_graph
 from colour import Color
 from athletes.graph_themes import get_colors
+import re
 
 import datetime
 from datetime import timedelta
@@ -188,10 +189,15 @@ def details(request, pk):
 		current_activity = activities.latest()
 
 		try:
+
 			# remove tags user doesn't want coach to see
-			tags_to_remove = [x['tag'] for x in Tag.objects.filter(user=pk, allow_access=False, run_id=current_activity.id).values('tag')]
-			regex = "(" + ")|(".join(tags_to_remove) + " [0-9]+)"
+			tags_to_remove = _remove_duplicates([x['tag'] for x in Tag.objects.filter(user=pk, allow_access=False, run_id=current_activity.id).values('tag')])
+			regex = "(" + ")|(".join(tag + r"(\s+[0-9]*)?" for tag in set(tags_to_remove)) + ')'
 			current_activity.tags = re.sub(regex, '', current_activity.tags)
+
+			print tags_to_remove
+			print regex
+
 		except:
 			pass
 
