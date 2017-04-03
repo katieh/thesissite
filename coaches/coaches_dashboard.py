@@ -19,8 +19,8 @@ def get_athletes_graph(activities, ratio):
 				distance_ratio = week_graph["distance"][2]
 				sRPE_ratio = week_graph["sRPE"][2]
 			else:
-				distance_ratio = week_graph["distance"][1]
-				sRPE_ratio = week_graph["sRPE"][1]
+				distance_ratio = week_graph["distance"][0]
+				sRPE_ratio = week_graph["sRPE"][0]
 
 
 			# fix distance ratio graph
