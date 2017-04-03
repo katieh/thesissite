@@ -28,7 +28,7 @@ def get_sentiment_tags(activity):
 
 		tag.save()
 
-def get_user_tags(activity):
+def get_user_tags(activity, permissions = None):
 
 	# get all words in the comment
 	words = activity.tags.split()
@@ -58,7 +58,10 @@ def get_user_tags(activity):
 				previous_tag = Tag.objects.filter(user=activity.user, tag=tag.tag).latest()
 				tag.allow_access = previous_tag.allow_access
 			except:
-				pass
+				try:
+					tag.allow_access = permissions[tag.tag]
+				except:
+					pass
 
 			# save the tag!
 			tag.save()

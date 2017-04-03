@@ -131,14 +131,16 @@ def edit(request, pk=None):
 			activity = form.save()
 
 			# delete any tags formerly associated with this activity
-			Tag.objects.filter(run_id=activity).delete()
+			tag_qs = Tag.objects.filter(run_id=activity)
+			old_tag_permissions = {x.tag:x.allow_access for x in tag_qs}
+			tag_qs.delete()
 
 			# NOTE: NOT DOING THIS ANYMORE
 			# ## get sentiment of comment
 			# get_sentiment_tags(activity)
 
 			## find tags in the new comment
-			get_user_tags(activity)
+			get_user_tags(activity, permissions = old_tag_permissions)
 
 			return redirect('athletes:details', pk=activity.pk)
 
