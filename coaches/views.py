@@ -187,6 +187,14 @@ def details(request, pk):
 	try:
 		current_activity = activities.latest()
 
+		try:
+			# remove tags user doesn't want coach to see
+			tags_to_remove = [x['tag'] for x in Tag.objects.filter(user=pk, allow_access=False, run_id=current_activity.id).values('tag')]
+			regex = "(" + ")|(".join(tags_to_remove) + " [0-9]+)"
+			current_activity.tags = re.sub(regex, '', current_activity.tags)
+		except:
+			pass
+
 	except:
 		current_activity = None
 	

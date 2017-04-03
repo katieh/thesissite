@@ -54,6 +54,12 @@ def get_user_tags(activity):
 			except:
 				tag.value = 1
 
+			try:
+				previous_tag = Tag.objects.filter(user=activity.user, tag=tag.tag).latest()
+				tag.allow_access = previous_tag.allow_access
+			except:
+				pass
+
 			# save the tag!
 			tag.save()
 
