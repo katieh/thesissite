@@ -46,3 +46,8 @@ def mps_to_time_per_mile(mps):
 def is_type(user, group_name):
     group =  Group.objects.get(name=group_name) 
     return group in user.groups.all() 
+
+# copied from http://stackoverflow.com/questions/8000022/
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)

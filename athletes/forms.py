@@ -61,3 +61,8 @@ class PerformanceForm(ModelForm):
 	class Meta:
 		model = Tag
 		fields = ['date', 'value', 'comments']
+
+class TagForm(forms.Form):
+
+	tag_name = forms.CharField()
+	allow_access = forms.BooleanField(required=False)

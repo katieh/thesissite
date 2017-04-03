@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^list/performance/$', views.performance_list, name='performance'),
     url(r'^(?P<pk>[0-9]+)/remove_tag/$', views.remove_tag, name='remove_tag'),
     url(r'^help/$', views.help, name='help'),
-    url(r'^toggle_advanced/$', views.toggle_advanced, name="toggle_advanced")
+    url(r'^toggle_advanced/$', views.toggle_advanced, name="toggle_advanced"),
+    url(r'^tag_access/$', views.tag_access, name="tag_access"),    
 ]

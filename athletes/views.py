@@ -11,6 +11,8 @@ from django.http import HttpResponseRedirect
 from django.db.models.base import ObjectDoesNotExist
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView
+from django.forms import formset_factory
+from django.contrib import messages
 
 
 import numpy as np
@@ -19,7 +21,7 @@ from datetime import timedelta
 
 from .tags import get_user_tags, get_sentiment_tags
 from .models import Activity, Tag, Preferences
-from .forms import UploadActivitiesForm, ActivityForm, InjuryForm, PerformanceForm, UploadActivityForm
+from .forms import UploadActivitiesForm, ActivityForm, InjuryForm, PerformanceForm, UploadActivityForm, TagForm
 from .activity_graphs import get_field_graphs, get_field_histograms
 from .dashboard_graphs import get_week_graphs, get_tag_graphs
 from .fitparse import Activity as FitActivity
@@ -452,3 +454,40 @@ def toggle_advanced(request):
 	preferences.save()
 
 	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+@login_required
+@user_passes_test(_is_athlete, login_url="/coaches/", redirect_field_name=None)
+def tag_access(request):
+
+	## get unique tags
+	tags = {x['tag']:x['allow_access'] for x in Tag.objects.filter(user=request.user).values('tag', 'allow_access')}
+	print tags
+	print len(tags)
+
+	TagFormSet = formset_factory(TagForm, extra=len(tags))
+
+	if request.method == 'POST':
+
+		formset = TagFormSet(request.POST)
+
+		if formset.is_valid():
+
+			for form in formset:
+				data = form.cleaned_data
+
+				## get tags by tag name and user
+				tags = Tag.objects.filter(user=request.user, tag=data['tag_name'])
+
+				for tag in tags:
+					tag.allow_access = data['allow_access']
+					tag.save()
+
+
+			messages.add_message(request, messages.INFO, 'Your preferences have been saved!')
+			return redirect('athletes:tag_access')
+
+
+	else:
+		formset = TagFormSet()
+
+	return render(request, 'athletes/tag_access.html', {'formset': formset, 'tags':tags})

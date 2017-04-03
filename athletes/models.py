@@ -180,6 +180,7 @@ class Tag(models.Model):
 	date = models.DateTimeField(blank=False) # date associated with tag
 	value = models.FloatField(default=1) # numeric value associated with tag
 	comments = models.TextField(null=True) # ONLY filled out for injury / performance tags
+	allow_access = models.BooleanField(default=True)
 
 	def __str__(self):
 		try:

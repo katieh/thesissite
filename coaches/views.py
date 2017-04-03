@@ -61,7 +61,7 @@ def index(request):
 		activities[user_name]["color"] = user_colors[athlete_ids.index(athlete_id)].hex
 
 		# get all tags
-		tags_qs = Tag.objects.filter(user_id=athlete_id).order_by('-date').exclude(tag__in=["sentiment_neg", "sentiment_pos", "performance", "injury"])
+		tags_qs = Tag.objects.filter(user_id=athlete_id, allow_access=True).order_by('-date').exclude(tag__in=["sentiment_neg", "sentiment_pos", "performance", "injury"])
 		all_tags = _remove_duplicates([x.tag for x in tags_qs])
 
 		# look at recent tags
@@ -107,7 +107,7 @@ def list(request):
 		data['id'] = friend.id
 
 		try:
-			tags = [x["tag"] for x in Tag.objects.filter(user=friend.id).values("tag").order_by('-date') if (x["tag"] not in ["sentiment_neg", "sentiment_pos", "performance", "injury"])]
+			tags = [x["tag"] for x in Tag.objects.filter(user=friend.id, allow_access=True).values("tag").order_by('-date') if (x["tag"] not in ["sentiment_neg", "sentiment_pos", "performance", "injury"])]
 			unique_tags = _remove_duplicates(tags)
 			tag_counts = Counter(tags)
 
@@ -119,12 +119,12 @@ def list(request):
 			pass
 
 		try:
-			data['injury'] = Tag.objects.filter(user=friend.id, tag="injury").latest()
+			data['injury'] = Tag.objects.filter(user=friend.id, tag="injury", allow_access=True).latest()
 		except:
 			pass
 
 		try:
-			data['performance'] = Tag.objects.filter(user=friend.id, tag="performance").latest()
+			data['performance'] = Tag.objects.filter(user=friend.id, tag="performance", allow_access=True).latest()
 		except:
 			pass
 
@@ -200,7 +200,7 @@ def details(request, pk):
 		current_week = None
 
 	## -------- GET USER TAGS ---------- ##
-	tags = Tag.objects.filter(user=pk)
+	tags = Tag.objects.filter(user=pk, allow_access=True)
 
 	return render(request, 'coaches/details.html', 
 		{'this_week': this_week,

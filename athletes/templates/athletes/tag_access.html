@@ -1,0 +1,50 @@
+{% extends "athletes/base.html" %}
+{% load static %}
+{% load template_filters %}
+
+<!DOCTYPE html>
+<html>
+
+{% block content %}
+
+    <div class="container-fluid">
+
+        <h1>Manage Tag Access</h1>
+        <hr>
+
+        {% if messages %}
+			    {% for message in messages %}
+			    <div class="alert alert-success" role="alert">{{ message }}</div>
+			    {% endfor %}
+		{% endif %}
+
+        <form method="POST" class="post-form">
+
+            {% csrf_token %}
+
+            <table class="table">
+
+			  <tr>
+			    <th>Tag</th>
+			    <th>Allow Coaches to Access</th>
+			  </tr>
+
+			  {% for tag in tags %}
+			  	<tr>
+			  		<td><input id="id_form-{{forloop.counter0}}-tag_name" name="form-{{forloop.counter0}}-tag_name" type="text" value={{tag}} readonly></td>
+			  		<td><div class="checkbox">
+				  		<input id="id_form-{{forloop.counter0}}-allow_access" name="form-{{forloop.counter0}}-allow_access" type="checkbox" {%if tags|get_item:tag %} checked="checked" {% endif %}>
+					</div></td>
+			  	</tr>
+	          {% endfor %}
+
+			</table>
+
+			{{ formset.management_form }}
+
+            <button type="submit" class="save btn btn-primary pull-right">Save</button>
+        </form>
+
+    </div>
+
+{% endblock %}
