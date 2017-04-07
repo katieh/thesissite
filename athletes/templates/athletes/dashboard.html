@@ -153,6 +153,17 @@
 	                {% endif %}
 
 	                <table class="table-condensed">
+		                <tr>
+	                        <td>Met Expectations:</td>
+	                        <td>
+	                        {% if activity.met_expectation %} <span class="glyphicon glyphicon-ok"></span> 
+	                        {% else %}{% if activity.met_expectation == False %}
+	                        <span class="glyphicon glyphicon-remove"></span>
+	                        {% else %}
+	                        When you have a chance, please fill in this field
+
+	                        {% endif %}{% endif %}</td>
+	                    </tr>
 	                    <tr>
 	                        <td>Distance:</td>
 	                        <td>{{ activity.tot_dist | two_decimals}} {% if activity.tot_dist != None %}miles{% endif %}</td>
