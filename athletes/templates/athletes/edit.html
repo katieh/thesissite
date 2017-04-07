@@ -111,6 +111,29 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
 
                         <div class="col-sm-5">
                             <div class="form-group row">
+                                
+                                    <div class='col-sm-4'>
+                                        <label for="tot_dist">Expectations:</label>
+                                    </div>
+                                    <div class='col-sm-8'>
+                                        <div class="radio" required>
+                                                <label>
+                                                <input type="radio" name="met_expectation" id="met_expectation_true" value="True" {% if form.met_expectation.value == True or form.met_expectation.value == None %} checked {% endif %}>
+                                                I met or exceeded my expectations
+                                              </label>
+                                            </div>
+                                            <div class="radio">
+                                              <label>
+                                                <input type="radio" name="met_expectation" id="met_expectation_false" value="False" {% if form.met_expectation.value == False %} checked {% endif %}>
+                                                I was below my expectations
+                                              </label>
+                                        </div>
+                                    </div>
+                                      
+
+                            </div>
+
+                            <div class="form-group row">
                                 <div class="col-sm-4 col-form-label">
                                     <label for="tot_dist">Distance (Miles):</label>
                                     {% if form.tot_dist.errors %}

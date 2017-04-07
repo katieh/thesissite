@@ -109,21 +109,65 @@ https://tutorial.djangogirls.org/en/django_forms/ -->
                             <input type="number" class="form-control" rows="10" name="RPE" value="{{form.RPE.value}}" min = "1" max = "10" required></input>
                         </div>
 
+                        <div class='col-sm-1'></div>
+
                         <div class="col-sm-3">
-                            <p>
-                                {{ form.docfile }}
-                            </p>
-                            {% if form.docfile.errors %}
-                                {% for error in form.docfile.errors %}
-                                    <div class="alert alert-danger">
-                                        <strong>{{ error | escape }}</strong>
+
+                            <div class="row" style="padding-bottom: 30px;">
+                                <div class='col-sm-12'>
+
+                                {% if form.met_expectation.errors %}
+                                {% for error in form.met_expectation.errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error | escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
+                                    <div class="radio">
+                                      <label>
+                                        <input type="radio" name="met_expectation" id="met_expectation_true" value="True" checked>
+                                        I met or exceeded my expectations
+                                      </label>
                                     </div>
-                                {% endfor %}
-                            {% endif %}
+                                    <div class="radio">
+                                      <label>
+                                        <input type="radio" name="met_expectation" id="met_expectation_false" value="False">
+                                        I was below my expectations
+                                      </label>
+                                    </div>
+                                    {% if form.docfile.errors %}
+                                        {% for error in form.docfile.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error | escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
 
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class='col-sm-12'>
+
+                                    <p>
+                                        <input id="id_docfile" name="docfile" type="file" accept=".gpx,.fit" required>
+                                    </p>
+                                    <p style="font-size: 10px">HackTrack only supports .fit and .gpx uploads. <a href={% url 'athletes:help' %}>Click here</a> for information on how to find these files.</p>
+                                    {% if form.docfile.errors %}
+                                        {% for error in form.docfile.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error | escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                </div>
+                            </div>
                         </div>
+                            
 
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
 
                             <button type="submit" class="save btn btn-primary pull-right" value="Upload">Save</button>
 

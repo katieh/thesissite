@@ -18,15 +18,18 @@ from django.contrib import messages
 import numpy as np
 import datetime
 from datetime import timedelta
+import fileinput
+import re
 
 from .tags import get_user_tags, get_sentiment_tags
 from .models import Activity, Tag, Preferences
-from .forms import UploadActivitiesForm, ActivityForm, InjuryForm, PerformanceForm, UploadActivityForm, TagForm
+from .forms import UploadActivitiesForm, ActivityForm, InjuryForm, PerformanceForm, UploadActivityForm, TagForm, ExpectationsForm
 from .activity_graphs import get_field_graphs, get_field_histograms
 from .dashboard_graphs import get_week_graphs, get_tag_graphs
 from .fitparse import Activity as FitActivity
-from activity_helper_methods import get_dict_of_fields
+from activity_helper_methods import get_dict_of_fields, get_dict_from_gpx
 import json
+import gpxpy
 
 # modified from stack overflow but I don't have internet rn 
 # so can't get the link.
@@ -102,9 +105,32 @@ def details(request, pk):
 	# get the matching activity IF the user has permission!
 	activity = get_object_or_404(Activity, user=request.user, pk=pk)
 
+	try:
+		next_pk = Activity.objects.filter(user=request.user, start_time__gt=activity.start_time).order_by('start_time')[0].pk
+	except:
+		next_pk = None
+
+	try:
+		prev_pk = Activity.objects.filter(user=request.user, start_time__lt=activity.start_time).order_by('-start_time')[0].pk
+	except:
+		prev_pk = None
+
+	if request.method == "POST":
+		form = ExpectationsForm(request.POST, instance=activity)
+
+		if form.is_valid():
+			form.save()
+			return redirect('athletes:details', pk=activity.pk)
+
+	else:
+		form = ExpectationsForm(instance=activity)
+
 	return render(request, 'athletes/details.html', 
 		{'pk': pk,
 		'activity': activity,
+		'next_pk':next_pk,
+		'prev_pk':prev_pk,
+		'form': form,
 		'field_graphs': get_field_graphs(activity),
 		'field_histograms': get_field_histograms(activity, request.user)})
 
@@ -123,9 +149,6 @@ def edit(request, pk=None):
 
 	if request.method == "POST":
 		form = ActivityForm(request.POST, instance=activity)
-		print "this one"
-		print form['tot_dist'].errors
-		print "that one"
 		if form.is_valid():
 
 			activity = form.save()
@@ -243,15 +266,19 @@ class UploadView(FormView):
 				db_activity.speed = activity_dict['speed']
 				db_activity.max_speed = max(activity_dict['speed'])
 
-			if 'heart_rate' in activity_dict.keys():
+			try:
 				db_activity.heart_rate = activity_dict['heart_rate']
 				db_activity.avg_hr = int(np.nanmean([x for x in activity_dict['heart_rate'] if x != None]))
 				db_activity.max_hr = max(activity_dict['heart_rate'])
+			except:
+				pass
 
-			if 'cadence' in activity_dict.keys():
+			try:
 				db_activity.cadence = activity_dict['cadence']
 				db_activity.avg_cadence = int(np.nanmean([x for x in activity_dict['cadence'] if x != None]))
 				db_activity.max_cadence = max(activity_dict['cadence'])
+			except:
+				pass
 
 
 			## save models!
@@ -274,10 +301,27 @@ def upload_one(request):
 			db_activity.save() ## save so that we save the file
 
 			## open file and extract data
-			activity_file = open("media/" + db_activity.file.name)
-			fit_activity = FitActivity(activity_file)
-			fit_activity.parse()
-			activity_dict = get_dict_of_fields(fit_activity)
+			path = "media/" + db_activity.file.name
+
+			try:
+				activity_file = open(path)
+				fit_activity = FitActivity(activity_file)
+				fit_activity.parse()
+				activity_dict = get_dict_of_fields(fit_activity)
+
+			except:
+				# format file so gpxpy can read extensions
+			    for line in fileinput.input(path, inplace = True):
+			        if not re.search(r':TrackPointExtension',line):
+			            print line,
+			            
+			    fileinput.close()
+			            
+			    ## open file and parse GPX
+			    gpx_file = open(path, 'r')
+			    gpx = gpxpy.parse(gpx_file) 
+
+			    activity_dict = get_dict_from_gpx(gpx)
 
 			# TODO: something like this would be GREAT
 			## find the union of keys in dict and fields in the Activity model
@@ -291,6 +335,7 @@ def upload_one(request):
 			db_activity.name = request.POST['name']
 			db_activity.comments = request.POST['comments']
 			db_activity.tags = request.POST['tags']
+			db_activity.met_expectation = request.POST['met_expectation']
 
 			## save any # that were in the comments.
 
@@ -302,7 +347,7 @@ def upload_one(request):
 			get_user_tags(db_activity)
 
 			## fill in data for db_activity and save again
-			if 'timestamp' in activity_dict.keys():
+			try:
 				db_activity.timestamp = activity_dict['timestamp']
 
 				## fill in summary stats
@@ -314,37 +359,53 @@ def upload_one(request):
 				## figure out which week the activity is in
 				activity_isocalendar = db_activity.start_time.date().isocalendar()
 				db_activity.week = activity_isocalendar[0] + activity_isocalendar[1] / 100.0
+			except:
+				pass
 
-			if 'position_lat' in activity_dict.keys():
+			try:
 				db_activity.position_lat = activity_dict['position_lat']
+			except:
+				pass
 
-			if 'position_long' in activity_dict.keys():
+			try:
 				db_activity.position_long = activity_dict['position_long']
+			except:
+				pass
 
-			if 'distance' in activity_dict.keys():
+			try:
 				db_activity.distance = activity_dict['distance']
 				db_activity.tot_dist = max(activity_dict['distance'])
+			except:
+				pass
 
-			if 'altitude' in activity_dict.keys():
+			try:
 				db_activity.altitude = activity_dict['altitude']
 
 				db_activity.elevation_gained = sum([abs(activity_dict['altitude'][i] - activity_dict['altitude'][i+1]) 
 					for i in range(len(activity_dict['altitude']) - 1) 
 					if activity_dict['altitude'][i] != None and activity_dict['altitude'][i+1] != None])
+			except:
+				pass
 
-			if 'speed' in activity_dict.keys():
+			try:
 				db_activity.speed = activity_dict['speed']
 				db_activity.max_speed = max(activity_dict['speed'])
+			except:
+				pass
 
-			if 'heart_rate' in activity_dict.keys():
+			try:
 				db_activity.heart_rate = activity_dict['heart_rate']
 				db_activity.avg_hr = int(np.nanmean([x for x in activity_dict['heart_rate'] if x != None]))
 				db_activity.max_hr = max(activity_dict['heart_rate'])
+			except:
+				pass
 
-			if 'cadence' in activity_dict.keys():
+			try:
 				db_activity.cadence = activity_dict['cadence']
 				db_activity.avg_cadence = int(np.nanmean([x for x in activity_dict['cadence'] if x != None]))
 				db_activity.max_cadence = max(activity_dict['cadence'])
+			except:
+				pass
 
 			## save models!
 			db_activity.save()

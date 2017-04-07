@@ -24,6 +24,7 @@ class UploadActivityForm(forms.Form):
 	comments = forms.CharField()
 	RPE = forms.IntegerField()
 	tags = forms.CharField(required=False)
+	met_expectation = forms.CharField()
 
 # http://stackoverflow.com/questions/27651577/
 class NaturalDateField(forms.DateField):
@@ -40,13 +41,20 @@ class NaturalDateField(forms.DateField):
 			return None
 		return parsed_date.date
 
+class ExpectationsForm(ModelForm):
+
+	class Meta:
+		model = Activity
+		fields = ['met_expectation']
+
+
 class ActivityForm(ModelForm):
 	start_time = NaturalDateField()
 	tags = forms.CharField(required=False)
 
 	class Meta:
 		model = Activity
-		fields = ['name', 'comments', 'tags', 'RPE', 'tot_dist', 'start_time', 'tot_time']
+		fields = ['name', 'comments', 'tags', 'RPE', 'tot_dist', 'start_time', 'tot_time', 'met_expectation']
 
 class InjuryForm(ModelForm):
 	date = NaturalDateField()

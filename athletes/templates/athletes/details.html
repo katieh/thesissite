@@ -17,13 +17,20 @@
         <div class="container-fluid">
 
             <div class="row">
-                <div class="col-sm-10">
-                    <h1>{{ activity.name }}</h1>
+                <div class="col-sm-12">          
+                <a class="btn btn-default btn-sm" {% if prev_pk != None %} href="{% url 'athletes:details' prev_pk %}" {% else %} disabled="disabled" href = "#" {% endif %} role="button"><span class="glyphicon glyphicon-chevron-left"></span> Previous Run</a>
+
+                <a class="btn btn-default btn-sm pull-right" {% if next_pk != None %} href="{% url 'athletes:details' next_pk %}" {% else %} disabled="disabled" href = "#" {% endif %} role="button">Next Run <span class="glyphicon glyphicon-chevron-right"></span></a>
                 </div>
+            </div>
 
-                <div class="col-sm-2">
+            <hr>
 
-                    <div class="btn-group pull-right" role="group">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 style="margin-top: 5px;">{{ activity.name }}</h1>
+
+                    <div class="btn-group" role="group" style ="position: absolute; bottom: 0; right: 5px;">
 
                         <button onclick="location.href = '{% url 'athletes:edit' activity.id %}'" type="button" class="btn btn-default" aria-label="Left Align">
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -33,9 +40,7 @@
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </a>
                     </div>
-
                 </div>
-
             </div>
 
             <div class="row">
@@ -109,6 +114,56 @@
 
                                         <table class="table-condensed">
                                             <tr>
+                                                <td>Met Expectations:</td>
+                                                <td>
+                                                {% if activity.met_expectation %} <span class="glyphicon glyphicon-ok"></span> 
+                                                {% else %}{% if activity.met_expectation == False %}
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                                {% else %}
+                                                <form action="{% url "athletes:details" activity.pk %}" method="post" enctype="multipart/form-data">
+
+                                                    {% csrf_token %}
+
+                                                <div class = "row" style="border: 1px solid lightgrey;border-radius: 5px; padding-bottom: 5px;">
+                                                <div class = "col-sm-12">
+                                                <div class = "row">
+                                                <div class = "col-sm-12">
+
+                                                    <div class="radio">
+                                                  <label>
+                                                    <input type="radio" name="met_expectation" id="met_expectation_true" value="True" checked>
+                                                    Met or Exceeded
+                                                  </label>
+                                                </div>
+                                                <div class="radio">
+                                                  <label>
+                                                    <input type="radio" name="met_expectation" id="met_expectation_false" value="False">
+                                                    Below
+                                                  </label>
+                                                </div>
+
+                                                </div>
+                                                </div>
+                                                <div class = "row">
+                                                <div class = "col-sm-12">
+
+                                                    <button type="submit" class="save btn btn-primary pull-right" value="Upload">Save</button>
+
+                                                </div>
+                                                </div>
+                                                
+
+                                                
+
+                                                
+
+                                                
+
+                                                </form>
+
+                                                {% endif %}{% endif %}</td>
+                                            </tr>
+                                            <tr>
                                                 <td>Distance:</td>
                                                 <td>{{ activity.tot_dist | two_decimals}} {% if activity.tot_dist != None %}miles{% endif %}</td>
                                             </tr>
@@ -142,6 +197,7 @@
                                                 <textarea style="height:75px" readonly>{{activity.comments}}</textarea>
                                             </div>
                                         </div>
+                                        <hr>
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <label>Tags:</label>

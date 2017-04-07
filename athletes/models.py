@@ -71,6 +71,9 @@ class Activity(models.Model):
 	heart_rate = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
 	cadence = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
 
+	# user input
+	met_expectation = models.NullBooleanField(default=None, null=True)
+
 
 	class Meta:
 		get_latest_by = 'start_time'
