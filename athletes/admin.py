@@ -25,6 +25,30 @@ class ActivityAdmin(admin.ModelAdmin):
 
 	download_csv.short_description = "Download CSV file for selected stats."
 
+
+class TagAdmin(admin.ModelAdmin):
+
+	actions = ['download_csv']
+	list_display = ('user', 'run', 'tag', 'date', 'value', 'comments')
+
+	def download_csv(self, request, queryset):
+		import csv
+		from django.http import HttpResponse
+		import StringIO
+
+		f = StringIO.StringIO()
+		writer = csv.writer(f)
+		writer.writerow(['user', 'run', 'tag', 'date', 'value', 'comments'])
+		for s in queryset:
+			writer.writerow([s.user, s.run, s.tag, s.date, s.value, s.comments])
+
+		f.seek(0)
+		response = HttpResponse(f, content_type='text/csv')
+		response['Content-Disposition'] = 'attachment; filename=stat-info.csv'
+		return response
+
+	download_csv.short_description = "Download CSV file for selected stats."
+
 # Register your models here.
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Tag)
