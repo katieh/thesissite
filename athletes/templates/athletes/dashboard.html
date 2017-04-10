@@ -1,222 +1,230 @@
 {% load template_filters %}
 
-<div class="row">
+<div class='row'>
+	<div class='col-sm-12'>
+			<table style="margin-bottom: 0px; width:100%;">
+				<tr>
+					<td style='width:30%; padding: 0px; height: 100%;'>
+					<div class="chart-wrapper" style="height: 100%">
+						  <div class="chart-title">
+						    This Week -- {{ this_week }}
+						  </div>
+						  <div class="chart-stage">
+						    <table class="table-condensed">
+						    	<tr>
+							  		<td>Weekly Mileage:</td>
+							  		{% if current_week != None %}
+								  		<td>{{ current_week.acute_distance | two_decimals }}  miles</td>
+							  		{% else %}
+								  		<td>0.00  miles</td>
+							  		{% endif %}
+							  	</tr>
+							  	<tr>
+							  		<td>Mean Weekly Mileage Past Month:</td>
+							  		{% if current_week != None %}
+								  		<td>{{ current_week.chronic_distance | two_decimals }}  miles</td>
+							  		{% else %}
+								  		<td>0.00  miles</td>
+							  		{% endif %}
+							  	</tr>
+							  	<tr>
+							  		<td>Weekly sRPE:</td>
+							  		{% if current_week != None %}
+								  		<td>{{ current_week.acute_sRPE}}</td>
+							  		{% else %}
+								  		<td>0</td>
+							  		{% endif %}
+							  	</tr>
+							  	<tr>
+							  		<td>Mean Weekly sRPE Past Month:</td>
+							  		{% if current_week != None %}
+								  		<td>{{ current_week.chronic_sRPE}}</td>
+							  		{% else %}
+								  		<td>0</td>
+							  		{% endif %}
+							  	</tr>
+							  	<tr>
+							  		<td>Number of Runs:</td>
+							  		{% if current_week != None %}
+								  		<td>{{ current_week.count}}</td>
+							  		{% else %}
+								  		<td>0</td>
+							  		{% endif %}
+							  	</tr>
+						    </table>
+						  </div>
+						</div>
+						</td>
 
-		<div class="col-sm-4">
-			<div class="chart-wrapper">
-			  <div class="chart-title">
-			    This Week -- {{ this_week }}
-			  </div>
-			  <div class="chart-stage">
-			    <table class="table-condensed">
-			    	<tr>
-				  		<td>Weekly Mileage:</td>
-				  		{% if current_week != None %}
-					  		<td>{{ current_week.acute_distance | two_decimals }}  miles</td>
-				  		{% else %}
-					  		<td>0.00  miles</td>
-				  		{% endif %}
-				  	</tr>
-				  	<tr>
-				  		<td>Mean Weekly Mileage Past Month:</td>
-				  		{% if current_week != None %}
-					  		<td>{{ current_week.chronic_distance | two_decimals }}  miles</td>
-				  		{% else %}
-					  		<td>0.00  miles</td>
-				  		{% endif %}
-				  	</tr>
-				  	<tr>
-				  		<td>Weekly sRPE:</td>
-				  		{% if current_week != None %}
-					  		<td>{{ current_week.acute_sRPE}}</td>
-				  		{% else %}
-					  		<td>0</td>
-				  		{% endif %}
-				  	</tr>
-				  	<tr>
-				  		<td>Mean Weekly sRPE Past Month:</td>
-				  		{% if current_week != None %}
-					  		<td>{{ current_week.chronic_sRPE}}</td>
-				  		{% else %}
-					  		<td>0</td>
-				  		{% endif %}
-				  	</tr>
-				  	<tr>
-				  		<td>Number of Runs:</td>
-				  		{% if current_week != None %}
-					  		<td>{{ current_week.count}}</td>
-				  		{% else %}
-					  		<td>0</td>
-				  		{% endif %}
-				  	</tr>
-			    </table>
-			  </div>
+					<td style='padding: 0px; padding-left: 10px; height: 100%;'>
+
+									<div class="chart-wrapper" style="height: 100%">
+								    	<div class="chart-title">
+								    		{% if activity != None %}
+										        {% if request.user|is_type:"athlete" %}
+										        <a href="{% url 'athletes:details' activity.id %}">Latest Run -- {{ activity.start_time }}</a>
+
+										        {% else %}
+										        Latest Run -- {{ activity.start_time }}
+
+										        {% endif %}
+									        {% else %}
+										        Latest Run -- {{activity.start_time}}
+											{% endif %}
+									    </div>
+
+							<!-- 			        	<a class="pull-right" id="increment_index">
+							                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							                </a>
+
+							                <a class="pull-right" id="decrement_index">
+							                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							                </a> -->
+
+								        	<!-- <div class="btn-group pull-right" role="group">
+
+							                    <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+							                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							                    </button>
+
+							                    <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+							                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							                    </button>
+
+							                </div> -->
+
+								    <div class="chart-stage">
+
+								        <div class='row'>
+											<div class="col-sm-6">
+
+								                {% if activity.RPE == None %}
+
+								                <div class="progress" style="margin-bottom: 5px">
+								                    <div class="progress-bar" role="progressbar" aria-valuenow="{{activity.RPE}}" 
+								                    aria-valuemin="0" aria-valuemax="10" style="width:100%; background: grey; ">
+								                        RPE: {{activity.RPE}}
+								                    </div>
+								                </div>
+
+								                {% else %}
+
+								                    {% if activity.RPE <= 3 %}
+								                    <div class="progress" style="margin-bottom: 5px">
+								                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{activity.RPE}}" 
+								                        aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
+								                            RPE: {{activity.RPE}}
+								                        </div>
+								                    </div>
+
+								                    {% else %}
+
+								                        {% if activity.RPE <= 6 %}
+								                        <div class="progress" style="margin-bottom: 5px">
+								                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{activity.RPE}}" 
+								                            aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
+								                                RPE: {{activity.RPE}}
+								                            </div>
+								                        </div>
+
+								                        {% else %}
+
+								                            {% if activity.RPE <= 8 %}
+								                            <div class="progress" style="margin-bottom: 5px">
+								                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{activity.RPE}}" 
+								                                aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
+								                                    RPE: {{activity.RPE}}
+								                                </div>
+								                            </div>
+
+								                            {% else %}
+
+								                                <div class="progress" style="margin-bottom: 5px">
+								                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{activity.RPE}}" 
+								                                    aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
+								                                        RPE: {{activity.RPE}}
+								                                    </div>
+								                                </div>
+
+								                            {% endif %}
+
+								                        {% endif %}
+
+								                    {% endif %}
+
+								                {% endif %}
+
+								                <table class="table-condensed">
+									                <tr>
+								                        <td>Met Expectations:</td>
+								                        <td>
+								                        {% if activity.met_expectation %} <span class="glyphicon glyphicon-ok"></span> 
+								                        {% else %}{% if activity.met_expectation == False %}
+								                        <span class="glyphicon glyphicon-remove"></span>
+								                        {% else %}
+								                        When you have a chance, please fill in this field
+
+								                        {% endif %}{% endif %}</td>
+								                    </tr>
+								                    <tr>
+								                        <td>Distance:</td>
+								                        <td>{{ activity.tot_dist | two_decimals}} {% if activity.tot_dist != None %}miles{% endif %}</td>
+								                    </tr>
+								                    <tr>
+								                        <td>Total Time:</td>
+								                        <td>{{ activity.tot_time}} {% if activity.tot_time != None %}minutes{% endif %}</td>
+								                    </tr>
+								                    <tr>
+								                        <td>Average Pace:</td>
+								                        <td>{{ activity.avg_speed | mps_to_time_per_mile}}{% if activity.avg_speed != None %} mins / mile{% endif %}</td>
+								                    </tr>
+								                    <tr>
+								                    <tr>
+								                        <td>Average Heart Rate:</td>
+								                        <td>{{ activity.avg_hr }} {% if activity.avg_hr != None %}bpm{% endif %}</td>
+								                    </tr>
+								                        <td>Elevation Gained:</td>
+								                        <td>{{ activity.elevation_gained }} {% if activity.elevation_gained != None %}feet{% endif %}</td>
+								                    </tr>
+								                    <tr>
+								                        <td>Average Cadance:</td>
+								                        <td>{{ activity.avg_cadence }} {% if activity.avg_cadence != None %}spm{% endif %}</td>
+								                    </tr>
+								                </table>
+								            </div>
+								            
+											<div class='col-sm-6'>
+
+							                    {% if request.user|is_type:"athlete" %}
+							                    <div class="row">
+							                        <div class="col-sm-12">
+							                            <label>Comments:</label>
+							                            <textarea style="height:75px" readonly>{{activity.comments}}</textarea>
+							                        </div>
+							                    </div>
+							                    <hr>
+							                    {% endif %}
+							                    <div class="row">
+							                        <div class="col-sm-12">
+							                            <label>Tags:</label>
+							                            <textarea {% if request.user|is_type:"athlete" %} style="height:100px" {% endif %} readonly>{{activity.tags}}</textarea>
+							                        </div>
+							                    </div>
+							                    
+							                </div>
+
+								        </div>
+								    </div>
+								</div>
+							</div>
+					</td>
+				</tr>
 			</div>
-		</div>
-
-		<div class="col-sm-8">
-
-		<div class="chart-wrapper">
-	    	<div class="chart-title">
-	    		{% if activity != None %}
-			        {% if request.user|is_type:"athlete" %}
-			        <a href="{% url 'athletes:details' activity.id %}">Latest Run -- {{ activity.start_time }}</a>
-
-			        {% else %}
-			        Latest Run -- {{ activity.start_time }}
-
-			        {% endif %}
-		        {% else %}
-			        Latest Run -- {{activity.start_time}}
-				{% endif %}
-		    </div>
-
-<!-- 			        	<a class="pull-right" id="increment_index">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                </a>
-
-                <a class="pull-right" id="decrement_index">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                </a> -->
-
-	        	<!-- <div class="btn-group pull-right" role="group">
-
-                    <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    </button>
-
-                    <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    </button>
-
-                </div> -->
-
-	    <div class="chart-stage">
-
-	        <div class='row'>
-				<div class="col-sm-6">
-
-	                {% if activity.RPE == None %}
-
-	                <div class="progress" style="margin-bottom: 5px">
-	                    <div class="progress-bar" role="progressbar" aria-valuenow="{{activity.RPE}}" 
-	                    aria-valuemin="0" aria-valuemax="10" style="width:100%; background: grey; ">
-	                        RPE: {{activity.RPE}}
-	                    </div>
-	                </div>
-
-	                {% else %}
-
-	                    {% if activity.RPE <= 3 %}
-	                    <div class="progress" style="margin-bottom: 5px">
-	                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{activity.RPE}}" 
-	                        aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
-	                            RPE: {{activity.RPE}}
-	                        </div>
-	                    </div>
-
-	                    {% else %}
-
-	                        {% if activity.RPE <= 6 %}
-	                        <div class="progress" style="margin-bottom: 5px">
-	                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{activity.RPE}}" 
-	                            aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
-	                                RPE: {{activity.RPE}}
-	                            </div>
-	                        </div>
-
-	                        {% else %}
-
-	                            {% if activity.RPE <= 8 %}
-	                            <div class="progress" style="margin-bottom: 5px">
-	                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{activity.RPE}}" 
-	                                aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
-	                                    RPE: {{activity.RPE}}
-	                                </div>
-	                            </div>
-
-	                            {% else %}
-
-	                                <div class="progress" style="margin-bottom: 5px">
-	                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{activity.RPE}}" 
-	                                    aria-valuemin="0" aria-valuemax="10" style="width:{{activity.RPE_percent}}%">
-	                                        RPE: {{activity.RPE}}
-	                                    </div>
-	                                </div>
-
-	                            {% endif %}
-
-	                        {% endif %}
-
-	                    {% endif %}
-
-	                {% endif %}
-
-	                <table class="table-condensed">
-		                <tr>
-	                        <td>Met Expectations:</td>
-	                        <td>
-	                        {% if activity.met_expectation %} <span class="glyphicon glyphicon-ok"></span> 
-	                        {% else %}{% if activity.met_expectation == False %}
-	                        <span class="glyphicon glyphicon-remove"></span>
-	                        {% else %}
-	                        When you have a chance, please fill in this field
-
-	                        {% endif %}{% endif %}</td>
-	                    </tr>
-	                    <tr>
-	                        <td>Distance:</td>
-	                        <td>{{ activity.tot_dist | two_decimals}} {% if activity.tot_dist != None %}miles{% endif %}</td>
-	                    </tr>
-	                    <tr>
-	                        <td>Total Time:</td>
-	                        <td>{{ activity.tot_time}} {% if activity.tot_time != None %}minutes{% endif %}</td>
-	                    </tr>
-	                    <tr>
-	                        <td>Average Pace:</td>
-	                        <td>{{ activity.avg_speed | mps_to_time_per_mile}}{% if activity.avg_speed != None %} mins / mile{% endif %}</td>
-	                    </tr>
-	                    <tr>
-	                    <tr>
-	                        <td>Average Heart Rate:</td>
-	                        <td>{{ activity.avg_hr }} {% if activity.avg_hr != None %}bpm{% endif %}</td>
-	                    </tr>
-	                        <td>Elevation Gained:</td>
-	                        <td>{{ activity.elevation_gained }} {% if activity.elevation_gained != None %}feet{% endif %}</td>
-	                    </tr>
-	                    <tr>
-	                        <td>Average Cadance:</td>
-	                        <td>{{ activity.avg_cadence }} {% if activity.avg_cadence != None %}spm{% endif %}</td>
-	                    </tr>
-	                </table>
-	            </div>
-	            
-				<div class='col-sm-6'>
-
-                    {% if request.user|is_type:"athlete" %}
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <label>Comments:</label>
-                            <textarea style="height:75px" readonly>{{activity.comments}}</textarea>
-                        </div>
-                    </div>
-                    <hr>
-                    {% endif %}
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <label>Tags:</label>
-                            <textarea {% if request.user|is_type:"athlete" %} style="height:100px" {% endif %} readonly>{{activity.tags}}</textarea>
-                        </div>
-                    </div>
-                    
-                </div>
-
-	        </div>
-	    </div>
+		</table>
 	</div>
 </div>
-            
-	</div>
+
+
 
 	<div class="row">
 

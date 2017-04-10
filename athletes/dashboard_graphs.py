@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from colour import Color
 import json
 
+
 def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 	tag_graphs = {}
 	red = Color('#f37736')
@@ -13,11 +14,31 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 
 	unique_tags = np.unique([x['tag'] for x in tags.values('tag')])
 
+	# get x values from ratios
+	if distance_ratio != None:
+		day_keys = [x['x'] for x in distance_ratio['values']]
+	elif sRPE_ratio != None:
+		day_keys = [x['x'] for x in sRPE_ratio['values']]
+	else:
+		day_keys = []
+
+	# get x values for all tags
+	for x in tags.values('date'):
+		date_value = (x['date'].date() - datetime(1970,1,1).date()).total_seconds() * 1000
+		if date_value not in day_keys:
+			day_keys.append(date_value)
+
 	## get all tag graphs
 	for tag in unique_tags:
 
-		x_val = [(x['date'].date() - datetime(1970,1,1).date()).total_seconds() * 1000 for x in tags.filter(tag=tag).order_by('date').values('date')]
-		y_val = [x['value'] for x in tags.filter(tag=tag).order_by('date').values('value')]
+		tag_data = {x:0 for x in day_keys}
+
+		for tag_instance in tags.filter(tag=tag).order_by('date').values('date', 'value'):
+			tag_data[(tag_instance['date'].date()  - datetime(1970,1,1).date()).total_seconds() * 1000] = tag_instance['value']
+
+		sorted_tag_data = collections.OrderedDict(sorted(tag_data.items()))
+		x_val = sorted_tag_data.keys()
+		y_val = list(sorted_tag_data.values())
 
 		tag_graphs[tag] = map_to_graph(x_val, y_val)
 
@@ -51,6 +72,7 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 				"yAxis": 1
 			})
 
+	# append distance and sRPE ratios
 	if distance_ratio:
 		data['user_tags'].append(distance_ratio)
 	if sRPE_ratio:
@@ -185,12 +207,12 @@ def get_week_graphs(activities, advanced=True):
 
 	# get acute:chronic ratio for DISTANCE
 	y_val = [float(ordered_weeks[x]["acute_distance"]) / ordered_weeks[x]["chronic_distance"] if ordered_weeks[x]["chronic_distance"] != 0 else 0 for x in ordered_weeks]
+	y_val = [x if x <= 3 else 3 for x in y_val]
 	field_graphs["distance_ratio"] = map_to_graph(x_val, y_val)
 
 	# get acute:chronic ratio for sRPE
-
 	y_val = [float(ordered_weeks[x]["acute_sRPE"]) / ordered_weeks[x]["chronic_sRPE"] if ordered_weeks[x]["chronic_sRPE"] != 0 else 0 for x in ordered_weeks]
-	print y_val
+	y_val = [x if x <= 3 else 3 for x in y_val]
 	field_graphs["sRPE_ratio"] = map_to_graph(x_val, y_val)
 
 	# get an object with all the data we want to graph
