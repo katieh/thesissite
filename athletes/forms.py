@@ -30,9 +30,6 @@ class UploadActivityForm(forms.Form):
 class NaturalDateField(forms.DateField):
 	def to_python(self, value):
 
-		print "look at this"
-		print value
-
 		if not value:
 			return None
 		try:

@@ -23,9 +23,11 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 		day_keys = []
 
 	# get x values for all tags
+	print tags.values('date')
 	for x in tags.values('date'):
 		date_value = (x['date'].date() - datetime(1970,1,1).date()).total_seconds() * 1000
 		if date_value not in day_keys:
+			print x['date'].date()
 			day_keys.append(date_value)
 
 	## get all tag graphs
@@ -95,7 +97,6 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 
 	# http://stackoverflow.com/questions/642763/find-intersection-of-two-lists
 	for tag in set.intersection({'injury', 'performance'}, unique_tags):
-		print tag
 		data['performance_injury'].append({
 				"values": tag_graphs[tag],
 				"key": str(tag),

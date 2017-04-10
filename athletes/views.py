@@ -292,7 +292,6 @@ def upload_one(request):
 
 	if request.method == 'POST':
 		form = UploadActivityForm(request.POST, request.FILES)
-		print form.is_valid()
 
 		if form.is_valid():
 
@@ -430,7 +429,6 @@ def new_injury(request):
 	if request.method == "POST":
 		form = InjuryForm(request.POST, instance=tag)
 		if form.is_valid():
-			print "valid!"
 			form.save()
 
 			return redirect('athletes:injury')
@@ -524,8 +522,6 @@ def tag_access(request):
 
 	## get unique tags
 	tags = {x['tag']:x['allow_access'] for x in Tag.objects.filter(user=request.user).values('tag', 'allow_access')}
-	print tags
-	print len(tags)
 
 	TagFormSet = formset_factory(TagForm, extra=len(tags))
 

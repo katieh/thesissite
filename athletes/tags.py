@@ -36,7 +36,6 @@ def get_user_tags(activity, permissions = None):
 
 	# get the hashtags and their associated values if they exist
 	for i in range(len(words)):
-		print words[i]
 		if words[i].startswith("#"):
 
 			# we're going to save a new hashtag
