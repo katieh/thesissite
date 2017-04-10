@@ -54,7 +54,8 @@ def index(request):
 
 	for athlete_id in athlete_ids:
 		user = User.objects.get(pk=athlete_id)
-		user_name = user.first_name + " " + user.last_name
+		#user_name = user.first_name + " " + user.last_name REAL!!
+		user_name = user.id
 
 		# add to activity
 		activities[user_name] = {}
