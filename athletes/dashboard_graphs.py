@@ -70,7 +70,8 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 				"values": tag_graphs[tag],
 				"key": str(tag),
 				"color": get_color(tag) if "sentiment" in tag else user_colors[user_tags.index(tag)].hex,
-				"type": "bar",
+				#"type": "bar",
+				"type": 'line',
 				"yAxis": 1
 			})
 
@@ -101,7 +102,8 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 				"values": tag_graphs[tag],
 				"key": str(tag),
 				"color": get_color(tag),
-				"type": "bar",
+				#"type": "bar",
+				"type": 'line',
 				"yAxis": 1
 			})
 

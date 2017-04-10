@@ -49,6 +49,46 @@ function make_bar_chart(data, key) {
     });
 }
 
+function make_line_chart(data, y_max, key) {
+
+
+    height = 250
+
+    // make the graph with the appropriate key
+    nv.addGraph(function() {
+
+        var chart = nv.models.lineChart()
+        .useInteractiveGuideline(true)
+        .height(height);
+
+        chart.xAxis
+        .axisLabel('Week')
+        .tickFormat(function(d) {
+            return d3.time.format('%m/%d/%y')(new Date(d))
+        })
+        .rotateLabels(-45)
+        ;
+
+        chart.y1Axis
+        .tickFormat(d3.format('.1f'));
+        chart.y2Axis2
+        .tickFormat(d3.format('.2f'))
+        ;
+
+        // chart.yDomain1([0, y_max])
+
+        // modifide from http://stackoverflow.com/questions/9244824/how-to-remove-quot-from-my-json-in-javascript
+        d3.select("#" + key + " svg")
+        .datum(data)
+        .transition().duration(500)
+        .call(chart).style({'height': height});
+
+        nv.utils.windowResize(chart.update);
+
+        return chart;
+    });
+}
+
 function make_multichart(data, y_max, key) {
     height = 250
 
