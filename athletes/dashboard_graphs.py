@@ -23,8 +23,8 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 		day_keys = []
 
 	# get x values for all tags
-	print tags.filter('tag')..exclude(id__in=['injury', 'performance']).values('date')
-	for x in tags.values('date'):
+	print tags.exclude(id__in=['injury', 'performance']).values('date')
+	for x in tags.exclude(id__in=['injury', 'performance']).values('date'):
 		date_value = (x['date'].date() - datetime(1970,1,1).date()).total_seconds() * 1000
 		if date_value not in day_keys:
 			print x['date'].date()
