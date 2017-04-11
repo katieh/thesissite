@@ -61,6 +61,8 @@ def index(request):
 	except:
 		current_activity = None
 	
+	## -------- GET ACTIVITY DATES! ---------- ##
+	print activities.values('start_time')
 
 	# -------- GET THE CURRENT WEEK! ---------- ##
 	this_week = datetime.datetime.now().date() - timedelta(days=datetime.datetime.now().weekday())

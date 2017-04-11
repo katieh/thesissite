@@ -1,10 +1,23 @@
 from .models import get_y_value_fields
-from .graph_themes import get_color
+from .graph_themes import get_color, graph_date
 import numpy as np
 import collections
 from datetime import datetime, timedelta
 from colour import Color
 import json
+
+def _get_date_range(queryset):
+
+	try:
+		# get min date from all tags
+		date_range = [x['date'] for x in queryset]
+		min_date = min(date_range)
+		max_date = max(date_range)
+		delta = max_date - min_date
+		return [graph_date(min_date + timedelta(days=i)) for i in range(delta.days + 1)]
+	except:
+		return None
+
 
 
 def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
@@ -14,29 +27,38 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 
 	unique_tags = np.unique([x['tag'] for x in tags.values('tag')])
 
-	# get x values from ratios
-	if distance_ratio != None:
-		day_keys = [x['x'] for x in distance_ratio['values']]
-	elif sRPE_ratio != None:
-		day_keys = [x['x'] for x in sRPE_ratio['values']]
-	else:
-		day_keys = []
 
-	# get x values for all tags
-	print tags.exclude(tag__in=['injury', 'performance']).values('date')
-	for x in tags.exclude(tag__in=['injury', 'performance']).values('date'):
-		date_value = (x['date'].date() - datetime(1970,1,1).date()).total_seconds() * 1000
-		if date_value not in day_keys:
-			print x['date'].date()
-			day_keys.append(date_value)
+
+	try:
+		weeks_dates = [x['x'] for x in distance_ratio['values']]
+	except:
+		pass
+	ut_dates = _get_date_range(tags.exclude(tag__in=['performance', 'injury']).values('date'))
+	pi_dates = _get_date_range(tags.filter(tag__in=['performance', 'injury']).values('date'))
+
+	try:
+		if min(weeks_dates) < min(ut_dates) and max(weeks_dates) > max(ut_dates):
+			ut_dates = weeks_dates
+	except:
+		pass
+
+	try:
+		if min(weeks_dates) < min(pi_dates) and max(weeks_dates) > max(pi_dates):
+			pi_dates = weeks_dates
+	except:
+		pass
 
 	## get all tag graphs
 	for tag in unique_tags:
 
-		tag_data = {x:0 for x in day_keys}
+		if tag in ["performance", 'injury']:
+			tag_data = {x:0 for x in pi_dates}
+
+		else:
+			tag_data = {x:0 for x in ut_dates}
 
 		for tag_instance in tags.filter(tag=tag).order_by('date').values('date', 'value'):
-			tag_data[(tag_instance['date'].date()  - datetime(1970,1,1).date()).total_seconds() * 1000] = tag_instance['value']
+			tag_data[graph_date(tag_instance['date'])] = tag_instance['value']
 
 		sorted_tag_data = collections.OrderedDict(sorted(tag_data.items()))
 		x_val = sorted_tag_data.keys()
@@ -70,9 +92,10 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 				"values": tag_graphs[tag],
 				"key": str(tag),
 				"color": get_color(tag) if "sentiment" in tag else user_colors[user_tags.index(tag)].hex,
-				"type": "bar",
-				#"type": 'line',
-				"yAxis": 1
+				#"type": "bar",
+				"type": 'line',
+				"yAxis": 1,
+				'area': 'true'
 			})
 
 	# append distance and sRPE ratios
@@ -102,9 +125,10 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 				"values": tag_graphs[tag],
 				"key": str(tag),
 				"color": get_color(tag),
-				"type": "bar",
-				#"type": 'line',
-				"yAxis": 1
+				#"type": "bar",
+				"type": 'line',
+				"yAxis": 1, 
+				'area': 'true'
 			})
 
 	if distance_ratio:

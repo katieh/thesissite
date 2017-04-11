@@ -4867,7 +4867,7 @@ nv.models.indentedTree = function() {
 
 
       var series = g.selectAll('.nv-series')
-          .data(function(d) { return d });
+          .data(function(d) { return d; });
       var seriesEnter = series.enter().append('g').attr('class', 'nv-series')
           .on('mouseover', function(d,i) {
             dispatch.legendMouseover(d,i);  //TODO: Make consistent with other event objects
@@ -4914,7 +4914,7 @@ nv.models.indentedTree = function() {
       seriesEnter.append('circle')
           .style('stroke-width', 2)
           .attr('class','nv-legend-symbol')
-          .attr('r', 5);
+          .attr('r', 4);
       seriesEnter.append('text')
           .attr('text-anchor', 'start')
           .attr('class','nv-legend-text')
@@ -4937,16 +4937,21 @@ nv.models.indentedTree = function() {
         series.each(function(d,i) {
               var legendText = d3.select(this).select('text');
               var nodeTextLength;
+
+              // console.log(legendText[0][0])
               try {
                 nodeTextLength = legendText.node().getComputedTextLength();
               }
               catch(e) {
                 nodeTextLength = nv.utils.calcApproxTextWidth(legendText);
               }
+              // console.log(nodeTextLength)
              
               seriesWidths.push(nodeTextLength + 28); // 28 is ~ the width of the circle plus some padding
+
             });
 
+        // console.log(seriesWidths)
         var seriesPerRow = 0;
         var legendWidth = 0;
         var columnWidths = [];
@@ -4954,15 +4959,26 @@ nv.models.indentedTree = function() {
         while ( legendWidth < availableWidth && seriesPerRow < seriesWidths.length) {
           columnWidths[seriesPerRow] = seriesWidths[seriesPerRow];
           legendWidth += seriesWidths[seriesPerRow++];
+
         }
+        // console.log(columnWidths)
+        // console.log(seriesWidths)
+        // console.log(seriesPerRow)
+
         if (seriesPerRow === 0) seriesPerRow = 1; //minimum of one series per row
 
 
+        // console.log(legendWidth)
+        // console.log(availableWidth)
+        // console.log(legendWidth > availableWidth)
         while ( legendWidth > availableWidth && seriesPerRow > 1 ) {
           columnWidths = [];
           seriesPerRow--;
 
           for (var k = 0; k < seriesWidths.length; k++) {
+            // console.log("for loop")
+            // console.log(seriesWidths[k])
+            // console.log(columnWidths[k % seriesPerRow])
             if (seriesWidths[k] > (columnWidths[k % seriesPerRow] || 0) )
               columnWidths[k % seriesPerRow] = seriesWidths[k];
           }
@@ -4983,17 +4999,22 @@ nv.models.indentedTree = function() {
               return 'translate(' + xPositions[i % seriesPerRow] + ',' + (5 + Math.floor(i / seriesPerRow) * 20) + ')';
             });
 
+        console.log(series);
+
         //position legend as far right as possible within the total width
         if (rightAlign) {
+          console.log("A")
            g.attr('transform', 'translate(' + (width - margin.right - legendWidth) + ',' + margin.top + ')');
         }
         else {
+          console.log("B")
            g.attr('transform', 'translate(0' + ',' + margin.top + ')');
         }
 
         height = margin.top + margin.bottom + (Math.ceil(seriesWidths.length / seriesPerRow) * 20);
 
       } else {
+        console.log("C")
 
         var ypos = 5,
             newxpos = 5,
@@ -5005,6 +5026,7 @@ nv.models.indentedTree = function() {
               xpos = newxpos;
 
               if (width < margin.left + margin.right + xpos + length) {
+                console.log("D")
                 newxpos = xpos = 5;
                 ypos += 20;
               }
@@ -5532,6 +5554,9 @@ nv.models.lineChart = function() {
         g.select('.nv-legendWrap')
             .datum(data)
             .call(legend);
+
+        console.log("data LINECHART")
+        console.log(data)
 
         if ( margin.top != legend.height()) {
           margin.top = legend.height();
@@ -9465,16 +9490,26 @@ nv.models.multiChart = function() {
       var g = wrap.select('g');
 
       if (showLegend) {
-        legend.width( availableWidth / 2 );
+        legend.width(availableWidth * 1.25);
 
         g.select('.legendWrap')
             .datum(data.map(function(series) { 
               series.originalKey = series.originalKey === undefined ? series.key : series.originalKey;
-              series.key = series.originalKey + (series.yAxis == 1 ? '' : ' (right axis)');
+              series.key = series.originalKey + (series.yAxis == 1 ? '' : ' (right)');
               return series;
             }))
           .call(legend);
 
+          console.log("data MULTICHART")
+          console.log(data.map(function(series) { 
+              series.originalKey = series.originalKey === undefined ? series.key : series.originalKey;
+              series.key = series.originalKey + (series.yAxis == 1 ? '' : ' (right)');
+              return series;
+            }))
+
+        console.log('legend height, margin-top')
+        console.log(legend.height())
+        console.log(margin.top)
         if ( margin.top != legend.height()) {
           margin.top = legend.height();
           availableHeight = (height || parseInt(container.style('height')) || 400)
@@ -9482,8 +9517,12 @@ nv.models.multiChart = function() {
         }
 
         g.select('.legendWrap')
-            .attr('transform', 'translate(' + ( availableWidth / 2 ) + ',' + (-margin.top) +')');
-      }
+            .attr('transform', 'translate(' + -availableWidth/7 + ', ' + (-margin.top) +')');
+
+        // wrap.select('.nv-legendWrap')
+        //     .attr('transform', 'translate(0,' + (-margin.top) +')')
+
+        }
 
 
       lines1

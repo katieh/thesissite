@@ -44,8 +44,8 @@
 						{% for user_tag in tags.new %}
 							<tr>
 								<td>
-									<!--REAL <a href="{% url 'coaches:details' user_tag.id %}" style="color:black"> {{user_tag.name}}:</a><br> -->
-									<a href="{% url 'coaches:details' user_tag.id %}" style="color:black"> {{user_tag.id}}:</a><br>
+									<a href="{% url 'coaches:details' user_tag.id %}" style="color:black"> {{user_tag.name}}:</a><br> 
+									<!-- DEMO <a href="{% url 'coaches:details' user_tag.id %}" style="color:black"> {{user_tag.id}}:</a><br> -->
 									
 										<p style="color: {{user_tag.color}}">
 											{% for tag in user_tag.tags %}
@@ -65,8 +65,8 @@
 						{% for user_tag in tags.recent %}
 							<tr>
 								<td>
-									<!-- REAL <a href="{% url 'coaches:details' user_tag.id %}" style="color:black"> {{user_tag.name}}:</a><br> -->
-									<a href="{% url 'coaches:details' user_tag.id %}" style="color:black"> {{user_tag.id}}:</a><br>
+									<a href="{% url 'coaches:details' user_tag.id %}" style="color:black"> {{user_tag.name}}:</a><br>
+									<!-- DEMO <a href="{% url 'coaches:details' user_tag.id %}" style="color:black"> {{user_tag.id}}:</a><br> -->
 									
 										<p style="color: {{user_tag.color}}">
 											{% for tag in user_tag.tags %}

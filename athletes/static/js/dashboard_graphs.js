@@ -9,7 +9,7 @@ make_multichart(week_graphs['distance'], week_graphs['y_max']['distance'], 'dist
 make_multichart(week_graphs['sRPE'], week_graphs['y_max']['sRPE'], 'sRPE');
 
 // graph tags
-make_multichart_no_legend(tag_graphs['user_tags'], tag_graphs["y_max"]['user_tags'], 'user_tags')
+make_multichart(tag_graphs['user_tags'], tag_graphs["y_max"]['user_tags'], 'user_tags')
 make_multichart(tag_graphs['performance_injury'], tag_graphs["y_max"]['performance_injury'], 'performance_injury')
 
 
@@ -69,11 +69,11 @@ function make_line_chart(data, y_max, key) {
         .rotateLabels(-45)
         ;
 
-        chart.y1Axis
-        .tickFormat(d3.format('.1f'));
-        chart.y2Axis2
-        .tickFormat(d3.format('.2f'))
-        ;
+        // chart.y1Axis
+        // .tickFormat(d3.format('.1f'));
+        // chart.y2Axis2
+        // .tickFormat(d3.format('.2f'))
+        // ;
 
         // chart.yDomain1([0, y_max])
 
@@ -90,7 +90,16 @@ function make_line_chart(data, y_max, key) {
 }
 
 function make_multichart(data, y_max, key) {
-    height = 250
+    height = 300;
+
+    d3.selection.prototype.moveToBack = function() {  
+        return this.each(function() { 
+            var firstChild = this.parentNode.firstChild; 
+            if (firstChild) { 
+                this.parentNode.insertBefore(this, firstChild); 
+            } 
+        });
+    };
 
     d3.selection.prototype.moveToFront = function() {
     return this.each(function(){
@@ -126,8 +135,22 @@ function make_multichart(data, y_max, key) {
         .call(chart).style({'height': height});
 
 
-        d3.select("#" + key + " svg" + ' .lines1Wrap').moveToFront();
-        d3.select("#" + key + " svg" + ' .lines2Wrap').moveToFront();
+        if (key == 'performance_injury' || key == 'user_tags') {
+
+            d3.select("#" + key + " svg" + ' .lines1Wrap').moveToBack();
+            d3.select("#" + key + " svg" + ' .lines2Wrap').moveToBack();
+
+            d3.select('#' + key + " svg" + " .y1").moveToBack();
+            d3.select('#' + key + " svg" + " .y2").moveToBack();
+            d3.select('#' + key + " svg" + " .x").moveToBack();
+
+        }
+
+        else {
+            d3.select("#" + key + " svg" + ' .lines1Wrap').moveToFront();
+            d3.select("#" + key + " svg" + ' .lines2Wrap').moveToFront();
+        }
+
 
         nv.utils.windowResize(chart.update);
 
