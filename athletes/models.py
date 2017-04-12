@@ -9,6 +9,8 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 
+import numpy as np
+
 ## ------------------------------------------------------------ ##
 ## A model which stores data from an uploaded activity.
 ## ------------------------------------------------------------ ##
@@ -70,6 +72,7 @@ class Activity(models.Model):
 	speed = ArrayField(models.FloatField(null=True), null=True, default=None) # float field
 	heart_rate = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
 	cadence = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None) # positive integer value
+	rpe = ArrayField(models.PositiveIntegerField(null=True), null=True, default=None)
 
 	# user input
 	met_expectation = models.NullBooleanField(default=None, null=True)
@@ -91,6 +94,10 @@ class Activity(models.Model):
 
 	@property
 	def avg_speed(self):
+
+		if self.speed != None:
+			return np.mean([x for x in self.speed if x != None])
+
 		try:
 			return (self.tot_dist * 1609.34) / (self.tot_time * 60)
 		except:
