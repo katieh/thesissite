@@ -304,13 +304,13 @@ def upload_one(request):
 			## open file and extract data
 			path = "media/" + db_activity.file.name
 
-			try:
+			if path.endswith('.fit'):
 				activity_file = open(path)
 				fit_activity = FitActivity(activity_file)
 				fit_activity.parse()
 				activity_dict = get_dict_of_fields(fit_activity)
 
-			except:
+			elif path.endswith('.gpx'):
 				# format file so gpxpy can read extensions
 			    for line in fileinput.input(path, inplace = True):
 			        if not re.search(r':TrackPointExtension',line):
@@ -405,6 +405,12 @@ def upload_one(request):
 				db_activity.cadence = activity_dict['cadence']
 				db_activity.avg_cadence = int(np.nanmean([x for x in activity_dict['cadence'] if x != None]))
 				db_activity.max_cadence = max(activity_dict['cadence'])
+			except:
+				pass
+
+			try:
+				if not all(x is None for x in activity_dict['rpe']):
+					db_activity.rpe = [x if x != None else 0 for x in activity_dict['rpe']]
 			except:
 				pass
 
