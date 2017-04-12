@@ -95,9 +95,6 @@ class Activity(models.Model):
 	@property
 	def avg_speed(self):
 
-		if self.speed != None:
-			return np.mean([x for x in self.speed if x != None])
-
 		try:
 			return (self.tot_dist * 1609.34) / (self.tot_time * 60)
 		except:

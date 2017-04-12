@@ -354,12 +354,16 @@ def upload_one(request):
 				## fill in summary stats
 				db_activity.start_time = min(activity_dict['timestamp'])
 				db_activity.num_records = len(activity_dict['timestamp'])
-				db_activity.tot_time = int((max(activity_dict['timestamp']) - min(activity_dict['timestamp'])).total_seconds() / 60.0)
 
-				## get iso calender
-				## figure out which week the activity is in
-				activity_isocalendar = db_activity.start_time.date().isocalendar()
-				db_activity.week = activity_isocalendar[0] + activity_isocalendar[1] / 100.0
+				# get total time!
+				tot_time = 0
+				for i in range(1, db_activity.num_records):
+					time_gap = (activity_dict['timestamp'][i] - activity_dict['timestamp'][i - 1]).total_seconds() / 60.0
+					if time_gap < 0.5:
+						tot_time += time_gap
+
+				db_activity.tot_time = tot_time
+				#db_activity.tot_time = int((max(activity_dict['timestamp']) - min(activity_dict['timestamp'])).total_seconds() / 60.0)
 			except:
 				pass
 
