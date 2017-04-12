@@ -3,7 +3,7 @@ from colour import Color
 from datetime import datetime
 
 def graph_date(date):
-	return (date.date() - datetime(1970,1,1).date()).total_seconds() * 1000 + 86400
+	return (date.date() - datetime(1970,1,1).date()).total_seconds() * 1000 + 8.64e+7
 
 def get_colors(count):
 	## ---------- COLORS FOR GRAPH! ------------ ##

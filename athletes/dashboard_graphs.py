@@ -5,18 +5,20 @@ import collections
 from datetime import datetime, timedelta
 from colour import Color
 import json
+import copy
 
-def _get_date_range(queryset):
 
-	try:
-		# get min date from all tags
-		date_range = [x['date'] for x in queryset]
-		min_date = min(date_range)
-		max_date = max(date_range)
-		delta = max_date - min_date
-		return [graph_date(min_date + timedelta(days=i)) for i in range(delta.days + 1)]
-	except:
-		return None
+## FIX THIS!
+def _get_date_range(min_date, max_date):
+	SECONDS_PER_DAY = 86400
+	dates = []
+	i = 0
+
+	while (min_date +  SECONDS_PER_DAY * i * 1000 <= max_date):
+		dates.append(min_date + SECONDS_PER_DAY * i * 1000)
+		i += 1
+
+	return dates
 
 
 
@@ -27,26 +29,50 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 
 	unique_tags = np.unique([x['tag'] for x in tags.values('tag')])
 
-
+	# print distance_ratio
+	# print sRPE_ratio
+	# if distance_ratio != None and sRPE_ratio != None:
+	# 	distance_ratio_dict = {x['x']:x['y'] for x in distance_ratio['values']}
+	# 	sRPE_ratio_dict = {x['x']:x['y'] for x in sRPE_ratio['values']}
+	# else:
+	# 	distance_ratio_dict = None
+	# print "DISTANCE AND SRPE"
+	# print distance_ratio_dict
+	# print sRPE_ratio_dict
 
 	try:
+		#weeks_dates = distance_ratio.keys()
 		weeks_dates = [x['x'] for x in distance_ratio['values']]
 	except:
-		pass
-	ut_dates = _get_date_range(tags.exclude(tag__in=['performance', 'injury']).values('date'))
-	pi_dates = _get_date_range(tags.filter(tag__in=['performance', 'injury']).values('date'))
+		weeks_dates = None
 
+	## get dates for user tags
+	ut_dates = [graph_date(x['date']) for x in tags.exclude(tag__in=['performance', 'injury']).values('date')]
 	try:
-		if min(weeks_dates) < min(ut_dates) and max(weeks_dates) > max(ut_dates):
-			ut_dates = weeks_dates
+		ut_dates = _get_date_range(min(ut_dates), max(ut_dates))
 	except:
 		pass
+	if weeks_dates != None:
+		try:
+			min_val = min(min(weeks_dates), min(ut_dates))
+			max_val = max(max(weeks_dates), max(ut_dates))
+			ut_dates = _get_date_range(min_val, max_val)
+		except:
+			pass
 
+	## get dates for performance and injury
+	pi_dates = [graph_date(x['date']) for x in tags.filter(tag__in=['performance', 'injury']).values('date')]
 	try:
-		if min(weeks_dates) < min(pi_dates) and max(weeks_dates) > max(pi_dates):
-			pi_dates = weeks_dates
+		pi_dates = _get_date_range(min(pi_dates), max(pi_dates))
 	except:
 		pass
+	if weeks_dates != None:
+		try:
+			min_val = min(min(weeks_dates), min(pi_dates))
+			max_val = max(max(weeks_dates), max(pi_dates))
+			pi_dates = _get_date_range(min_val, max_val)
+		except:
+			pass
 
 	## get all tag graphs
 	for tag in unique_tags:
@@ -66,10 +92,6 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 
 		tag_graphs[tag] = map_to_graph(x_val, y_val)
 
-	## get week graph with all 0s
-	# x_val = [((datetime.combine(x, datetime.min.time()) - datetime(1970,1,1)).total_seconds() + 86400) * 1000 for x in weeks.keys()]
-	# y_val = [0] * len(x_val)
-	# zero_weeks = map_to_graph(x_val, y_val)
 
 	## define unique USER tags
 	user_tags = [x for x in unique_tags if x != "injury" and x != "performance"]
@@ -98,11 +120,69 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 				'area': 'true'
 			})
 
-	# append distance and sRPE ratios
+	# # append distance and sRPE ratios for USER TAGS
+	# if distance_ratio != None:
+
+	# 	ut_distance_ratio = distance_ratio.copy()
+
+	# 	smaller_dates = [x < y for x in ut_distance_ratio.keys() for y in ut_dates]
+	# 	for smaller_date in smaller_dates:
+	# 		ut_distance_ratio[smaller_date] = None
+
+	# 	larger_dates = [x > y for x in ut_distance_ratio.keys() for y in ut_dates]
+	# 	for larger_date in larger_dates:
+	# 		ut_distance_ratio[larger_date] = None
+
+	# 	data['user_tags'].append(map_to_graph(ut_distance_ratio.keys(), list(ut_distance_ratio.values())))
+
+	# print "OVER HERE"
+	# print sRPE_ratio
+	# if sRPE_ratio != None:
+
+	# 	ut_sRPE_ratio = sRPE_ratio.copy()
+
+	# 	smaller_dates = [x < y for x in ut_sRPE_ratio.keys() for y in ut_dates]
+	# 	for smaller_date in smaller_dates:
+	# 		ut_sRPE_ratio[smaller_date] = None
+
+	# 	larger_dates = [x > y for x in ut_sRPE_ratio.keys() for y in ut_dates]
+	# 	for larger_date in larger_dates:
+	# 		ut_sRPE_ratio[larger_date] = None
+
+	# 	print "HERE"
+	# 	print map_to_graph(ut_sRPE_ratio.keys(), list(ut_sRPE_ratio.values()))
+
+	# 	data['user_tags'].append({
+	# 			"values": map_to_graph(ut_sRPE_ratio.keys(), list(ut_sRPE_ratio.values())),
+	# 			"key": str("Acute:Chronic sRPE"),
+	# 			"color": get_color("Acute:Chronic sRPE"),
+	# 			#"type": "bar",
+	# 			"type": 'line',
+	# 			"yAxis": 2,
+	# 	})
+
 	if distance_ratio:
-		data['user_tags'].append(distance_ratio)
+		try:
+			# add extra data point to distance if we need to
+			if max(weeks_dates) < max(ut_dates):
+				ut_distance_ratio = copy.deepcopy(distance_ratio)
+				ut_distance_ratio['values'].append({'x': max(ut_dates), 'y':ut_distance_ratio['values'][len(ut_distance_ratio['values']) - 1]['y']})
+				data['user_tags'].append(ut_distance_ratio)
+			else:
+				data['user_tags'].append(distance_ratio)
+		except:
+			pass
 	if sRPE_ratio:
-		data['user_tags'].append(sRPE_ratio)
+		try:
+			# add extra data point to distance if we need to
+			if max(weeks_dates) < max(ut_dates):
+				ut_sRPE_ratio = copy.deepcopy(sRPE_ratio)
+				ut_sRPE_ratio['values'].append({'x': max(ut_dates), 'y':ut_sRPE_ratio['values'][len(ut_sRPE_ratio['values']) - 1]['y']})
+				data['user_tags'].append(ut_sRPE_ratio)
+			else:
+				data['user_tags'].append(sRPE_ratio)
+		except:
+			pass
 
 	# get the max_y value for 'user_tags'
 	try:
@@ -132,9 +212,28 @@ def get_tag_graphs(tags, distance_ratio=None, sRPE_ratio=None):
 			})
 
 	if distance_ratio:
-		data['performance_injury'].append(distance_ratio)
+		# add extra data point to distance if we need to
+		try:
+			if max(weeks_dates) < max(pi_dates):
+				pi_distance_ratio = copy.deepcopy(distance_ratio)
+				pi_distance_ratio['values'].append({'x': max(pi_dates), 'y':pi_distance_ratio['values'][len(pi_distance_ratio['values']) - 1]['y']})
+				data['performance_injury'].append(pi_distance_ratio)
+			else:
+				data['performance_injury'].append(distance_ratio)
+		except:
+			pass
+		
 	if sRPE_ratio:
-		data['performance_injury'].append(sRPE_ratio)
+		try:
+			# add extra data point to distance if we need to
+			if max(weeks_dates) < max(pi_dates):
+				pi_sRPE_ratio = copy.deepcopy(sRPE_ratio)
+				pi_sRPE_ratio['values'].append({'x': max(pi_dates), 'y':pi_sRPE_ratio['values'][len(pi_sRPE_ratio['values']) - 1]['y']})
+				data['performance_injury'].append(pi_sRPE_ratio)
+			else:
+				data['performance_injury'].append(sRPE_ratio)
+		except:
+			pass
 
 	try:
 		data["y_max"]['performance_injury'] = max([x["y"] for tag in set.intersection({'injury', 'performance'}, unique_tags) for x in tag_graphs[tag]])
@@ -229,8 +328,6 @@ def get_week_graphs(activities, advanced=True):
 		y_val = [ordered_weeks[x][field] for x in ordered_weeks]
 
 		field_graphs[field] = map_to_graph(x_val, y_val)
-
-	print ordered_weeks
 
 	# get acute:chronic ratio for DISTANCE
 	y_val = [float(ordered_weeks[x]["acute_distance"]) / ordered_weeks[x]["chronic_distance"] if ordered_weeks[x]["chronic_distance"] != 0 else 0 for x in ordered_weeks]
