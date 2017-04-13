@@ -57,10 +57,9 @@ def get_dict_from_gpx(gpx):
     cad = []
     rpe = []
     distance = [0]
-    n = 3
     for track in gpx.tracks:
         for segment in track.segments:
-            for point_no in range(0, len(segment.points), n):
+            for point_no in range(0, len(segment.points)):
 
                 point = segment.points[point_no]
                 
@@ -116,7 +115,7 @@ def get_dict_from_gpx(gpx):
                 if point.speed != None:
                     speed.append(point.speed)
                 elif point_no > 0:
-                    speed.append(point.speed_between(segment.points[point_no - n]))
+                    speed.append(point.speed_between(segment.points[point_no - 1]))
                 else:
                     speed.append(None)
 
@@ -124,12 +123,12 @@ def get_dict_from_gpx(gpx):
                 if point_no > 0:
                     try:
                         current_loc = (point.latitude, point.longitude)
-                        previous_loc = (segment.points[point_no - n].latitude, segment.points[point_no - n].longitude)
+                        previous_loc = (segment.points[point_no - 1].latitude, segment.points[point_no - 1].longitude)
                         delta_distance = vincenty(current_loc, previous_loc).miles
                     except:
                         delta_distance = 0
 
-                    distance.append(distance[(point_no / n) - 1] + delta_distance)
+                    distance.append(distance[point_no - 1] + delta_distance)
                     
     return {'timestamp':time, 'position_lat':latitude, 'position_long':longitude,
             'distance':distance, 'altitude':altitude, 'speed': speed, 'heart_rate': hr,

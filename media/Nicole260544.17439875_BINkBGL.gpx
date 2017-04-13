@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx creator="BodyMonitor" version="1.1"
+  xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/11.xsd"
+  xmlns:ns2="http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
+  xmlns:ns3="http://www.cluetrust.com/Schemas/gpxdata10.xsd"
+  xmlns:ns4="BodyMonitorSpec"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata>
+    <text>BodyMonitor</text>
+    <time>2017-04-11T16:58:37.-0400</time>
+  </metadata>
+  <trk>
+    <type>running</type>
+    <trkseg>
+      <trkpt lat="40.3524661576751"
+        lon="-74.6500206460009">
+        <ele>60.24755859375</ele>
+        <time>2000-12-31T19:00:00.-0500</time>
+        <extensions>
+            <ns4:rpe>4</ns4:rpe>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3484556684646"
+        lon="-74.6522841789524">
+        <ele>68.47802734375</ele>
+        <time>2000-12-31T19:00:00.-0500</time>
+        <extensions>
+            <ns2:hr>151</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+            <ns4:rpe>4</ns4:rpe>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3441440174732"
+        lon="-74.6487349458734">
+        <ele>48.8016967773438</ele>
+        <time>2017-04-11T17:12:52.-0400</time>
+        <extensions>
+            <ns2:hr>146</ns2:hr>
+            <ns2:cad>0</ns2:cad>
+            <ns4:speed>0.0</ns4:speed>
+            <ns4:rpe>5</ns4:rpe>
+        </extensions>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

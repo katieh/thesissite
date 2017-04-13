@@ -37,7 +37,7 @@ def get_field_histograms(activity, user):
 		data[key.replace('avg_', '') + '-histogram']['graph'] = [{
 			"values": values,
 			"key": get_label(key) + " Histogram",
-			"color": get_color(key),
+			"color": get_color(key)
 		}];
 
 		## add metadata information
@@ -61,6 +61,7 @@ def get_field_graphs(activity):
 	speed = []
 	heart_rate = []
 	cadence = []
+	rpe = []
 
 	if activity.num_records != None:
 		N = activity.num_records
@@ -76,6 +77,11 @@ def get_field_graphs(activity):
 			heart_rate.append({"x": activity.distance[i], "y": activity.heart_rate[i]})
 		if activity.cadence != None:
 			cadence.append({"x": activity.distance[i], "y": activity.cadence[i]})
+		if activity.rpe != None:
+			if activity.rpe[i] != None:
+				rpe.append({"x": activity.distance[i], "y": activity.rpe[i]})
+			else:
+				rpe.append({"x": activity.distance[i], "y": 0})
 
 
 	data = {
@@ -83,7 +89,9 @@ def get_field_graphs(activity):
 			{
 			"values": altitude,
 			"key": 'Altitude',
-			"color": get_color("altitude")
+			"color": get_color("altitude"),
+			'type': 'line',
+			'yAxis':1
 			}
 		],
 
@@ -91,7 +99,9 @@ def get_field_graphs(activity):
 			{
 			"values": speed,
 			"key": 'Speed',
-			"color": get_color("speed")
+			"color": get_color("speed"),
+			'type': 'line',
+			'yAxis':1
 			}
 		],
 
@@ -99,7 +109,9 @@ def get_field_graphs(activity):
 			{
 			"values": heart_rate,
 			"key": 'Heart Rate',
-			"color": get_color("heartrate")
+			"color": get_color("heartrate"),
+			'type': 'line',
+			'yAxis':1
 			}
 		],
 
@@ -107,9 +119,27 @@ def get_field_graphs(activity):
 			{
 			"values": cadence,
 			"key": 'Cadence',
-			"color": get_color("cadence")
+			"color": get_color("cadence"),
+			'type': 'line',
+			'yAxis':1
 			}
 		]
 	}
+
+	print rpe
+
+
+	if activity.rpe != None:
+		rpe_graph = {"values": rpe,
+			"key": 'RPE',
+			"color": '#727272',
+			'type': 'line',
+			'area':'true',
+			'yAxis':2}
+
+		data['altitude-graph'].append(rpe_graph)
+		data['speed-graph'].append(rpe_graph)
+		data['heartrate-graph'].append(rpe_graph)
+		data['cadence-graph'].append(rpe_graph)
 
 	return json.dumps(data)

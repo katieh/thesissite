@@ -4366,7 +4366,7 @@ nv.models.historicalBarChart = function() {
   //------------------------------------------------------------
 
   bars.dispatch.on('elementMouseover.tooltip', function(e) {
-    e.pos = [e.pos[0] +  margin.left, e.pos[1] + margin.top];
+    e.pos = [e.pos[0] +  margin.left, e.pos[1] + margin.top + 19];
     dispatch.tooltipShow(e);
   });
 
@@ -9490,7 +9490,7 @@ nv.models.multiChart = function() {
       var g = wrap.select('g');
 
       if (showLegend) {
-        legend.width(availableWidth * 1.25);
+        legend.width(availableWidth * 1.1);
 
         g.select('.legendWrap')
             .datum(data.map(function(series) { 
@@ -9500,16 +9500,6 @@ nv.models.multiChart = function() {
             }))
           .call(legend);
 
-          console.log("data MULTICHART")
-          console.log(data.map(function(series) { 
-              series.originalKey = series.originalKey === undefined ? series.key : series.originalKey;
-              series.key = series.originalKey + (series.yAxis == 1 ? '' : ' (right)');
-              return series;
-            }))
-
-        console.log('legend height, margin-top')
-        console.log(legend.height())
-        console.log(margin.top)
         if ( margin.top != legend.height()) {
           margin.top = legend.height();
           availableHeight = (height || parseInt(container.style('height')) || 400)
@@ -9683,7 +9673,7 @@ nv.models.multiChart = function() {
   });
 
   bars1.dispatch.on('elementMouseover.tooltip', function(e) {
-    e.pos = [e.pos[0] +  margin.left, e.pos[1] + margin.top];
+    e.pos = [e.pos[0] +  margin.left, e.pos[1] + margin.top + 19];
     dispatch.tooltipShow(e);
   });
 
@@ -9692,7 +9682,7 @@ nv.models.multiChart = function() {
   });
 
   bars2.dispatch.on('elementMouseover.tooltip', function(e) {
-    e.pos = [e.pos[0] +  margin.left, e.pos[1] + margin.top];
+    e.pos = [e.pos[0] +  margin.left, e.pos[1] + margin.top + 19];
     dispatch.tooltipShow(e);
   });
 
@@ -9733,7 +9723,7 @@ nv.models.multiChart = function() {
   });
 
     lines1.dispatch.on('elementMouseover.tooltip', function(e) {
-    e.pos = [e.pos[0] +  margin.left, e.pos[1] + margin.top];
+    e.pos = [e.pos[0] +  margin.left, e.pos[1] + margin.top + 13];
     dispatch.tooltipShow(e);
   });
 
@@ -9742,9 +9732,11 @@ nv.models.multiChart = function() {
   });
 
   lines2.dispatch.on('elementMouseover.tooltip', function(e) {
-    e.pos = [e.pos[0] +  margin.left, e.pos[1] + margin.top];
+    e.pos = [e.pos[0] +  margin.left, e.pos[1] + margin.top  + 13];
     dispatch.tooltipShow(e);
   });
+
+  //LOOK HERE TO CHANGE POSITION OF TOOLTIPS
 
   lines2.dispatch.on('elementMouseout.tooltip', function(e) {
     dispatch.tooltipHide(e);

@@ -8,8 +8,7 @@ var keys = Object.keys(field_graphs)
 
 // make line graphs for all of the variables
 for (i in keys) {
-
-    make_line_graph(keys[i]);
+    make_multichart(field_graphs[keys[i]], keys[i]);
 }
 
 keys = Object.keys(field_histograms)
@@ -19,6 +18,99 @@ for (i in keys) {
     make_histogram(keys[i])
 }
 
+function  get_histogram_xaxis_label(key) {
+    console.log(key)
+    if (key == "speed-histogram" || key == 'speed-graph') {
+        return "Speed"
+    }
+    else if (key == "elevation_gained-histogram" || key == 'altitude-graph') {
+        return "Elevation Gained"
+    }
+    else if (key == "cadence-histogram" || key == 'cadence-graph') {
+        return "Cadence"
+    }
+    else if(key == "hr-histogram" || key == 'heartrate-graph') {
+        return "Heart Rate"
+    }
+    else {
+        throw "key does not have a defined label!"
+    }
+}
+
+function  get_graph_xaxis_label(key) {
+    console.log(key)
+    if (key == "speed-histogram" || key == 'speed-graph') {
+        return "Speed (mph)"
+    }
+    else if (key == "elevation_gained-histogram" || key == 'altitude-graph') {
+        return "Elevation Gained (feet)"
+    }
+    else if (key == "cadence-histogram" || key == 'cadence-graph') {
+        return "Cadence (spm)"
+    }
+    else if(key == "hr-histogram" || key == 'heartrate-graph') {
+        return "Heart Rate (bmp)"
+    }
+    else {
+        throw "key does not have a defined label!"
+    }
+}
+
+function make_multichart(data, key) {
+    height = 250;
+
+    // make the graph with the appropriate key
+    nv.addGraph(function() {
+
+        var chart = nv.models.multiChart()
+        .height(height);
+
+        chart.yAxis1
+        .tickFormat(d3.format('.1f'));
+
+        chart.yAxis2
+        .tickFormat(d3.format('d'));
+
+        chart.xAxis
+        .tickFormat(d3.format('.1f'))
+        ;
+
+        // modifide from http://stackoverflow.com/questions/9244824/how-to-remove-quot-from-my-json-in-javascript
+        d3.select("#" + key + " svg")
+        .datum(field_graphs[key])
+        .transition().duration(500)
+        .call(chart).style({'height': height});
+
+        // modifide from http://stackoverflow.com/questions/9244824/how-to-remove-quot-from-my-json-in-javascript
+        d3.select("#" + key + " svg")
+        .datum(data)
+        .transition().duration(500)
+        .call(chart).style({'height': height});
+
+
+        // if (key == 'performance_injury' || key == 'user_tags') {
+
+        //     d3.select("#" + key + " svg" + ' .lines1Wrap').moveToBack();
+        //     d3.select("#" + key + " svg" + ' .lines2Wrap').moveToBack();
+
+        //     d3.select('#' + key + " svg" + " .y1").moveToBack();
+        //     d3.select('#' + key + " svg" + " .y2").moveToBack();
+        //     d3.select('#' + key + " svg" + " .x").moveToBack();
+
+        // }
+
+        // else {
+        //     d3.select("#" + key + " svg" + ' .lines1Wrap').moveToFront();
+        //     d3.select("#" + key + " svg" + ' .lines2Wrap').moveToFront();
+        // }
+
+
+        nv.utils.windowResize(chart.update);
+
+        return chart;
+    });
+}
+
 
 /* NOTE: This code is based on the following tutorials:
     - http://adilmoujahid.com/posts/2015/01/interactive-data-visualization-d3-dc-python-mongodb/
@@ -26,7 +118,6 @@ for (i in keys) {
     - http://nvd3.org/livecode/index.html#codemirrorNav
 */
 function make_line_graph(key) {
-
 
     height = 250
 
@@ -43,7 +134,7 @@ function make_line_graph(key) {
         ;
 
         chart.yAxis
-        .axisLabel('Speed (mph)')
+        .axisLabel(get_histogram_xaxis_label(key))
         .tickFormat(d3.format('.2f'))
         ;
 
@@ -57,24 +148,6 @@ function make_line_graph(key) {
 
         return chart;
     });
-}
-
-function  get_histogram_xaxis_label(key) {
-    if (key == "speed-histogram") {
-        return "Speed"
-    }
-    else if (key == "elevation_gained-histogram") {
-        return "Elevation Gained"
-    }
-    else if (key == "cadence-histogram") {
-        return "Cadence"
-    }
-    else if(key == "hr-histogram") {
-        return "Heart Rate"
-    }
-    else {
-        throw "key does not have a defined label!"
-    }
 }
 
 /* NOTE: This code is based on the following example:

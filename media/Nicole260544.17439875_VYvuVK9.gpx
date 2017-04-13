@@ -1,0 +1,2888 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx creator="BodyMonitor" version="1.1"
+  xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/11.xsd"
+  xmlns:ns2="http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
+  xmlns:ns3="http://www.cluetrust.com/Schemas/gpxdata10.xsd"
+  xmlns:ns4="BodyMonitorSpec"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata>
+    <text>BodyMonitor</text>
+    <time>2017-04-11T16:58:37.-0400</time>
+  </metadata>
+  <trk>
+    <type>running</type>
+    <trkseg>
+      <trkpt lat="40.3442964423824"
+        lon="-74.6479269304077">
+        <ele>47.5536193847656</ele>
+        <time>2017-04-11T16:58:37.-0400</time>
+        <extensions>
+            <ns2:hr>83</ns2:hr>
+            <ns2:cad>0</ns2:cad>
+            <ns4:speed>0.0</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3442964423824"
+        lon="-74.6479269304077">
+        <ele>47.4180603027344</ele>
+        <time>2017-04-11T16:58:40.-0400</time>
+        <extensions>
+            <ns2:hr>78</ns2:hr>
+            <ns2:cad>0</ns2:cad>
+            <ns4:speed>0.0</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3442964423824"
+        lon="-74.6479269304077">
+        <ele>47.0471496582031</ele>
+        <time>2017-04-11T16:58:43.-0400</time>
+        <extensions>
+            <ns2:hr>74</ns2:hr>
+            <ns2:cad>0</ns2:cad>
+            <ns4:speed>0.0</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.344320624173"
+        lon="-74.6479308699022">
+        <ele>48.1473388671875</ele>
+        <time>2017-04-11T16:58:46.-0400</time>
+        <extensions>
+            <ns2:hr>71</ns2:hr>
+            <ns2:cad>0</ns2:cad>
+            <ns4:speed>0.0</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3443352086845"
+        lon="-74.6479152795623">
+        <ele>48.8958740234375</ele>
+        <time>2017-04-11T16:58:49.-0400</time>
+        <extensions>
+            <ns2:hr>72</ns2:hr>
+            <ns2:cad>0</ns2:cad>
+            <ns4:speed>0.0</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3443540679667"
+        lon="-74.6479057241926">
+        <ele>48.1789245605469</ele>
+        <time>2017-04-11T16:58:52.-0400</time>
+        <extensions>
+            <ns2:hr>70</ns2:hr>
+            <ns2:cad>0</ns2:cad>
+            <ns4:speed>0.0</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3443518886718"
+        lon="-74.647922487999">
+        <ele>49.7998352050781</ele>
+        <time>2017-04-11T16:58:55.-0400</time>
+        <extensions>
+            <ns2:hr>71</ns2:hr>
+            <ns2:cad>47</ns2:cad>
+            <ns4:speed>1.859375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3443568339947"
+        lon="-74.6479180455903">
+        <ele>53.2177124023438</ele>
+        <time>2017-04-11T16:58:58.-0400</time>
+        <extensions>
+            <ns2:hr>75</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>2.6640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3444033116478"
+        lon="-74.6478295326928">
+        <ele>52.9851684570312</ele>
+        <time>2017-04-11T16:59:01.-0400</time>
+        <extensions>
+            <ns2:hr>85</ns2:hr>
+            <ns2:cad>93</ns2:cad>
+            <ns4:speed>2.96875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3444584226611"
+        lon="-74.6477114316771">
+        <ele>50.0176391601562</ele>
+        <time>2017-04-11T16:59:04.-0400</time>
+        <extensions>
+            <ns2:hr>90</ns2:hr>
+            <ns2:cad>93</ns2:cad>
+            <ns4:speed>3.0546875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.344501715191"
+        lon="-74.6475952584992">
+        <ele>51.7391967773438</ele>
+        <time>2017-04-11T16:59:07.-0400</time>
+        <extensions>
+            <ns2:hr>101</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>2.94140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3445442114401"
+        lon="-74.6474815160731">
+        <ele>49.7302551269531</ele>
+        <time>2017-04-11T16:59:10.-0400</time>
+        <extensions>
+            <ns2:hr>107</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>2.75</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3446016274768"
+        lon="-74.6473419573853">
+        <ele>47.8417053222656</ele>
+        <time>2017-04-11T16:59:13.-0400</time>
+        <extensions>
+            <ns2:hr>111</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>2.859375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3446557326618"
+        lon="-74.6472096909533">
+        <ele>47.8237609863281</ele>
+        <time>2017-04-11T16:59:16.-0400</time>
+        <extensions>
+            <ns2:hr>114</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>2.94140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3447123105082"
+        lon="-74.6470907517473">
+        <ele>47.8443298339844</ele>
+        <time>2017-04-11T16:59:19.-0400</time>
+        <extensions>
+            <ns2:hr>120</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.0546875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3447618894655"
+        lon="-74.6469768416832">
+        <ele>46.9526977539062</ele>
+        <time>2017-04-11T16:59:22.-0400</time>
+        <extensions>
+            <ns2:hr>124</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3448143601793"
+        lon="-74.6468616743336">
+        <ele>46.9600219726562</ele>
+        <time>2017-04-11T16:59:25.-0400</time>
+        <extensions>
+            <ns2:hr>126</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3448747098822"
+        lon="-74.6467392985473">
+        <ele>46.1672058105469</ele>
+        <time>2017-04-11T16:59:28.-0400</time>
+        <extensions>
+            <ns2:hr>128</ns2:hr>
+            <ns2:cad>93</ns2:cad>
+            <ns4:speed>3.3046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.344927264415"
+        lon="-74.6466207784364">
+        <ele>45.4700012207031</ele>
+        <time>2017-04-11T16:59:31.-0400</time>
+        <extensions>
+            <ns2:hr>131</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3449701378498"
+        lon="-74.6465183515797">
+        <ele>46.3069152832031</ele>
+        <time>2017-04-11T16:59:34.-0400</time>
+        <extensions>
+            <ns2:hr>133</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3450134722892"
+        lon="-74.6464201156745">
+        <ele>46.3676147460938</ele>
+        <time>2017-04-11T16:59:37.-0400</time>
+        <extensions>
+            <ns2:hr>136</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.345062045418"
+        lon="-74.646307630534">
+        <ele>47.2183532714844</ele>
+        <time>2017-04-11T16:59:40.-0400</time>
+        <extensions>
+            <ns2:hr>138</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.345099009611"
+        lon="-74.6462186147223">
+        <ele>48.1080627441406</ele>
+        <time>2017-04-11T16:59:43.-0400</time>
+        <extensions>
+            <ns2:hr>140</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3451390331987"
+        lon="-74.6461215522835">
+        <ele>48.6907653808594</ele>
+        <time>2017-04-11T16:59:46.-0400</time>
+        <extensions>
+            <ns2:hr>141</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3451824514571"
+        lon="-74.6460194607029">
+        <ele>49.474609375</ele>
+        <time>2017-04-11T16:59:49.-0400</time>
+        <extensions>
+            <ns2:hr>141</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3452301863957"
+        lon="-74.6459105797807">
+        <ele>48.8094787597656</ele>
+        <time>2017-04-11T16:59:52.-0400</time>
+        <extensions>
+            <ns2:hr>142</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3452674858648"
+        lon="-74.6458283533106">
+        <ele>48.7267150878906</ele>
+        <time>2017-04-11T16:59:55.-0400</time>
+        <extensions>
+            <ns2:hr>144</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3453073837239"
+        lon="-74.6457172930936">
+        <ele>48.3703308105469</ele>
+        <time>2017-04-11T16:59:58.-0400</time>
+        <extensions>
+            <ns2:hr>145</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3453555377576"
+        lon="-74.6455963422308">
+        <ele>48.6345520019531</ele>
+        <time>2017-04-11T17:00:01.-0400</time>
+        <extensions>
+            <ns2:hr>145</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3453996265683"
+        lon="-74.645493663917">
+        <ele>49.3794860839844</ele>
+        <time>2017-04-11T17:00:04.-0400</time>
+        <extensions>
+            <ns2:hr>146</ns2:hr>
+            <ns2:cad>93</ns2:cad>
+            <ns4:speed>3.3046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.345445266031"
+        lon="-74.6453924943457">
+        <ele>49.1280212402344</ele>
+        <time>2017-04-11T17:00:07.-0400</time>
+        <extensions>
+            <ns2:hr>146</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.345488810018"
+        lon="-74.6452971082876">
+        <ele>48.3707580566406</ele>
+        <time>2017-04-11T17:00:10.-0400</time>
+        <extensions>
+            <ns2:hr>147</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3455268638584"
+        lon="-74.6452150494555">
+        <ele>48.0801391601562</ele>
+        <time>2017-04-11T17:00:13.-0400</time>
+        <extensions>
+            <ns2:hr>147</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3455687314648"
+        lon="-74.645113293151">
+        <ele>47.7229309082031</ele>
+        <time>2017-04-11T17:00:16.-0400</time>
+        <extensions>
+            <ns2:hr>147</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.3046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3456232976544"
+        lon="-74.6450189129213">
+        <ele>46.6053466796875</ele>
+        <time>2017-04-11T17:00:19.-0400</time>
+        <extensions>
+            <ns2:hr>147</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3457219526547"
+        lon="-74.6449600719611">
+        <ele>44.3983764648438</ele>
+        <time>2017-04-11T17:00:22.-0400</time>
+        <extensions>
+            <ns2:hr>146</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3458337672431"
+        lon="-74.644983625109">
+        <ele>44.7760009765625</ele>
+        <time>2017-04-11T17:00:25.-0400</time>
+        <extensions>
+            <ns2:hr>146</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3459105454761"
+        lon="-74.6450095251898">
+        <ele>45.2403259277344</ele>
+        <time>2017-04-11T17:00:28.-0400</time>
+        <extensions>
+            <ns2:hr>146</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.345980408639"
+        lon="-74.6450507641534">
+        <ele>46.468017578125</ele>
+        <time>2017-04-11T17:00:31.-0400</time>
+        <extensions>
+            <ns2:hr>147</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3460594499859"
+        lon="-74.6450933442215">
+        <ele>47.8074951171875</ele>
+        <time>2017-04-11T17:00:34.-0400</time>
+        <extensions>
+            <ns2:hr>148</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3461366892237"
+        lon="-74.6451251116345">
+        <ele>47.4410400390625</ele>
+        <time>2017-04-11T17:00:37.-0400</time>
+        <extensions>
+            <ns2:hr>149</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3462209273505"
+        lon="-74.6451756545106">
+        <ele>48.0102844238281</ele>
+        <time>2017-04-11T17:00:40.-0400</time>
+        <extensions>
+            <ns2:hr>149</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3463166067752"
+        lon="-74.6452337410996">
+        <ele>49.5669860839844</ele>
+        <time>2017-04-11T17:00:43.-0400</time>
+        <extensions>
+            <ns2:hr>151</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3464076342437"
+        lon="-74.6452941746215">
+        <ele>50.62255859375</ele>
+        <time>2017-04-11T17:00:46.-0400</time>
+        <extensions>
+            <ns2:hr>152</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3464900283519"
+        lon="-74.6453454718689">
+        <ele>50.9915771484375</ele>
+        <time>2017-04-11T17:00:49.-0400</time>
+        <extensions>
+            <ns2:hr>152</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3465733863789"
+        lon="-74.6454007924298">
+        <ele>50.9096069335938</ele>
+        <time>2017-04-11T17:00:52.-0400</time>
+        <extensions>
+            <ns2:hr>152</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3466607677195"
+        lon="-74.6454631537894">
+        <ele>50.6420288085938</ele>
+        <time>2017-04-11T17:00:55.-0400</time>
+        <extensions>
+            <ns2:hr>154</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.346746682227"
+        lon="-74.6455240902255">
+        <ele>50.8086547851562</ele>
+        <time>2017-04-11T17:00:58.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3468381707001"
+        lon="-74.6455876250515">
+        <ele>51.0938110351562</ele>
+        <time>2017-04-11T17:01:01.-0400</time>
+        <extensions>
+            <ns2:hr>154</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3469191817942"
+        lon="-74.6456249245206">
+        <ele>50.7606201171875</ele>
+        <time>2017-04-11T17:01:04.-0400</time>
+        <extensions>
+            <ns2:hr>154</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3470101254437"
+        lon="-74.6456986852685">
+        <ele>50.6666870117188</ele>
+        <time>2017-04-11T17:01:07.-0400</time>
+        <extensions>
+            <ns2:hr>154</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3470911365378"
+        lon="-74.6457752958635">
+        <ele>50.4384765625</ele>
+        <time>2017-04-11T17:01:10.-0400</time>
+        <extensions>
+            <ns2:hr>154</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3471604967866"
+        lon="-74.6458307840625">
+        <ele>49.9603576660156</ele>
+        <time>2017-04-11T17:01:13.-0400</time>
+        <extensions>
+            <ns2:hr>153</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.0546875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3472446510944"
+        lon="-74.6459189616839">
+        <ele>49.5826416015625</ele>
+        <time>2017-04-11T17:01:16.-0400</time>
+        <extensions>
+            <ns2:hr>153</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.0546875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3473213874179"
+        lon="-74.6459999308685">
+        <ele>50.9563598632812</ele>
+        <time>2017-04-11T17:01:19.-0400</time>
+        <extensions>
+            <ns2:hr>154</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3473912505809"
+        lon="-74.6460756194542">
+        <ele>51.2954711914062</ele>
+        <time>2017-04-11T17:01:22.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3474624129388"
+        lon="-74.6461565886388">
+        <ele>51.3917236328125</ele>
+        <time>2017-04-11T17:01:25.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3475458547849"
+        lon="-74.6462302655677">
+        <ele>51.8532104492188</ele>
+        <time>2017-04-11T17:01:28.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3476186935234"
+        lon="-74.6462842450241">
+        <ele>52.7684326171875</ele>
+        <time>2017-04-11T17:01:31.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.0546875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3476849105585"
+        lon="-74.6463679802368">
+        <ele>53.3079223632812</ele>
+        <time>2017-04-11T17:01:34.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.02734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3477514209602"
+        lon="-74.6464290843109">
+        <ele>52.7356567382812</ele>
+        <time>2017-04-11T17:01:37.-0400</time>
+        <extensions>
+            <ns2:hr>154</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>2.96875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3478234634179"
+        lon="-74.6464906074802">
+        <ele>53.4474487304688</ele>
+        <time>2017-04-11T17:01:40.-0400</time>
+        <extensions>
+            <ns2:hr>154</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>2.96875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3478834778446"
+        lon="-74.6465435811082">
+        <ele>53.8568115234375</ele>
+        <time>2017-04-11T17:01:43.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>2.94140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3479428636286"
+        lon="-74.6465940401653">
+        <ele>54.67529296875</ele>
+        <time>2017-04-11T17:01:46.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>2.9140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3479951667044"
+        lon="-74.6466127318094">
+        <ele>54.7181396484375</ele>
+        <time>2017-04-11T17:01:49.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>2.77734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3480712743852"
+        lon="-74.6466669627229">
+        <ele>56.3233642578125</ele>
+        <time>2017-04-11T17:01:52.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>87</ns2:cad>
+            <ns4:speed>2.75</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3481272235888"
+        lon="-74.6467164159516">
+        <ele>56.7192993164062</ele>
+        <time>2017-04-11T17:01:55.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>2.8046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3481850168112"
+        lon="-74.6467667911897">
+        <ele>57.738525390625</ele>
+        <time>2017-04-11T17:01:58.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>2.8046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.348258358464"
+        lon="-74.64681523859">
+        <ele>58.2781982421875</ele>
+        <time>2017-04-11T17:02:01.-0400</time>
+        <extensions>
+            <ns2:hr>158</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>2.9140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3483151877675"
+        lon="-74.6468519513259">
+        <ele>57.8890991210938</ele>
+        <time>2017-04-11T17:02:04.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>2.96875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3483637189868"
+        lon="-74.6468629316191">
+        <ele>59.2957153320312</ele>
+        <time>2017-04-11T17:02:07.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.0</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3484334145117"
+        lon="-74.6469169948945">
+        <ele>59.7556762695312</ele>
+        <time>2017-04-11T17:02:10.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.0546875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3485180298242"
+        lon="-74.6469889116237">
+        <ele>60.1534423828125</ele>
+        <time>2017-04-11T17:02:13.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3486159304533"
+        lon="-74.6470489260504">
+        <ele>58.9678344726562</ele>
+        <time>2017-04-11T17:02:16.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3486952232573"
+        lon="-74.6470991336504">
+        <ele>58.3091430664062</ele>
+        <time>2017-04-11T17:02:19.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3487832751501"
+        lon="-74.6471573878775">
+        <ele>57.384765625</ele>
+        <time>2017-04-11T17:02:22.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.348895299286"
+        lon="-74.6472184081326">
+        <ele>56.6942749023438</ele>
+        <time>2017-04-11T17:02:25.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3489864105734"
+        lon="-74.6472501755456">
+        <ele>56.2296142578125</ele>
+        <time>2017-04-11T17:02:28.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3490451258052"
+        lon="-74.6472692024658">
+        <ele>57.0165405273438</ele>
+        <time>2017-04-11T17:02:31.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3491074452552"
+        lon="-74.6473163925806">
+        <ele>57.7166137695312</ele>
+        <time>2017-04-11T17:02:34.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3491646098349"
+        lon="-74.6473998763362">
+        <ele>57.0078735351562</ele>
+        <time>2017-04-11T17:02:37.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3492344310883"
+        lon="-74.6474914905379">
+        <ele>57.4044799804688</ele>
+        <time>2017-04-11T17:02:40.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3493082756552"
+        lon="-74.6475158818761">
+        <ele>57.177490234375</ele>
+        <time>2017-04-11T17:02:43.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3493595729026"
+        lon="-74.6475243475983">
+        <ele>57.6107177734375</ele>
+        <time>2017-04-11T17:02:46.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.0546875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3494182881344"
+        lon="-74.6475463920037">
+        <ele>56.285400390625</ele>
+        <time>2017-04-11T17:02:49.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>2.94140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3495089384172"
+        lon="-74.6476051491449">
+        <ele>57.1475219726562</ele>
+        <time>2017-04-11T17:02:52.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.0546875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.349586512931"
+        lon="-74.6476348210821">
+        <ele>57.4790649414062</ele>
+        <time>2017-04-11T17:02:55.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3496705415103"
+        lon="-74.6476585418681">
+        <ele>58.6732177734375</ele>
+        <time>2017-04-11T17:02:58.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.349746230096"
+        lon="-74.6476535965452">
+        <ele>58.5564575195312</ele>
+        <time>2017-04-11T17:03:01.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3498405265066"
+        lon="-74.6477123536865">
+        <ele>59.15771484375</ele>
+        <time>2017-04-11T17:03:04.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3499779478091"
+        lon="-74.6478249226461">
+        <ele>59.587646484375</ele>
+        <time>2017-04-11T17:03:07.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3501018742475"
+        lon="-74.6479354799489">
+        <ele>58.378173828125</ele>
+        <time>2017-04-11T17:03:10.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3502169996876"
+        lon="-74.6480659023622">
+        <ele>58.8382568359375</ele>
+        <time>2017-04-11T17:03:13.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3503037523854"
+        lon="-74.6481412556718">
+        <ele>58.6947021484375</ele>
+        <time>2017-04-11T17:03:16.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3503783094141"
+        lon="-74.6482253261606">
+        <ele>58.7261962890625</ele>
+        <time>2017-04-11T17:03:19.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3504747851196"
+        lon="-74.648289950634">
+        <ele>57.9789428710938</ele>
+        <time>2017-04-11T17:03:22.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3505557962138"
+        lon="-74.64831626981">
+        <ele>59.4957275390625</ele>
+        <time>2017-04-11T17:03:25.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3506345022846"
+        lon="-74.6483706683616">
+        <ele>59.479736328125</ele>
+        <time>2017-04-11T17:03:28.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>86</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3507218836251"
+        lon="-74.6484570857833">
+        <ele>59.1112060546875</ele>
+        <time>2017-04-11T17:03:31.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.350803439543"
+        lon="-74.6485123225252">
+        <ele>59.11328125</ele>
+        <time>2017-04-11T17:03:34.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3508888092268"
+        lon="-74.6485440899382">
+        <ele>59.7364501953125</ele>
+        <time>2017-04-11T17:03:37.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3509696526829"
+        lon="-74.6485953871856">
+        <ele>58.2505493164062</ele>
+        <time>2017-04-11T17:03:40.-0400</time>
+        <extensions>
+            <ns2:hr>158</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3510541841764"
+        lon="-74.6486743447135">
+        <ele>59.308837890625</ele>
+        <time>2017-04-11T17:03:43.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3511254722628"
+        lon="-74.6487352811495">
+        <ele>59.3553466796875</ele>
+        <time>2017-04-11T17:03:46.-0400</time>
+        <extensions>
+            <ns2:hr>158</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3512058128047"
+        lon="-74.6487998218039">
+        <ele>60.925048828125</ele>
+        <time>2017-04-11T17:03:49.-0400</time>
+        <extensions>
+            <ns2:hr>158</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3512577386949"
+        lon="-74.6488520410607">
+        <ele>58.9302978515625</ele>
+        <time>2017-04-11T17:03:52.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3513361933086"
+        lon="-74.6489284840176">
+        <ele>60.2631225585938</ele>
+        <time>2017-04-11T17:03:55.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3514348063994"
+        lon="-74.64901138104">
+        <ele>60.9356689453125</ele>
+        <time>2017-04-11T17:03:58.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.351506513581"
+        lon="-74.6490762569705">
+        <ele>61.6095581054688</ele>
+        <time>2017-04-11T17:04:01.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3515636781606"
+        lon="-74.6491014864991">
+        <ele>62.239501953125</ele>
+        <time>2017-04-11T17:04:04.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3516469104591"
+        lon="-74.6491483413378">
+        <ele>62.7261962890625</ele>
+        <time>2017-04-11T17:04:07.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3517239401493"
+        lon="-74.6492312383602">
+        <ele>62.599365234375</ele>
+        <time>2017-04-11T17:04:10.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.02734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3518192842979"
+        lon="-74.6493272949705">
+        <ele>62.1827392578125</ele>
+        <time>2017-04-11T17:04:13.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.02734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3518969845403"
+        lon="-74.649368114839">
+        <ele>61.5679321289062</ele>
+        <time>2017-04-11T17:04:16.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3519562865052"
+        lon="-74.6494194120864">
+        <ele>62.2926635742188</ele>
+        <time>2017-04-11T17:04:19.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3520649997893"
+        lon="-74.6495059971462">
+        <ele>62.4323120117188</ele>
+        <time>2017-04-11T17:04:22.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.02734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3521876270327"
+        lon="-74.6495672688583">
+        <ele>62.0827026367188</ele>
+        <time>2017-04-11T17:04:25.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.02734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3523392556611"
+        lon="-74.649632480065">
+        <ele>62.609375</ele>
+        <time>2017-04-11T17:04:28.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.02734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3524434427175"
+        lon="-74.6497205738673">
+        <ele>62.6447143554688</ele>
+        <time>2017-04-11T17:04:31.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>93</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3524739109356"
+        lon="-74.6498485655288">
+        <ele>60.6289672851562</ele>
+        <time>2017-04-11T17:04:34.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3524709772694"
+        lon="-74.649976138095">
+        <ele>60.3785400390625</ele>
+        <time>2017-04-11T17:04:37.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3524479270357"
+        lon="-74.6501068957845">
+        <ele>61.6243896484375</ele>
+        <time>2017-04-11T17:04:40.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>93</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3524094121906"
+        lon="-74.6502135135929">
+        <ele>62.02978515625</ele>
+        <time>2017-04-11T17:04:43.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3523763455826"
+        lon="-74.6503259987334">
+        <ele>61.8125610351562</ele>
+        <time>2017-04-11T17:04:46.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>94</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3523594560477"
+        lon="-74.6504202951441">
+        <ele>62.0275268554688</ele>
+        <time>2017-04-11T17:04:49.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>94</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3523463802788"
+        lon="-74.6505321935514">
+        <ele>62.5989379882812</ele>
+        <time>2017-04-11T17:04:52.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3523439495269"
+        lon="-74.6506153420309">
+        <ele>62.999755859375</ele>
+        <time>2017-04-11T17:04:55.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3523234557736"
+        lon="-74.6507379692743">
+        <ele>63.8090209960938</ele>
+        <time>2017-04-11T17:04:58.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3523014113683"
+        lon="-74.6508530528048">
+        <ele>63.7135620117188</ele>
+        <time>2017-04-11T17:05:01.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3522677999366"
+        lon="-74.6509778593431">
+        <ele>63.2855224609375</ele>
+        <time>2017-04-11T17:05:04.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3522321349386"
+        lon="-74.6510977205584">
+        <ele>64.1782836914062</ele>
+        <time>2017-04-11T17:05:07.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3521919856224"
+        lon="-74.6511677932689">
+        <ele>64.7047729492188</ele>
+        <time>2017-04-11T17:05:10.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3521370003376"
+        lon="-74.6512759198199">
+        <ele>64.8214721679688</ele>
+        <time>2017-04-11T17:05:13.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.352088050023"
+        lon="-74.6514096111754">
+        <ele>65.7805786132812</ele>
+        <time>2017-04-11T17:05:16.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3520518402013"
+        lon="-74.6515396144936">
+        <ele>65.7529907226562</ele>
+        <time>2017-04-11T17:05:19.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3520092182237"
+        lon="-74.651614716346">
+        <ele>65.2395629882812</ele>
+        <time>2017-04-11T17:05:22.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.351982102767"
+        lon="-74.6517141257177">
+        <ele>65.8070068359375</ele>
+        <time>2017-04-11T17:05:25.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3519759839776"
+        lon="-74.6518712864021">
+        <ele>65.61376953125</ele>
+        <time>2017-04-11T17:05:28.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3519338649142"
+        lon="-74.6519895550559">
+        <ele>66.7998657226562</ele>
+        <time>2017-04-11T17:05:31.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3519059112671"
+        lon="-74.6521147806893">
+        <ele>67.08251953125</ele>
+        <time>2017-04-11T17:05:34.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3518651333082"
+        lon="-74.6522282716582">
+        <ele>66.434326171875</ele>
+        <time>2017-04-11T17:05:37.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.35178014081"
+        lon="-74.6522968356261">
+        <ele>66.5689697265625</ele>
+        <time>2017-04-11T17:05:40.-0400</time>
+        <extensions>
+            <ns2:hr>163</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.3046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3517090622711"
+        lon="-74.6524031181584">
+        <ele>66.5350952148438</ele>
+        <time>2017-04-11T17:05:43.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.33203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3516939748454"
+        lon="-74.6525412519226">
+        <ele>65.77685546875</ele>
+        <time>2017-04-11T17:05:46.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.33203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3516649734605"
+        lon="-74.6526522283206">
+        <ele>65.6605224609375</ele>
+        <time>2017-04-11T17:05:49.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3516163584221"
+        lon="-74.6527225524882">
+        <ele>64.9935302734375</ele>
+        <time>2017-04-11T17:05:52.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3515994688872"
+        lon="-74.6528843232194">
+        <ele>63.87060546875</ele>
+        <time>2017-04-11T17:05:55.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3515589842949"
+        lon="-74.6530038491587">
+        <ele>64.5987548828125</ele>
+        <time>2017-04-11T17:05:58.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.351520972364"
+        lon="-74.6531387139807">
+        <ele>64.9671630859375</ele>
+        <time>2017-04-11T17:06:01.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3514849720899"
+        lon="-74.653284978191">
+        <ele>65.073974609375</ele>
+        <time>2017-04-11T17:06:04.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3514666995409"
+        lon="-74.6534220223079">
+        <ele>65.79150390625</ele>
+        <time>2017-04-11T17:06:07.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3514544200528"
+        lon="-74.6535526961783">
+        <ele>66.1135864257812</ele>
+        <time>2017-04-11T17:06:10.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3514234908301"
+        lon="-74.6536386106858">
+        <ele>65.4116821289062</ele>
+        <time>2017-04-11T17:06:13.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3513896698508"
+        lon="-74.6537786722878">
+        <ele>65.6954345703125</ele>
+        <time>2017-04-11T17:06:16.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3513724869493"
+        lon="-74.6538938396374">
+        <ele>66.9633178710938</ele>
+        <time>2017-04-11T17:06:19.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3513450781259"
+        lon="-74.6540283691833">
+        <ele>67.2910766601562</ele>
+        <time>2017-04-11T17:06:22.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3512967145446"
+        lon="-74.6541680955092">
+        <ele>66.66650390625</ele>
+        <time>2017-04-11T17:06:25.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3512539668384"
+        lon="-74.6542739589462">
+        <ele>66.4710693359375</ele>
+        <time>2017-04-11T17:06:28.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3512152843553"
+        lon="-74.6543598734538">
+        <ele>66.3740844726562</ele>
+        <time>2017-04-11T17:06:31.-0400</time>
+        <extensions>
+            <ns2:hr>162</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3511538030955"
+        lon="-74.6544871107439">
+        <ele>65.6515502929688</ele>
+        <time>2017-04-11T17:06:34.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3510872926939"
+        lon="-74.654614264215">
+        <ele>66.192626953125</ele>
+        <time>2017-04-11T17:06:37.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3510709898922"
+        lon="-74.6547446028093">
+        <ele>66.247314453125</ele>
+        <time>2017-04-11T17:06:40.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3510522144291"
+        lon="-74.6548906155626">
+        <ele>65.0836181640625</ele>
+        <time>2017-04-11T17:06:43.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3510187706355"
+        lon="-74.6550348681162">
+        <ele>65.9146118164062</ele>
+        <time>2017-04-11T17:06:46.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>93</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3509477340061"
+        lon="-74.6551263984988">
+        <ele>65.8932495117188</ele>
+        <time>2017-04-11T17:06:49.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3508961853016"
+        lon="-74.655227484251">
+        <ele>66.3795776367188</ele>
+        <time>2017-04-11T17:06:52.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.350861526132"
+        lon="-74.6553499438564">
+        <ele>67.0516357421875</ele>
+        <time>2017-04-11T17:06:55.-0400</time>
+        <extensions>
+            <ns2:hr>158</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3508487856391"
+        lon="-74.6554262191752">
+        <ele>67.7296752929688</ele>
+        <time>2017-04-11T17:06:58.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.0546875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3508242266628"
+        lon="-74.655449437047">
+        <ele>67.50537109375</ele>
+        <time>2017-04-11T17:07:01.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3507417487356"
+        lon="-74.6554141492347">
+        <ele>66.161865234375</ele>
+        <time>2017-04-11T17:07:04.-0400</time>
+        <extensions>
+            <ns2:hr>158</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3506428003687"
+        lon="-74.6553747542898">
+        <ele>67.1838989257812</ele>
+        <time>2017-04-11T17:07:07.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3505501803387"
+        lon="-74.6553305816601">
+        <ele>67.3247680664062</ele>
+        <time>2017-04-11T17:07:10.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.3046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3504648106548"
+        lon="-74.6552857384781">
+        <ele>67.2095336914062</ele>
+        <time>2017-04-11T17:07:13.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.3046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3503762977574"
+        lon="-74.6552494448374">
+        <ele>67.7205810546875</ele>
+        <time>2017-04-11T17:07:16.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3503016569096"
+        lon="-74.6552289091746">
+        <ele>67.5694580078125</ele>
+        <time>2017-04-11T17:07:19.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3502237052101"
+        lon="-74.6552044340173">
+        <ele>66.8959350585938</ele>
+        <time>2017-04-11T17:07:22.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3500764770809"
+        lon="-74.6551649552534">
+        <ele>67.5615234375</ele>
+        <time>2017-04-11T17:07:25.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3499771934378"
+        lon="-74.6551276557843">
+        <ele>67.64208984375</ele>
+        <time>2017-04-11T17:07:28.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3498875908929"
+        lon="-74.6550870873729">
+        <ele>67.2156982421875</ele>
+        <time>2017-04-11T17:07:31.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3498075018081"
+        lon="-74.6550336946497">
+        <ele>66.7476196289062</ele>
+        <time>2017-04-11T17:07:34.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.349725191519"
+        lon="-74.6549881809155">
+        <ele>67.9888916015625</ele>
+        <time>2017-04-11T17:07:37.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3496518498662"
+        lon="-74.6549477801422">
+        <ele>68.8154296875</ele>
+        <time>2017-04-11T17:07:40.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3495831601697"
+        lon="-74.6548856702397">
+        <ele>68.4884033203125</ele>
+        <time>2017-04-11T17:07:43.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3495015623424"
+        lon="-74.6548585128734">
+        <ele>68.739501953125</ele>
+        <time>2017-04-11T17:07:46.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.3046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3494116245213"
+        lon="-74.6548011806557">
+        <ele>70.2052612304688</ele>
+        <time>2017-04-11T17:07:49.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.33203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3493269253898"
+        lon="-74.6547576785783">
+        <ele>71.9459228515625</ele>
+        <time>2017-04-11T17:07:52.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.33203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3492404241491"
+        lon="-74.65468567803">
+        <ele>73.5718383789062</ele>
+        <time>2017-04-11T17:07:55.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3491835948456"
+        lon="-74.6545960754851">
+        <ele>75.8314819335938</ele>
+        <time>2017-04-11T17:07:58.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.349147804119"
+        lon="-74.6544764657269">
+        <ele>75.7404174804688</ele>
+        <time>2017-04-11T17:08:01.-0400</time>
+        <extensions>
+            <ns2:hr>158</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3491129354018"
+        lon="-74.6543780621836">
+        <ele>75.672607421875</ele>
+        <time>2017-04-11T17:08:04.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3490689304102"
+        lon="-74.6542920638571">
+        <ele>76.75927734375</ele>
+        <time>2017-04-11T17:08:07.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3489894699681"
+        lon="-74.6542181354711">
+        <ele>76.7089233398438</ele>
+        <time>2017-04-11T17:08:10.-0400</time>
+        <extensions>
+            <ns2:hr>157</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3488945868242"
+        lon="-74.654122665594">
+        <ele>76.3453979492188</ele>
+        <time>2017-04-11T17:08:13.-0400</time>
+        <extensions>
+            <ns2:hr>159</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3488012124229"
+        lon="-74.6540648304621">
+        <ele>77.6028442382812</ele>
+        <time>2017-04-11T17:08:16.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3487369232255"
+        lon="-74.6540151257763">
+        <ele>77.5841064453125</ele>
+        <time>2017-04-11T17:08:19.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3486711671952"
+        lon="-74.6539717075179">
+        <ele>77.5767211914062</ele>
+        <time>2017-04-11T17:08:22.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3485718416426"
+        lon="-74.6539339051346">
+        <ele>77.6130981445312</ele>
+        <time>2017-04-11T17:08:25.-0400</time>
+        <extensions>
+            <ns2:hr>161</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.3046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3484850889448"
+        lon="-74.6538903192381">
+        <ele>77.7264404296875</ele>
+        <time>2017-04-11T17:08:28.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3483980847898"
+        lon="-74.6537987888555">
+        <ele>75.9583129882812</ele>
+        <time>2017-04-11T17:08:31.-0400</time>
+        <extensions>
+            <ns2:hr>160</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3483150201294"
+        lon="-74.653665432776">
+        <ele>74.4917602539062</ele>
+        <time>2017-04-11T17:08:34.-0400</time>
+        <extensions>
+            <ns2:hr>158</ns2:hr>
+            <ns2:cad>93</ns2:cad>
+            <ns4:speed>3.33203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3482472943518"
+        lon="-74.6535421349803">
+        <ele>74.3577270507812</ele>
+        <time>2017-04-11T17:08:37.-0400</time>
+        <extensions>
+            <ns2:hr>156</ns2:hr>
+            <ns2:cad>86</ns2:cad>
+            <ns4:speed>3.33203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3482258366797"
+        lon="-74.6533964575032">
+        <ele>73.8434448242188</ele>
+        <time>2017-04-11T17:08:40.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.3046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3482470848042"
+        lon="-74.6532702260415">
+        <ele>73.2410278320312</ele>
+        <time>2017-04-11T17:08:43.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3482657345388"
+        lon="-74.6531515382925">
+        <ele>72.0369873046875</ele>
+        <time>2017-04-11T17:08:46.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3482879884917"
+        lon="-74.6530186851273">
+        <ele>72.002197265625</ele>
+        <time>2017-04-11T17:08:49.-0400</time>
+        <extensions>
+            <ns2:hr>155</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3482946940142"
+        lon="-74.6528976504455">
+        <ele>71.3466796875</ele>
+        <time>2017-04-11T17:08:52.-0400</time>
+        <extensions>
+            <ns2:hr>154</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3482826240736"
+        lon="-74.652819698746">
+        <ele>71.637451171875</ele>
+        <time>2017-04-11T17:08:55.-0400</time>
+        <extensions>
+            <ns2:hr>152</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3483158583197"
+        lon="-74.652671674336">
+        <ele>70.2865600585938</ele>
+        <time>2017-04-11T17:08:58.-0400</time>
+        <extensions>
+            <ns2:hr>152</ns2:hr>
+            <ns2:cad>93</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3483771719414"
+        lon="-74.6525226440976">
+        <ele>69.101806640625</ele>
+        <time>2017-04-11T17:09:01.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.348440832496"
+        lon="-74.6523329616288">
+        <ele>68.8408203125</ele>
+        <time>2017-04-11T17:09:04.-0400</time>
+        <extensions>
+            <ns2:hr>151</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.348468618505"
+        lon="-74.6522371564756">
+        <ele>68.3636474609375</ele>
+        <time>2017-04-11T17:09:07.-0400</time>
+        <extensions>
+            <ns2:hr>151</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.348498919085"
+        lon="-74.6520933230171">
+        <ele>68.5175170898438</ele>
+        <time>2017-04-11T17:09:10.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3485168144483"
+        lon="-74.6519794967721">
+        <ele>67.9068603515625</ele>
+        <time>2017-04-11T17:09:13.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3485285910222"
+        lon="-74.651823341916">
+        <ele>67.9625854492188</ele>
+        <time>2017-04-11T17:09:16.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>94</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3485747753087"
+        lon="-74.6517095156709">
+        <ele>67.9259643554688</ele>
+        <time>2017-04-11T17:09:19.-0400</time>
+        <extensions>
+            <ns2:hr>151</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.3046875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3486219654235"
+        lon="-74.6516101062993">
+        <ele>68.131103515625</ele>
+        <time>2017-04-11T17:09:22.-0400</time>
+        <extensions>
+            <ns2:hr>149</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3485961072523"
+        lon="-74.6515323222379">
+        <ele>66.4424438476562</ele>
+        <time>2017-04-11T17:09:25.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>2.88671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3485303512219"
+        lon="-74.6514968667875">
+        <ele>66.5797729492188</ele>
+        <time>2017-04-11T17:09:28.-0400</time>
+        <extensions>
+            <ns2:hr>151</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.0</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3484720969948"
+        lon="-74.6514711343447">
+        <ele>66.4440307617188</ele>
+        <time>2017-04-11T17:09:31.-0400</time>
+        <extensions>
+            <ns2:hr>151</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.02734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3484075982499"
+        lon="-74.6514408756743">
+        <ele>66.731201171875</ele>
+        <time>2017-04-11T17:09:34.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.02734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3483195463571"
+        lon="-74.6514054202239">
+        <ele>66.7158203125</ele>
+        <time>2017-04-11T17:09:37.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.0546875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.348228057884"
+        lon="-74.6513781790385">
+        <ele>65.5040893554688</ele>
+        <time>2017-04-11T17:09:40.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3481798200312"
+        lon="-74.651347585092">
+        <ele>65.0838623046875</ele>
+        <time>2017-04-11T17:09:43.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3481840528923"
+        lon="-74.6513154824028">
+        <ele>65.3441772460938</ele>
+        <time>2017-04-11T17:09:46.-0400</time>
+        <extensions>
+            <ns2:hr>149</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3481589071828"
+        lon="-74.6512749978105">
+        <ele>65.6715698242188</ele>
+        <time>2017-04-11T17:09:49.-0400</time>
+        <extensions>
+            <ns2:hr>147</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.08203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3480620962012"
+        lon="-74.6512299869905">
+        <ele>63.34326171875</ele>
+        <time>2017-04-11T17:09:52.-0400</time>
+        <extensions>
+            <ns2:hr>146</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.347896260247"
+        lon="-74.65119712993">
+        <ele>60.1581420898438</ele>
+        <time>2017-04-11T17:09:55.-0400</time>
+        <extensions>
+            <ns2:hr>143</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3477663826573"
+        lon="-74.6511722356776">
+        <ele>60.32861328125</ele>
+        <time>2017-04-11T17:09:58.-0400</time>
+        <extensions>
+            <ns2:hr>142</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3476596810299"
+        lon="-74.6511205193351">
+        <ele>60.1094360351562</ele>
+        <time>2017-04-11T17:10:01.-0400</time>
+        <extensions>
+            <ns2:hr>141</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3475471120703"
+        lon="-74.651057068328">
+        <ele>57.9200439453125</ele>
+        <time>2017-04-11T17:10:04.-0400</time>
+        <extensions>
+            <ns2:hr>140</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3474177793044"
+        lon="-74.6510025021384">
+        <ele>56.7823486328125</ele>
+        <time>2017-04-11T17:10:07.-0400</time>
+        <extensions>
+            <ns2:hr>137</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3473131731528"
+        lon="-74.650948522682">
+        <ele>57.3211669921875</ele>
+        <time>2017-04-11T17:10:10.-0400</time>
+        <extensions>
+            <ns2:hr>136</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3471984668079"
+        lon="-74.6509033442239">
+        <ele>56.3040161132812</ele>
+        <time>2017-04-11T17:10:13.-0400</time>
+        <extensions>
+            <ns2:hr>136</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3470985545221"
+        lon="-74.6508417372356">
+        <ele>54.5751342773438</ele>
+        <time>2017-04-11T17:10:16.-0400</time>
+        <extensions>
+            <ns2:hr>135</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3470110055435"
+        lon="-74.6507579182039">
+        <ele>54.815185546875</ele>
+        <time>2017-04-11T17:10:19.-0400</time>
+        <extensions>
+            <ns2:hr>136</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3469435731325"
+        lon="-74.6506354585985">
+        <ele>55.3765869140625</ele>
+        <time>2017-04-11T17:10:22.-0400</time>
+        <extensions>
+            <ns2:hr>136</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3468998195979"
+        lon="-74.6505314391802">
+        <ele>54.9559326171875</ele>
+        <time>2017-04-11T17:10:25.-0400</time>
+        <extensions>
+            <ns2:hr>135</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3468919406089"
+        lon="-74.6503944788823">
+        <ele>54.1004638671875</ele>
+        <time>2017-04-11T17:10:28.-0400</time>
+        <extensions>
+            <ns2:hr>135</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3468864504624"
+        lon="-74.6502499748717">
+        <ele>53.2398071289062</ele>
+        <time>2017-04-11T17:10:31.-0400</time>
+        <extensions>
+            <ns2:hr>136</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.25</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3468738776076"
+        lon="-74.6501238272289">
+        <ele>53.151123046875</ele>
+        <time>2017-04-11T17:10:34.-0400</time>
+        <extensions>
+            <ns2:hr>138</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.346888126843"
+        lon="-74.6499978472243">
+        <ele>52.8090209960938</ele>
+        <time>2017-04-11T17:10:37.-0400</time>
+        <extensions>
+            <ns2:hr>139</ns2:hr>
+            <ns2:cad>95</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3468992328647"
+        lon="-74.6498758067141">
+        <ele>53.0092163085938</ele>
+        <time>2017-04-11T17:10:40.-0400</time>
+        <extensions>
+            <ns2:hr>140</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3468921501565"
+        lon="-74.6497390140543">
+        <ele>53.3944702148438</ele>
+        <time>2017-04-11T17:10:43.-0400</time>
+        <extensions>
+            <ns2:hr>140</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3468674654517"
+        lon="-74.6496101003835">
+        <ele>53.4519653320312</ele>
+        <time>2017-04-11T17:10:46.-0400</time>
+        <extensions>
+            <ns2:hr>140</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.21875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3468387993428"
+        lon="-74.6495145466874">
+        <ele>53.5884399414062</ele>
+        <time>2017-04-11T17:10:49.-0400</time>
+        <extensions>
+            <ns2:hr>140</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3467686428133"
+        lon="-74.649426369066">
+        <ele>52.3895263671875</ele>
+        <time>2017-04-11T17:10:52.-0400</time>
+        <extensions>
+            <ns2:hr>140</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.346686081067"
+        lon="-74.6493539494226">
+        <ele>53.0957641601562</ele>
+        <time>2017-04-11T17:10:55.-0400</time>
+        <extensions>
+            <ns2:hr>141</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.13671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3466397291425"
+        lon="-74.6492847149024">
+        <ele>53.1145629882812</ele>
+        <time>2017-04-11T17:10:58.-0400</time>
+        <extensions>
+            <ns2:hr>142</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3466167208183"
+        lon="-74.6492241137425">
+        <ele>54.266357421875</ele>
+        <time>2017-04-11T17:11:01.-0400</time>
+        <extensions>
+            <ns2:hr>142</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3465785831589"
+        lon="-74.6491687093625">
+        <ele>53.7747802734375</ele>
+        <time>2017-04-11T17:11:04.-0400</time>
+        <extensions>
+            <ns2:hr>141</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3465333208817"
+        lon="-74.6491128858874">
+        <ele>54.1242065429688</ele>
+        <time>2017-04-11T17:11:07.-0400</time>
+        <extensions>
+            <ns2:hr>139</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3464484960217"
+        lon="-74.6490697190861">
+        <ele>54.6535034179688</ele>
+        <time>2017-04-11T17:11:10.-0400</time>
+        <extensions>
+            <ns2:hr>139</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3463373938951"
+        lon="-74.6490144823442">
+        <ele>54.5882568359375</ele>
+        <time>2017-04-11T17:11:13.-0400</time>
+        <extensions>
+            <ns2:hr>139</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3462158143896"
+        lon="-74.6489685495148">
+        <ele>55.2110595703125</ele>
+        <time>2017-04-11T17:11:16.-0400</time>
+        <extensions>
+            <ns2:hr>138</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3460970428217"
+        lon="-74.6488985606233">
+        <ele>55.2767333984375</ele>
+        <time>2017-04-11T17:11:19.-0400</time>
+        <extensions>
+            <ns2:hr>139</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.19140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3459792770821"
+        lon="-74.6488216147522">
+        <ele>55.5852661132812</ele>
+        <time>2017-04-11T17:11:22.-0400</time>
+        <extensions>
+            <ns2:hr>141</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3458676720414"
+        lon="-74.6487485245565">
+        <ele>55.5231323242188</ele>
+        <time>2017-04-11T17:11:25.-0400</time>
+        <extensions>
+            <ns2:hr>142</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3457535943392"
+        lon="-74.6486785356651">
+        <ele>55.7149658203125</ele>
+        <time>2017-04-11T17:11:28.-0400</time>
+        <extensions>
+            <ns2:hr>143</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.33203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3456696076694"
+        lon="-74.6486305073599">
+        <ele>55.770751953125</ele>
+        <time>2017-04-11T17:11:31.-0400</time>
+        <extensions>
+            <ns2:hr>145</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.33203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3455594275522"
+        lon="-74.6485813894073">
+        <ele>55.4550170898438</ele>
+        <time>2017-04-11T17:11:34.-0400</time>
+        <extensions>
+            <ns2:hr>145</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.33203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3454639576751"
+        lon="-74.648540904815">
+        <ele>54.50537109375</ele>
+        <time>2017-04-11T17:11:37.-0400</time>
+        <extensions>
+            <ns2:hr>145</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.345367188603"
+        lon="-74.648488182644">
+        <ele>52.955810546875</ele>
+        <time>2017-04-11T17:11:40.-0400</time>
+        <extensions>
+            <ns2:hr>145</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.38671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.345281316005"
+        lon="-74.6484384779582">
+        <ele>52.8353881835938</ele>
+        <time>2017-04-11T17:11:43.-0400</time>
+        <extensions>
+            <ns2:hr>147</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>3.38671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3451923001933"
+        lon="-74.6483891085485">
+        <ele>51.9176635742188</ele>
+        <time>2017-04-11T17:11:46.-0400</time>
+        <extensions>
+            <ns2:hr>148</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.44140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3450868139419"
+        lon="-74.6483441815475">
+        <ele>51.1697998046875</ele>
+        <time>2017-04-11T17:11:49.-0400</time>
+        <extensions>
+            <ns2:hr>148</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.44140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3449801542241"
+        lon="-74.6482989192704">
+        <ele>51.1337280273438</ele>
+        <time>2017-04-11T17:11:52.-0400</time>
+        <extensions>
+            <ns2:hr>149</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3448829241473"
+        lon="-74.6482508071462">
+        <ele>50.7008056640625</ele>
+        <time>2017-04-11T17:11:55.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.38671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3447692236307"
+        lon="-74.6481909603576">
+        <ele>50.1869506835938</ele>
+        <time>2017-04-11T17:11:58.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.38671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3446881287176"
+        lon="-74.6481465362708">
+        <ele>50.1793212890625</ele>
+        <time>2017-04-11T17:12:01.-0400</time>
+        <extensions>
+            <ns2:hr>151</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.38671875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3446055669713"
+        lon="-74.6481104102681">
+        <ele>49.6744384765625</ele>
+        <time>2017-04-11T17:12:04.-0400</time>
+        <extensions>
+            <ns2:hr>151</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.359375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3445155453313"
+        lon="-74.6480524913172">
+        <ele>49.0832824707031</ele>
+        <time>2017-04-11T17:12:07.-0400</time>
+        <extensions>
+            <ns2:hr>152</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.33203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3444239730391"
+        lon="-74.6479816642354">
+        <ele>48.3675231933594</ele>
+        <time>2017-04-11T17:12:10.-0400</time>
+        <extensions>
+            <ns2:hr>152</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.33203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3443336161229"
+        lon="-74.6479476337085">
+        <ele>47.0559692382812</ele>
+        <time>2017-04-11T17:12:13.-0400</time>
+        <extensions>
+            <ns2:hr>153</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.27734375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3442632081363"
+        lon="-74.6480010264317">
+        <ele>46.759765625</ele>
+        <time>2017-04-11T17:12:16.-0400</time>
+        <extensions>
+            <ns2:hr>153</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3442314407233"
+        lon="-74.6480707638661">
+        <ele>46.8424987792969</ele>
+        <time>2017-04-11T17:12:19.-0400</time>
+        <extensions>
+            <ns2:hr>153</ns2:hr>
+            <ns2:cad>99</ns2:cad>
+            <ns4:speed>2.94140625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3441889444742"
+        lon="-74.6481547505359">
+        <ele>47.0149230957031</ele>
+        <time>2017-04-11T17:12:22.-0400</time>
+        <extensions>
+            <ns2:hr>153</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>2.96875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3441420058164"
+        lon="-74.6482537408123">
+        <ele>47.21337890625</ele>
+        <time>2017-04-11T17:12:25.-0400</time>
+        <extensions>
+            <ns2:hr>152</ns2:hr>
+            <ns2:cad>91</ns2:cad>
+            <ns4:speed>3.109375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3440886969123"
+        lon="-74.6483627055536">
+        <ele>46.4966735839844</ele>
+        <time>2017-04-11T17:12:28.-0400</time>
+        <extensions>
+            <ns2:hr>152</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3440508945289"
+        lon="-74.6484805551121">
+        <ele>45.8912048339844</ele>
+        <time>2017-04-11T17:12:31.-0400</time>
+        <extensions>
+            <ns2:hr>153</ns2:hr>
+            <ns2:cad>90</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3440296464044"
+        lon="-74.648580551217">
+        <ele>46.0510864257812</ele>
+        <time>2017-04-11T17:12:34.-0400</time>
+        <extensions>
+            <ns2:hr>152</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>3.1640625</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3440131759647"
+        lon="-74.6486289147983">
+        <ele>47.1324157714844</ele>
+        <time>2017-04-11T17:12:37.-0400</time>
+        <extensions>
+            <ns2:hr>153</ns2:hr>
+            <ns2:cad>89</ns2:cad>
+            <ns4:speed>2.859375</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3439817857373"
+        lon="-74.6486248076657">
+        <ele>47.4935302734375</ele>
+        <time>2017-04-11T17:12:40.-0400</time>
+        <extensions>
+            <ns2:hr>153</ns2:hr>
+            <ns2:cad>88</ns2:cad>
+            <ns4:speed>2.83203125</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3439734876532"
+        lon="-74.6486318484644">
+        <ele>47.4978942871094</ele>
+        <time>2017-04-11T17:12:43.-0400</time>
+        <extensions>
+            <ns2:hr>152</ns2:hr>
+            <ns2:cad>92</ns2:cad>
+            <ns4:speed>2.96875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3439975437153"
+        lon="-74.6486699861238">
+        <ele>47.8255615234375</ele>
+        <time>2017-04-11T17:12:46.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>80</ns2:cad>
+            <ns4:speed>2.71875</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3440715978298"
+        lon="-74.6487037651936">
+        <ele>48.6136169433594</ele>
+        <time>2017-04-11T17:12:49.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>73</ns2:cad>
+            <ns4:speed>1.0</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3440715978298"
+        lon="-74.6487037651936">
+        <ele>48.8364562988281</ele>
+        <time>2017-04-11T17:12:52.-0400</time>
+        <extensions>
+            <ns2:hr>150</ns2:hr>
+            <ns2:cad>0</ns2:cad>
+            <ns4:speed>0.0</ns4:speed>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.3441440174732"
+        lon="-74.6487349458734">
+        <ele>48.8016967773438</ele>
+        <time>2017-04-11T17:12:52.-0400</time>
+        <extensions>
+            <ns2:hr>146</ns2:hr>
+            <ns2:cad>0</ns2:cad>
+            <ns4:speed>0.0</ns4:speed>
+            <ns4:rpe>5</ns4:rpe>
+        </extensions>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

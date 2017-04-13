@@ -18,6 +18,19 @@ textarea{
 	
 }
 
+.details-line {
+  padding-top: 30px !important;
+}
+
+.details-hist {
+  padding-top: 10px !important;
+}
+
+.dashboard {
+  padding-top: 30px !important;
+  padding-right: 50px !important;
+}
+
 iframe:focus { 
     outline: none;
 }
@@ -33,4 +46,19 @@ iframe[seamless] {
 /* from http://stackoverflow.com/questions/3148415/ */
 .verticalLine {
   border-left: solid #ff0000;
+}
+
+.nvtooltip {
+  font-size: 10px !important;
+}
+
+.nvd3 text {
+  font: normal 11px sans-serif !important;
+}
+.nvd3 .title {
+  font: normal 10px sans-serif !important;
+}
+
+.nvtooltip h3 {
+  font: bold 12px sans-serif !important;
 }

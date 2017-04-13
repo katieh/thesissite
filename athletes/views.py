@@ -358,9 +358,16 @@ def upload_one(request):
 				# get total time!
 				tot_time = 0
 				for i in range(1, db_activity.num_records):
+					print "----------", i, "----------"
+					print activity_dict['timestamp'][i - 1]
+					print activity_dict['timestamp'][i]
+					print (activity_dict['timestamp'][i] - activity_dict['timestamp'][i - 1]).total_seconds() / 60.0
 					time_gap = (activity_dict['timestamp'][i] - activity_dict['timestamp'][i - 1]).total_seconds() / 60.0
 					if time_gap < 0.5:
 						tot_time += time_gap
+						print tot_time
+
+				print "TOT_TIME", tot_time
 
 				db_activity.tot_time = tot_time
 				#db_activity.tot_time = int((max(activity_dict['timestamp']) - min(activity_dict['timestamp'])).total_seconds() / 60.0)
